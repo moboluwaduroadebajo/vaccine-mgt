@@ -3,6 +3,8 @@ import Navbar from "./Navbar";
 import Image from "next/image";
 import pin from "../../../public/pin.png";
 import HeroImage from "../../../public/mom-image.png";
+import Button from "../utilities/Button";
+import Link from "next/link";
 
 const HeroSection = () => {
   return (
@@ -28,9 +30,13 @@ const HeroSection = () => {
             administered, dosage, with timely reminder of upcoming vaccinations.
           </p>
 
-          <button className="bg-[#1F8E1F] w-[280px] h-12 rounded-[80px] text-white">
-            Login
-          </button>
+          <Link href="/login">
+            <Button
+              label="Login"
+              variant="primary"
+              additionalClassname="lg:w-[280px] w-[100px]"
+            />
+          </Link>
         </div>
 
         <div className="lg:flex hidden relative">

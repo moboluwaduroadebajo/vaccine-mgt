@@ -4,6 +4,7 @@ import img2 from "../../../public/img2.png";
 import img3 from "../../../public/img3.png";
 import img4 from "../../../public/img4.png";
 import StepstoStart from "./StepstoStart";
+import Button from "../utilities/Button";
 
 const GetStartedPage = () => {
   const menu = [
@@ -53,9 +54,11 @@ const GetStartedPage = () => {
       </div>
 
       <div className="flex items-center justify-center py-12">
-        <button className="bg-[#1F8E1F] lg:w-[280px] w-[200px] h-12 rounded-[80px] text-white">
-          Register now
-        </button>
+        <Button
+          label="Register now"
+          variant="primary"
+          additionalClassname="lg:w-[280px] w-[200px]"
+        />
       </div>
     </div>
   );

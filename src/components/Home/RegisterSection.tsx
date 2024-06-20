@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import nurse from "@/assets/nurse-img.png";
+import Button from "../utilities/Button";
 
 const RegisterSection = () => {
   return (
@@ -17,9 +18,11 @@ const RegisterSection = () => {
           </span>
         </p>
 
-        <button className="bg-[#1F8E1F] lg:w-[400px] w-[200px] rounded-[80px] text-white md:h-[62px] h-12">
-          Register now
-        </button>
+        <Button
+          label="Register now"
+          variant="primary"
+          additionalClassname="lg:w-[400px] w-[200px] md:h-[62px] h-12"
+        />
       </div>
     </div>
   );

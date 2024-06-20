@@ -3,6 +3,7 @@ import React from "react";
 import Logo from "@/../public/logo.png";
 import { IoIosMenu } from "react-icons/io";
 import Link from "next/link";
+import Button from "../utilities/Button";
 
 const Navbar = () => {
   return (
@@ -17,9 +18,11 @@ const Navbar = () => {
         </ul>
 
         <Link href="/login">
-          <button className="bg-[#1F8E1F] lg:w-[280px] w-[100px] h-12 rounded-[80px] text-white">
-            Login
-          </button>
+          <Button
+            label="Login"
+            variant="primary"
+            additionalClassname="lg:w-[280px] w-[100px]"
+          />
         </Link>
       </div>
 
