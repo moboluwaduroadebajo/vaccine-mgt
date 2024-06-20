@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 import Logo from "@/../public/logo.png";
 import { IoIosMenu } from "react-icons/io";
+import Link from "next/link";
 
 const Navbar = () => {
   return (
@@ -10,14 +11,16 @@ const Navbar = () => {
 
       <div className="md:flex hidden gap-10 justify-center items-center">
         <ul className="flex items-center lg:gap-10 gap-8 font-league lg:text-2xl text-xl text-nowrap text-[#000]">
-          <li>About us </li>
-          <li>Features</li>
-          <li>Procedures</li>
+          <li className=" cursor-pointer hover:text-green-700">About us </li>
+          <li className=" cursor-pointer hover:text-green-700">Features</li>
+          <li className=" cursor-pointer hover:text-green-700">Procedures</li>
         </ul>
 
-        <button className="bg-[#1F8E1F] lg:w-[280px] w-[100px] h-12 rounded-[80px] text-white">
-          Login
-        </button>
+        <Link href="/login">
+          <button className="bg-[#1F8E1F] lg:w-[280px] w-[100px] h-12 rounded-[80px] text-white">
+            Login
+          </button>
+        </Link>
       </div>
 
       {/* mobile Navbar */}

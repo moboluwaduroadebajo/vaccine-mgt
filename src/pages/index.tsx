@@ -1,4 +1,10 @@
-import { Footer, GetStarted, Help, Navbar } from "@/components/Home";
+import {
+  Footer,
+  GetStarted,
+  Help,
+  Navbar,
+  RegisterSection,
+} from "@/components/Home";
 import HeroSection from "@/components/Home/HeroSection";
 import Image from "next/image";
 // import { Inter } from "next/font/google";
@@ -11,6 +17,7 @@ export default function Home() {
       <HeroSection />
       <Help />
       <GetStarted />
+      <RegisterSection />
       <Footer />
     </>
   );

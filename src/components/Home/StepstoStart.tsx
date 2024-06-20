@@ -1,6 +1,5 @@
 import Image, { StaticImageData } from "next/image";
 import React from "react";
-import img1 from "../../public/img1.png";
 
 interface StepsProps {
   isMultiple?: boolean;
@@ -18,13 +17,13 @@ const StepstoStart = ({
 }: StepsProps) => {
   return (
     <div
-      className={`flex items-center md:p-8 p-4 relative md:px-40 mb-4 ${
+      className={`flex items-center md:p-10 p-4 relative md:px-40 mb-4 ${
         isMultiple
-          ? "flex-row-reverse md:justify-end md:gap-16"
+          ? "flex-row-reverse md:justify-around md:gap-16"
           : "md:justify-center"
       }`}>
-      <div className="">
-        <Image alt="img1" src={img1} className="" />
+      <div>
+        <Image alt="img1" src={image} className="" />
       </div>
 
       <div className="font-poppins flex flex-col gap-4">
@@ -36,11 +35,11 @@ const StepstoStart = ({
 
       <div
         className={`absolute top-0 bottom-0 flex items-center justify-center ${
-          isMultiple ? "left-0" : "right-0"
+          isMultiple ? "left-[8%]" : "right-[10%]"
         }`}>
-        <span className="text-[#1F8E1F] text-[250px] leading-none opacity-[10%] font-bold">
+        <p className="text-[#1F8E1F] text-[250px] leading-none opacity-[10%] font-bold">
           {id}
-        </span>
+        </p>
       </div>
     </div>
   );

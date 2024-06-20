@@ -10,7 +10,7 @@ const HeroSection = () => {
       <Navbar />
 
       <div className="mt-20 lg:flex justify-between lg:pl-40 pl-8">
-        <div className="w\-1/2">
+        <div className="w-1/2">
           <div className="flex gap-1 bg-[#D9ECD9] p-2 md:w-[420px] w-[340px] rounded-full">
             <Image alt="pin" src={pin} />
             <p className="text-[#1F8E1F] md:text-base text-xs">
@@ -33,8 +33,18 @@ const HeroSection = () => {
           </button>
         </div>
 
-        <div className="lg:block hidden">
-          <Image alt="mom-image" src={HeroImage} />
+        <div className="lg:flex hidden relative">
+          <svg
+            className="absolute right-0 bottom-0"
+            width={594}
+            height={732}
+            viewBox="0 0 594 732"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx={745.5} cy={366} rx={745.5} ry={366} fill="#D2E8D2" />
+          </svg>
+          <Image alt="mom-image" src={HeroImage} className="z-50" />
+          {/* <div className="w-full h-[500px] bg-red-600 absolute top-0 -right-1/4 rounded-[50%] overflow-hidden"></div> */}
         </div>
       </div>
     </div>
