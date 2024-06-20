@@ -12,9 +12,27 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "hero-image": "url('/src/assets/mom-image.png')",
+      },
+      screens: {
+        tablet: "840px",
+        large: "1200px",
+      },
+      colors: {
+        green: {
+          100: "#d2e8d2",
+          200: "#b4d9b4",
+          300: "#8fc78f",
+          400: "#6ab46a",
+        },
+      },
+      fontFamily: {
+        league: ["var(--font-league_spartan)"],
+        poppins: ["var(--font-poppins)"],
       },
     },
   },
   plugins: [],
 };
 export default config;
+
