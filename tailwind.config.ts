@@ -12,7 +12,8 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-        "hero-image": "url('/src/assets/mom-image.png')",
+        "hero-image": "url('../assets/mom-image.png')",
+        loginBg: "url(../assets/login_bg.png)",
       },
       screens: {
         tablet: "840px",

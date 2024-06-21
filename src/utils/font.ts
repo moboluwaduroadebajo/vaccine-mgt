@@ -8,7 +8,7 @@ const league_Spartan = League_Spartan({
 
 const poppins_init = Poppins({
   subsets: ["latin"],
-  weight: ["100", "200", "300", "700"],
+  weight: ["100", "200", "300", "400", "500", "700", "800"],
   variable: "--font-poppins",
 });
 
