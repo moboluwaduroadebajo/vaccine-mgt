@@ -4,15 +4,15 @@ import LoginImage from "@/assets/login_img.png";
 import { ArrowLeft } from "react-feather";
 import InputField from "@/components/FormFields/InputField";
 import PasswordField from "@/components/FormFields/PasswordField";
-import Button from "@/components/utilities/Button";
 import Logo from "@/../public/logo.png";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Link from "next/link";
 import axios from "axios";
-import { headers } from "next/headers";
 import { useRouter } from "next/router";
 import Loader from "@/components/utilities/Loader";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const baseURL = process.env.NEXT_PUBLIC_BASE_API_URL;
@@ -35,13 +35,17 @@ const Login = () => {
           },
         });
         if (response.status === 200) {
+          toast.success("Logging in");
           localStorage.setItem("token", response.data.data.accessToken);
           router.push("/dashboard");
         } else {
+          toast.error(response.data.errors[0]);
           console.log(response.data.errors[0]);
         }
       } catch (error: any) {
         if (error.response) {
+          toast.error(error.response.data.errors[0]);
+
           console.log(error.response.data.errors[0]);
         }
       }
@@ -71,7 +75,7 @@ const Login = () => {
               placeholder="Enter your email address"
               label="Email address"
               name="username"
-              // isRequired
+              isRequired
               value={formik.values.username}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -102,6 +106,7 @@ const Login = () => {
           </p>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

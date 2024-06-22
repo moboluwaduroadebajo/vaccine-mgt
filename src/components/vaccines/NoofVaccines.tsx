@@ -22,7 +22,7 @@ const NoofVaccines = () => {
       }
     };
     getNoOfVaccines();
-  }, []);
+  });
 
   return (
     <div className="w-[25%] h-[300px] bg-[#D9ECD9] rounded-2xl flex flex-col justify-center items-center gap-4 shadow-md">
