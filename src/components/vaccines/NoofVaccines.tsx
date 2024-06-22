@@ -32,9 +32,9 @@ const NoofVaccines = () => {
       <div className="h-[60px] w-[60px] bg-white rounded-full flex items-center justify-center">
         <Icons name="injection" fill="#1F8E1F" />
       </div>
-      <p className="text-[#1F8E1F] font-poppins font-black text-4xl">
+      <div className="text-[#1F8E1F] font-poppins font-black text-4xl">
         {noOfVaccines !== null ? noOfVaccines : <Loader />}
-      </p>
+      </div>
     </div>
   );
 };
