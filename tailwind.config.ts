@@ -30,6 +30,7 @@ const config: Config = {
       fontFamily: {
         league: ["var(--font-league_spartan)"],
         poppins: ["var(--font-poppins)"],
+        roboto: ["var(--font-roboto)"],
       },
     },
   },

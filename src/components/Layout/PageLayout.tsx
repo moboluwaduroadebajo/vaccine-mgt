@@ -10,9 +10,9 @@ const PageLayout = ({ children }: LayoutProps) => {
   return (
     <div className="bg-[#F0F7F0] h-screen w-screen overflow-hidden flex">
       <Sidebar />
-      <main className="flex-1">
+      <main className="flex-1 flex flex-col">
         <Header />
-        <div className="px-4">{children}</div>
+        <div className="pl-4 pr-16 h-full">{children}</div>
       </main>
     </div>
   );

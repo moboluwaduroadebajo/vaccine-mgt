@@ -106,7 +106,7 @@ const PasswordField = ({
           )}>
           <input
             className={clsx({
-              "appearance-none  border-none outline-none focus:ring-0 text-sm p-0 bg-inherit":
+              "appearance-none border-none outline-none focus:ring-0 text-sm p-0 bg-inherit":
                 true,
               "w-[95%]": showPasswordToggler,
               "w-full": !showPasswordToggler,

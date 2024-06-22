@@ -8,8 +8,8 @@ const Sidebar = () => {
   const router = useRouter();
   return (
     <div className="w-[122px] bg-[#1F8E1F] text-white flex flex-col">
-      <div className="pt-4 flex-1">
-        <ul className="flex flex-col gap-2">
+      <div className="flex-1 flex flex-col justify-center">
+        <ul className="flex flex-col gap-3">
           {sideMenu.map((item) => (
             <MenuItem
               key={item.path}

@@ -6,6 +6,7 @@ import avatar from "@/assets/avatar.png";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { sideMenu } from "@/constants";
+import Link from "next/link";
 
 const Header = () => {
   const router = useRouter();
@@ -20,10 +21,12 @@ const Header = () => {
       </div>
       <div>
         <div className="flex justify-center items-center gap-6 cursor-pointer">
-          <Icons name="search" />
+          <Icons name="search" fill="#292D32" />
           <Icons name="bell" />
           <Image alt="avatar" src={avatar} />
-          <Image alt="logo" src={Logo} className="md:h-full h-[30%]" />
+          <Link href="/">
+            <Image alt="logo" src={Logo} className="md:h-full h-[30%]" />
+          </Link>
         </div>
       </div>
     </div>

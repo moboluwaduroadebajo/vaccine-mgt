@@ -15,7 +15,7 @@ const MenuItem = ({ label, iconName, path, isTabActive }: MenuItemProps) => {
     <Link href={path}>
       <li
         className={clsx({
-          "py-1 flex flex-col gap-1 justify-center items-center font-poppins hover:bg-[#F0F7F0] hover:font-bold hover:text-[#1F8E1F] group cursor-pointer":
+          "py-1 flex flex-col gap-3 justify-center items-center font-poppins hover:bg-[#F0F7F0] hover:font-bold hover:text-[#1F8E1F] group cursor-pointer":
             true,
           "bg-[#F0F7F0] text-[#1F8E1F] font-bold": isTabActive,
         })}>
