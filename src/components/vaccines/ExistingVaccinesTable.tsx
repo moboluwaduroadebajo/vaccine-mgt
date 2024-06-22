@@ -71,15 +71,7 @@ const ExistingVaccinesTable = () => {
 
             <tbody>
               {vaccines.map(
-                (data: {
-                  id: string;
-                  ageTarget: number;
-                  dosageType: string;
-                  dosage: string;
-                  routeOfAdministration: string;
-                  site: string;
-                  type: string;
-                }) => (
+                (data: ExistingVaccineType) => (
                   <tr
                     key={data.id}
                     className="h-[70px] mb-6 hover:bg-[#f4f9f4] hover:border hover:border-[#1F8E1F] hover:rounded-lg cursor-pointer">
