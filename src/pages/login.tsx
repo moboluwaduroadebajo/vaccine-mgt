@@ -35,6 +35,7 @@ const Login = () => {
           },
         });
         if (response.status === 200) {
+          localStorage.setItem("token", response.data.data.accessToken);
           router.push("/dashboard");
         } else {
           console.log(response.data.errors[0]);
