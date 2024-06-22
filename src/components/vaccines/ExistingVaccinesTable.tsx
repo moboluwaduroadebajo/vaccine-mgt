@@ -3,6 +3,7 @@ import { Icons } from "../icons";
 import { BiMenuAltLeft } from "react-icons/bi";
 import axios from "axios";
 import Loader from "@/components/utilities/Loader";
+import { ExistingVaccineType } from "@/type/vaccines.type";
 
 const ExistingVaccinesTable = () => {
   const [vaccines, setVaccines] = useState([]);

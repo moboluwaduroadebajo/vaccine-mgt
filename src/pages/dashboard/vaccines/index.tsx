@@ -7,14 +7,12 @@ import React from "react";
 const Vaccines = () => {
   return (
     <PageLayout>
-      <div className="flex flex-col gap-8">
-        <div className="flex gap-8">
-          <div className="flex1 w-3/4 flex flex-col gap-8 h-[83vh]">
-            <AddNewVaccine />
-            <ExistingVaccinesTable />
-          </div>
+      <div className="flex flex-col gap-8 h-[83vh]">
+        <div className="flex gap-8 w-full">
+          <AddNewVaccine />
           <NoofVaccines />
         </div>
+        <ExistingVaccinesTable />
       </div>
     </PageLayout>
   );

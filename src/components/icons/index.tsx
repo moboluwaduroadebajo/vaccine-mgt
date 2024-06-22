@@ -6,7 +6,15 @@ interface IconProps {
   className?: string;
 }
 
-export const Icons = ({ name, height, width, fill, className }: IconProps) => {
+// "#B2B1B1";
+
+export const Icons = ({
+  name,
+  height = 24,
+  width = 24,
+  fill,
+  className,
+}: IconProps) => {
   if (name === "peace") {
     return (
       <svg
@@ -260,10 +268,4 @@ export const Icons = ({ name, height, width, fill, className }: IconProps) => {
     );
   }
   return <div />;
-};
-
-Icons.defaultProps = {
-  width: 24,
-  height: 24,
-  fill: "#B2B1B1",
 };
