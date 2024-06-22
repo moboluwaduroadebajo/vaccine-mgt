@@ -21,7 +21,7 @@ interface ButtonProps {
 const Button: React.FC<ButtonProps> = ({
   variant,
   label,
-  onClick = () => {},
+  onClick = () => { },
   width,
   icon,
   iconPosition = "left",

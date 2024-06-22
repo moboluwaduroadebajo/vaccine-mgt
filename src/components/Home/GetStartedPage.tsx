@@ -38,7 +38,7 @@ const GetStartedPage = () => {
     },
   ];
   return (
-    <div className="bg-[#E1F0E1] py-32 bg-hero-image">
+    <div className="bg-[#E1F0E1] py-32">
       <p className="font-poppins text-center text-transparent capitalize bg-gradient-to-r from-[#1F8E1F] to-[#061c06] bg-clip-text md:text-5xl text-3xl font-bold pb-20">
         Get Started
       </p>
