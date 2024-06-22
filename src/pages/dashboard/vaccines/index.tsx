@@ -9,7 +9,7 @@ const Vaccines = () => {
     <PageLayout>
       <div className="flex flex-col gap-8">
         <div className="flex gap-8">
-          <div className="flex1 w-3/4 flex flex-col gap-8 h-screen">
+          <div className="flex1 w-3/4 flex flex-col gap-8 h-[83vh]">
             <AddNewVaccine />
             <ExistingVaccinesTable />
           </div>

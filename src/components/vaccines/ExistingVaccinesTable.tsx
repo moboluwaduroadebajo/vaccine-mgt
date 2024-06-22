@@ -18,6 +18,7 @@ const ExistingVaccinesTable = () => {
           },
         });
         setVaccines(response.data.data.content);
+        console.log(response.data.data.content);
       } catch (error) {
         console.error("Error fetching vaccine count:", error);
       }
@@ -26,11 +27,12 @@ const ExistingVaccinesTable = () => {
     console.log(vaccines);
   }, []);
 
-
   return (
     <div className="bg-white flex1 w-full rounded-2xl overflow-auto font-poppins">
       <div className="p-8 flex justify-between">
-        <p className="font-semibold text-2xl text-[#1F8E1F]">Existing Vaccines</p>
+        <p className="font-semibold text-2xl text-[#1F8E1F]">
+          Existing Vaccines
+        </p>
 
         <div className="flex items-center justify-center gap-8">
           <BiMenuAltLeft fontSize={24} />
@@ -48,7 +50,7 @@ const ExistingVaccinesTable = () => {
         </div>
       </div>
 
-      <div className="">
+      <div>
         <table className="w-full">
           <thead className="font-semibold text-1xl">
             <tr className="text-[#1F8E1F]">
@@ -60,20 +62,32 @@ const ExistingVaccinesTable = () => {
           </thead>
 
           <tbody>
-            {vaccines.map((data: { id: string; ageTarget: number; dosageType: string; dosage: string; routeOfAdministration: string; site: string; type: string }) => (
-              <tr
-                key={data.id}
-                className="h-[70px] mb-6 hover:bg-[#f4f9f4] hover:border hover:border-[#1F8E1F] hover:rounded-lg cursor-pointer">
-                <td className="p-6 font-medium mb-2 borderb">{data.ageTarget}</td>
-                <td className="p-6 font-medium borderb">
-                  {data.type}
-                </td>
-                <td className="p-6 borderb">{data.dosage} {data.dosageType}</td>
-                <td className="p-6 borderb text-[#1F8E1F]">
-                  {data.routeOfAdministration}
-                </td>
-              </tr>
-            ))}
+            {vaccines.map(
+              (data: {
+                id: string;
+                ageTarget: number;
+                dosageType: string;
+                dosage: string;
+                routeOfAdministration: string;
+                site: string;
+                type: string;
+              }) => (
+                <tr
+                  key={data.id}
+                  className="h-[70px] mb-6 hover:bg-[#f4f9f4] hover:border hover:border-[#1F8E1F] hover:rounded-lg cursor-pointer">
+                  <td className="p-6 font-medium mb-2 borderb">
+                    {data.ageTarget}
+                  </td>
+                  <td className="p-6 font-medium borderb">{data.type}</td>
+                  <td className="p-6 borderb">
+                    {data.dosage} {data.dosageType}
+                  </td>
+                  <td className="p-6 borderb text-[#1F8E1F]">
+                    {data.routeOfAdministration}
+                  </td>
+                </tr>
+              )
+            )}
           </tbody>
         </table>
       </div>
