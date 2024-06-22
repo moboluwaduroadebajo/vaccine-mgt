@@ -10,13 +10,14 @@ import { sideMenu } from "@/constants";
 const Header = () => {
   const router = useRouter();
   return (
-    <div className="h-20 bg-white w-full mb-10 rounded p-8 px-20 font-poppins font-medium text-xl flex justify-between">
-      {/* <p>Header</p> */}
-      <p>
+    <div className="h-20 bg-white mb-10 ml-4 rounded p-8 px-20 font-poppins font-medium text-xl flex justify-between">
+      <div>
         {sideMenu.map((name) => (
-          <>{router.pathname === name.path ? name.label : ""}</>
+          <p key={name.label}>
+            {router.pathname === name.path ? name.label : ""}
+          </p>
         ))}
-      </p>
+      </div>
       <div>
         <div className="flex justify-center items-center gap-6 cursor-pointer">
           <Icons name="search" />

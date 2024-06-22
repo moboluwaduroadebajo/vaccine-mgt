@@ -9,21 +9,41 @@ import Logo from "@/../public/logo.png";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Link from "next/link";
+import axios from "axios";
+import { headers } from "next/headers";
+import { useRouter } from "next/router";
+import Loader from "@/components/utilities/Loader";
 
 const Login = () => {
+  const baseURL = process.env.NEXT_PUBLIC_BASE_API_URL;
+  const router = useRouter();
+
   const formik = useFormik({
     initialValues: {
-      email: "",
+      username: "",
       password: "",
     },
     validationSchema: Yup.object({
-      email: Yup.string()
-        .required("Email is required")
-        .email("Please enter a valid email"),
+      username: Yup.string().required("Email is required"),
       password: Yup.string().required("Password is required"),
     }),
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      try {
+        const response = await axios.post(`${baseURL}/auth/login`, values, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (response.status === 200) {
+          router.push("/dashboard");
+        } else {
+          console.log(response.data.errors[0]);
+        }
+      } catch (error: any) {
+        if (error.response) {
+          console.log(error.response.data.errors[0]);
+        }
+      }
     },
   });
   return (
@@ -49,12 +69,12 @@ const Login = () => {
               type="email"
               placeholder="Enter your email address"
               label="Email address"
-              name="email"
-              isRequired
-              value={formik.values.email}
+              name="username"
+              // isRequired
+              value={formik.values.username}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              error={formik.touched.email ? formik.errors.email : ""}
+              error={formik.touched.username ? formik.errors.username : ""}
             />
 
             <PasswordField
@@ -68,12 +88,9 @@ const Login = () => {
               error={formik.touched.password ? formik.errors.password : ""}
             />
 
-            <Button
-              type="submit"
-              label="Login"
-              variant="primary"
-              additionalClassname="w-full mt-10"
-            />
+            <button className="flex justify-center items-center rounded-[80px] w-full mt-10 h-12 text-white font-poppins bg-[#1F8E1F]">
+              {formik.isSubmitting ? <Loader /> : "Login"}
+            </button>
           </form>
 
           <p className="flex gap-2 justify-center items-center mt-8 text-[#1F8E1F] font-poppins font-semibold">

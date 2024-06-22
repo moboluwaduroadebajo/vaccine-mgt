@@ -8,11 +8,11 @@ type LayoutProps = {
 
 const PageLayout = ({ children }: LayoutProps) => {
   return (
-    <div className="bg-[#F0F7F0] h-screen w-screen overflow-hidden">
+    <div className="bg-[#F0F7F0] h-screen w-screen overflow-hidden flex">
       <Sidebar />
-      <main className="ml-[142px]">
+      <main className="flex-1">
         <Header />
-        {children}
+        <div className="px-4">{children}</div>
       </main>
     </div>
   );
