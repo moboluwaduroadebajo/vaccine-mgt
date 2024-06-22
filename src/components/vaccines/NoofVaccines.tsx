@@ -25,7 +25,7 @@ const NoofVaccines = () => {
   }, []);
 
   return (
-    <div className="w-[25%] h-[300px] bg-[#D9ECD9] rounded-2xl flex flex-col justify-center items-center gap-4">
+    <div className="w-[25%] h-[300px] bg-[#D9ECD9] rounded-2xl flex flex-col justify-center items-center gap-4 shadow-md">
       <p className="capitalize font-poppins font-light text-center text-xl leading-8 max-w-[138px] ">
         No. of existing vaccines
       </p>
