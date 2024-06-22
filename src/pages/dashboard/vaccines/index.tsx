@@ -12,8 +12,8 @@ const Vaccines = () => {
               Add <br />
               <span>New Vaccine</span>
             </p>
-            <p className="max-w-[250px]">
-              Add a New Vaccine to be administer to all
+            <p className="max-w-[700px]">
+              Add a new Vaccine to be administered. Keep the children safe and healthy
             </p>
           </div>
 
