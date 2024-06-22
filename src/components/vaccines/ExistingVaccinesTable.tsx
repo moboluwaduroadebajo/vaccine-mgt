@@ -3,6 +3,7 @@ import { Icons } from "../icons";
 import { BiMenuAltLeft } from "react-icons/bi";
 import axios from "axios";
 import Loader from "@/components/utilities/Loader";
+import { ExistingVaccineType } from "@/type/vaccines.type";
 
 const ExistingVaccinesTable = () => {
   const [vaccines, setVaccines] = useState([]);
@@ -25,7 +26,7 @@ const ExistingVaccinesTable = () => {
     };
     getVaccines();
     console.log(vaccines);
-  }, []);
+  });
 
   return (
     <div className="bg-white flex1 w-full rounded-2xl overflow-auto font-poppins">
@@ -62,32 +63,22 @@ const ExistingVaccinesTable = () => {
           </thead>
 
           <tbody>
-            {vaccines.map(
-              (data: {
-                id: string;
-                ageTarget: number;
-                dosageType: string;
-                dosage: string;
-                routeOfAdministration: string;
-                site: string;
-                type: string;
-              }) => (
-                <tr
-                  key={data.id}
-                  className="h-[70px] mb-6 hover:bg-[#f4f9f4] hover:border hover:border-[#1F8E1F] hover:rounded-lg cursor-pointer">
-                  <td className="p-6 font-medium mb-2 borderb">
-                    {data.ageTarget}
-                  </td>
-                  <td className="p-6 font-medium borderb">{data.type}</td>
-                  <td className="p-6 borderb">
-                    {data.dosage} {data.dosageType}
-                  </td>
-                  <td className="p-6 borderb text-[#1F8E1F]">
-                    {data.routeOfAdministration}
-                  </td>
-                </tr>
-              )
-            )}
+            {vaccines.map((data: ExistingVaccineType) => (
+              <tr
+                key={data.id}
+                className="h-[70px] mb-6 hover:bg-[#f4f9f4] hover:border hover:border-[#1F8E1F] hover:rounded-lg cursor-pointer">
+                <td className="p-6 font-medium mb-2 borderb">
+                  {data.ageTarget}
+                </td>
+                <td className="p-6 font-medium borderb">{data.type}</td>
+                <td className="p-6 borderb">
+                  {data.dosage} {data.dosageType}
+                </td>
+                <td className="p-6 borderb text-[#1F8E1F]">
+                  {data.routeOfAdministration}
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
