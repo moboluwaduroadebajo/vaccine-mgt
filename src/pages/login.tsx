@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import LoginImage from "@/assets/login_img.png";
 import { ArrowLeft } from "react-feather";
 import InputField from "@/components/FormFields/InputField";
@@ -13,10 +13,26 @@ import { useRouter } from "next/router";
 import Loader from "@/components/utilities/Loader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import {
+  selectIsAuthenticated,
+  selectUserRole,
+} from "@/reducers/account.reducer";
+import { login } from "@/thunks/account-thunk";
 
 const Login = () => {
   const baseURL = process.env.NEXT_PUBLIC_BASE_API_URL;
   const router = useRouter();
+  const dispatch = useAppDispatch();
+
+  const userRole = useAppSelector(selectUserRole);
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push("/dashboard");
+    }
+  }, [isAuthenticated, router, userRole]);
 
   const formik = useFormik({
     initialValues: {
@@ -28,25 +44,29 @@ const Login = () => {
       password: Yup.string().required("Password is required"),
     }),
     onSubmit: async (values) => {
+      const { username, password } = values;
+
       try {
-        const response = await axios.post(`${baseURL}/auth/login`, values, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        if (response.status === 200) {
-          toast.success("Logging in");
-          localStorage.setItem("token", response.data.data.accessToken);
-          router.push("/dashboard");
-        } else {
-          toast.error(response.data.errors[0]);
-          console.log(response.data.errors[0]);
-        }
+        // const response = await axios.post(`${baseURL}/auth/login`, values, {
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        // });
+        // if (response.status === 200) {
+        //   toast.success("Logging in");
+        //   localStorage.setItem("token", response.data.data.accessToken);
+        //   router.push("/dashboard");
+        // } else {
+        //   toast.error(response.data.errors[0]);
+        //   console.log(response.data.errors[0]);
+        // }
+        dispatch(login({ username, password }));
       } catch (error: any) {
         if (error.response) {
           toast.error(error.response.data.errors[0]);
 
           console.log(error.response.data.errors[0]);
+          formik.isSubmitting = false;
         }
       }
     },
@@ -93,7 +113,9 @@ const Login = () => {
               error={formik.touched.password ? formik.errors.password : ""}
             />
 
-            <button className="flex justify-center items-center rounded-[80px] w-full mt-10 h-12 text-white font-poppins bg-[#1F8E1F]">
+            <button
+              className="flex justify-center items-center rounded-[80px] w-full mt-10 h-12 text-white font-poppins bg-[#1F8E1F]"
+              type="submit">
               {formik.isSubmitting ? <Loader /> : "Login"}
             </button>
           </form>
