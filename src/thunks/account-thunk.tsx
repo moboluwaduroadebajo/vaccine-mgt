@@ -1,3 +1,5 @@
+"use client";
+
 import ApiInstance from "@/api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";

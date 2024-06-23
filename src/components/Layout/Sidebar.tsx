@@ -1,3 +1,5 @@
+"use client";
+
 import { sideMenu } from "@/constants";
 import React, { useEffect } from "react";
 import MenuItem from "./MenuItem";

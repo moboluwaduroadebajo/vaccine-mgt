@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
 import { Icons } from "../icons";
 import axios, { AxiosError } from "axios";
