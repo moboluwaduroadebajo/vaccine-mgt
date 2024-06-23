@@ -12,7 +12,7 @@ const HeroSection = () => {
       <Navbar />
 
       <div className="mt-20 lg:flex justify-between lg:pl-40 pl-8">
-        <div className="w-1/2">
+        <div className="md:w-1/2 pb-10">
           <div className="flex gap-1 bg-[#D9ECD9] p-2 md:w-[420px] w-[340px] rounded-full">
             <Image alt="pin" src={pin} />
             <p className="text-[#1F8E1F] md:text-base text-xs">
@@ -20,7 +20,7 @@ const HeroSection = () => {
             </p>
           </div>
 
-          <p className="font-bold large:text-6xl tablet:text-5xl text-3xl leading-tight font-poppins">
+          <p className="font-bold large:text-6xl tablet:text-5xl text-3xl  leading-tight font-poppins">
             Manage Children&apos;s <br />
             <span className="text-[#1F8E1F]">Immunization </span> <br />
             History
@@ -50,7 +50,6 @@ const HeroSection = () => {
             <ellipse cx={745.5} cy={366} rx={745.5} ry={366} fill="#D2E8D2" />
           </svg>
           <Image alt="mom-image" src={HeroImage} className="z-50" />
-          {/* <div className="w-full h-[500px] bg-red-600 absolute top-0 -right-1/4 rounded-[50%] overflow-hidden"></div> */}
         </div>
       </div>
     </div>

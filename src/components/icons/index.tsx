@@ -6,8 +6,6 @@ interface IconProps {
   className?: string;
 }
 
-// "#B2B1B1";
-
 export const Icons = ({
   name,
   height = 24,
@@ -52,7 +50,7 @@ export const Icons = ({
   if (name === "loading-indicator") {
     return (
       <svg
-        className="animate-spin -ml-1 mr-3 h-5 w-5 text-white z-100"
+        className={`${className} animate-spin -ml-1 mr-3 h-5 w-5 text-white z-100`}
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24">

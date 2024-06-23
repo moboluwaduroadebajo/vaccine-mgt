@@ -8,34 +8,37 @@ import { ExistingVaccineType } from "@/type/vaccines.type";
 const ExistingVaccinesTable = () => {
   const [vaccines, setVaccines] = useState([]);
   const [searchKey, setSearchKey] = useState("");
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
+
   const baseURL = process.env.NEXT_PUBLIC_BASE_API_URL;
 
   useEffect(() => {
     const getVaccines = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get(`${baseURL}/vaccine?size=50&search=${searchKey}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get(
+          `${baseURL}/vaccine?size=50&search=${searchKey}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         setVaccines(response.data.data.content);
-        console.log(response.data.data.content);
       } catch (error) {
         console.error("Error fetching vaccine count:", error);
       }
     };
     getVaccines();
     setIsLoading(false);
-  }, [searchKey]);
+  }, [searchKey, baseURL]);
 
   if (isLoading) {
-    return <Loader />
+    return <Loader />;
   } else {
     return (
       <div className="bg-white flex1 w-full rounded-2xl overflow-auto font-poppins">
-        <div className="p-8 flex justify-between">
+        <div className="p-8 flex justify-between sticky top-0 z-10 bg-white shadow-md">
           <p className="font-semibold text-2xl text-[#1F8E1F]">
             Existing Vaccines
           </p>
@@ -43,9 +46,13 @@ const ExistingVaccinesTable = () => {
           <div className="flex items-center justify-center gap-8">
             <BiMenuAltLeft fontSize={24} />
             <div className="relative">
-              <span className="absolute top-1/2 right-6 -translate-y-1/2 ">
-                <Icons name="search" fill="#1F8E1F" width={16} height={16} />
-              </span>
+              <div className="absolute top-1/2 right-6 -translate-y-1/2 ">
+                {searchKey ? (
+                  <Loader className="!text-[#1F8E1F]" />
+                ) : (
+                  <Icons name="search" fill="#1F8E1F" width={16} height={16} />
+                )}
+              </div>
 
               <input
                 type="text"
@@ -58,7 +65,7 @@ const ExistingVaccinesTable = () => {
           </div>
         </div>
 
-        <div>
+        <div className="z-50">
           <table className="w-full">
             <thead className="font-semibold text-1xl">
               <tr className="text-[#1F8E1F]">
@@ -70,8 +77,14 @@ const ExistingVaccinesTable = () => {
             </thead>
 
             <tbody>
-              {vaccines.map(
-                (data: ExistingVaccineType) => (
+              {vaccines.length === 0 ? (
+                <tr>
+                  <td colSpan={4} className="text-center p-6">
+                    No Record found
+                  </td>
+                </tr>
+              ) : (
+                vaccines.map((data: ExistingVaccineType) => (
                   <tr
                     key={data.id}
                     className="h-[70px] mb-6 hover:bg-[#f4f9f4] hover:border hover:border-[#1F8E1F] hover:rounded-lg cursor-pointer">
@@ -86,15 +99,31 @@ const ExistingVaccinesTable = () => {
                       {data.routeOfAdministration}
                     </td>
                   </tr>
-                )
+                ))
               )}
+
+              {/* {vaccines.map((data: ExistingVaccineType) => (
+                <tr
+                  key={data.id}
+                  className="h-[70px] mb-6 hover:bg-[#f4f9f4] hover:border hover:border-[#1F8E1F] hover:rounded-lg cursor-pointer">
+                  <td className="p-6 font-medium mb-2 borderb">
+                    {data.ageTarget}
+                  </td>
+                  <td className="p-6 font-medium borderb">{data.type}</td>
+                  <td className="p-6 borderb">
+                    {data.dosage} {data.dosageType}
+                  </td>
+                  <td className="p-6 borderb text-[#1F8E1F]">
+                    {data.routeOfAdministration}
+                  </td>
+                </tr>
+              ))} */}
             </tbody>
           </table>
         </div>
       </div>
     );
   }
-
 };
 
 export default ExistingVaccinesTable;

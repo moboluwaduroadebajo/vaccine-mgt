@@ -15,7 +15,7 @@ const AddNewVaccine = () => {
         </p>
       </div>
 
-      <BsPlusCircleFill size={60} color="#1F8E1F" />
+      <BsPlusCircleFill size={60} color="#1F8E1F " />
     </div>
   );
 };
