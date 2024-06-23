@@ -19,7 +19,7 @@ const ExistingVaccinesTable = () => {
     const getVaccines = async () => {
       try {
         setIsLoading(true);
-        const token = window.localStorage.getItem("token");
+        const token = typeof window !== "undefined" ? localStorage.getItem("token") : "";
         const response = await axios.get(
           `${baseURL}/vaccine?size=50&search=${searchKey}`,
           {

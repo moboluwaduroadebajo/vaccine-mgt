@@ -18,11 +18,12 @@ export const login = createAsyncThunk<UserEntityType, LoginPayloadType>(
         { username, password },
         { withCredentials: true }
       );
-      window.localStorage.setItem(
-        "token",
-        "Bearer " + response.data.data.accessToken
-      );
-      console.log(response.data);
+      if (typeof window !== "undefined") {
+        localStorage.setItem(
+          "token",
+          "Bearer " + response.data.data.accessToken
+        );
+      }
 
       return response.data.data.user;
     } catch (err) {
@@ -30,8 +31,8 @@ export const login = createAsyncThunk<UserEntityType, LoginPayloadType>(
       if (!error.response) {
         throw err;
       }
-      toast.error(<Alert message={error.response.data.message} type="error" />);
 
+      toast.error(<Alert message={error.response.data.message} type="error" />);
       return rejectWithValue(error.response.data);
     }
   }
@@ -40,7 +41,9 @@ export const login = createAsyncThunk<UserEntityType, LoginPayloadType>(
 export const logout = () => (dispatch: AppDispatch) => {
   ApiInstance.post("/user/profile")
     .then((response) => {
-      localStorage.removeItem("token");
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("token");
+      }
       // DISPATCH EACH REDUCER'S RESET ACTION HERE
       if (response.data === "success") {
         dispatch(resetAccountState());

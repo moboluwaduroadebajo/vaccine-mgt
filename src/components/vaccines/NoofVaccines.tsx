@@ -14,7 +14,7 @@ const NoofVaccines = () => {
   useEffect(() => {
     const getNoOfVaccines = async () => {
       try {
-        const token = window.localStorage.getItem("token");
+        const token = typeof window !== "undefined" ? localStorage.getItem("token") : "";
         const response = await axios.get(`${baseURL}/vaccine/count`, {
           headers: {
             Authorization: token,

@@ -14,7 +14,7 @@ const Sidebar = () => {
   const dispatch = useAppDispatch();
 
   const baseURL = process.env.NEXT_PUBLIC_BASE_API_URL;
-  const token = window.localStorage.getItem("token");
+  const token = typeof window !== "undefined" ? localStorage.getItem("token") : "";
 
   const handleLogout = async () => {
     window.localStorage.removeItem("token");
