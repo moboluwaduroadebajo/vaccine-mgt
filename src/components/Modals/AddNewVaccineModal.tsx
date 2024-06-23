@@ -29,9 +29,11 @@ const AddNewVaccineModal = ({ isOpen, setIsOpen }: IProps) => {
     },
     onSubmit: async (values) => {
       try {
+        const token = localStorage.getItem("token");
         const response = await axios.post(`${baseURL}/vaccine`, values, {
           headers: {
             "Content-Type": "application/json",
+            Authorization: `${token}`,
           },
         });
         console.log(response);

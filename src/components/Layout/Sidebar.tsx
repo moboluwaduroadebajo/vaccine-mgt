@@ -1,5 +1,5 @@
 import { sideMenu } from "@/constants";
-import React, { MouseEvent, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import MenuItem from "./MenuItem";
 import { useRouter } from "next/router";
 import { Icons } from "../icons";
@@ -29,7 +29,7 @@ const Sidebar = () => {
             Authorization: ` ${token}`,
           },
         });
-        console.log(response);
+        // console.log(response);
       } catch (error) {
         console.log(error);
       }

@@ -17,7 +17,7 @@ export const login = createAsyncThunk<UserEntityType, LoginPayloadType>(
         { withCredentials: true }
       );
       localStorage.setItem("token", "Bearer " + response.data.data.accessToken);
-      //   localStorage.setItem("eitrams-userRole", response.data.data.user.type);
+
       console.log(response.data);
 
       return response.data.data.user;

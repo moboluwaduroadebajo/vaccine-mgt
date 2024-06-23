@@ -47,19 +47,6 @@ const Login = () => {
       const { username, password } = values;
 
       try {
-        // const response = await axios.post(`${baseURL}/auth/login`, values, {
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        // });
-        // if (response.status === 200) {
-        //   toast.success("Logging in");
-        //   localStorage.setItem("token", response.data.data.accessToken);
-        //   router.push("/dashboard");
-        // } else {
-        //   toast.error(response.data.errors[0]);
-        //   console.log(response.data.errors[0]);
-        // }
         dispatch(login({ username, password }));
       } catch (error: any) {
         if (error.response) {

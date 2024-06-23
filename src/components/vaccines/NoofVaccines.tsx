@@ -15,7 +15,7 @@ const NoofVaccines = () => {
         const token = localStorage.getItem("token");
         const response = await axios.get(`${baseURL}/vaccine/count`, {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: token,
           },
         });
         if (response.status === 403) {

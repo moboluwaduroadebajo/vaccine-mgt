@@ -23,7 +23,7 @@ const ExistingVaccinesTable = () => {
           `${baseURL}/vaccine?size=50&search=${searchKey}`,
           {
             headers: {
-              Authorization: `Bearer ${token}`,
+              Authorization: `${token}`,
             },
           }
         );
