@@ -12,10 +12,10 @@ const Sidebar = () => {
   const dispatch = useAppDispatch();
 
   const baseURL = process.env.NEXT_PUBLIC_BASE_API_URL;
-  const token = localStorage.getItem("token");
+  const token = window.localStorage.getItem("token");
 
   const handleLogout = async () => {
-    localStorage.removeItem("token");
+    window.localStorage.removeItem("token");
     await dispatch(resetAccountState());
     router.push("/login");
   };

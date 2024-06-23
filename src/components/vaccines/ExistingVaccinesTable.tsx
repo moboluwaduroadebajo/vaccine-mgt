@@ -18,7 +18,7 @@ const ExistingVaccinesTable = () => {
     const getVaccines = async () => {
       try {
         setIsLoading(true);
-        const token = localStorage.getItem("token");
+        const token = window.localStorage.getItem("token");
         const response = await axios.get(
           `${baseURL}/vaccine?size=50&search=${searchKey}`,
           {
@@ -27,10 +27,7 @@ const ExistingVaccinesTable = () => {
             },
           }
         );
-        if (response.status === 403) {
-          localStorage.removeItem("token");
-          router.push("/login");
-        }
+
         setVaccines(response.data.data.content);
         setIsLoading(false);
       } catch (err) {
@@ -38,7 +35,7 @@ const ExistingVaccinesTable = () => {
 
         console.error("Error fetching vaccine count:", error);
         if (error.response?.status === 403) {
-          localStorage.removeItem("token");
+          window.localStorage.removeItem("token");
           router.push("/login");
         }
       }

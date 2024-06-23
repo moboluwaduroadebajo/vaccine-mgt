@@ -12,22 +12,19 @@ const NoofVaccines = () => {
   useEffect(() => {
     const getNoOfVaccines = async () => {
       try {
-        const token = localStorage.getItem("token");
+        const token = window.localStorage.getItem("token");
         const response = await axios.get(`${baseURL}/vaccine/count`, {
           headers: {
             Authorization: token,
           },
         });
-        if (response.status === 403) {
-          localStorage.removeItem("token");
-          router.push("/login");
-        }
+
         setNoOfVaccines(response.data.data);
       } catch (err) {
         const error = err as AxiosError<Error>;
         console.error("Error fetching vaccine count:", error);
         if (error.response?.status === 403) {
-          localStorage.removeItem("token");
+          window.localStorage.removeItem("token");
           router.push("/login");
         }
       }

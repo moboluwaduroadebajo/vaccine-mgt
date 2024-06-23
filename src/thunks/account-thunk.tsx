@@ -16,8 +16,10 @@ export const login = createAsyncThunk<UserEntityType, LoginPayloadType>(
         { username, password },
         { withCredentials: true }
       );
-      localStorage.setItem("token", "Bearer " + response.data.data.accessToken);
-
+      window.localStorage.setItem(
+        "token",
+        "Bearer " + response.data.data.accessToken
+      );
       console.log(response.data);
 
       return response.data.data.user;
