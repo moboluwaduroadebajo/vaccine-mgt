@@ -1,9 +1,7 @@
-import { LoginPayloadType, UserEntityType } from "@/type/account.type";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { login } from "@/thunks/account-thunk";
+import { createSlice, createSelector } from "@reduxjs/toolkit";
 
 interface AccountState {
-  loading: boolean;
   user: {
     id: string;
     email: string;
@@ -19,6 +17,8 @@ interface AccountState {
     ];
     status: string;
   };
+  accessToken: string;
+  message: string;
   error: string;
   isLoadingAccountDetails: boolean;
   hasLoadedAccountDetails: boolean;
@@ -26,7 +26,6 @@ interface AccountState {
 }
 
 const initialState: AccountState = {
-  loading: false,
   user: {
     id: "",
     email: "",
@@ -42,37 +41,17 @@ const initialState: AccountState = {
     ],
     status: "",
   },
+  accessToken: "",
+  message: "",
   error: "",
   isLoadingAccountDetails: false,
   hasLoadedAccountDetails: false,
   isAuthenticated: false,
 };
-const baseURL = process.env.NEXT_PUBLIC_BASE_API_URL;
 
-export const login = createAsyncThunk<UserEntityType, LoginPayloadType>(
-  "account/login",
-  async ({ username, password }) => {
-    try {
-      const request = await axios.post(
-        `${baseURL}/auth/login`,
-        {
-          username,
-          password,
-        },
-        { withCredentials: true }
-      );
-      const response = request.data.data;
-      localStorage.setItem("user", JSON.stringify(response));
-      return response;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-);
-
-const accountSlice = createSlice({
+export const accountSlice = createSlice({
   name: "account",
-  initialState: initialState,
+  initialState,
   reducers: {
     setUser: (state, action) => {
       if (action.payload) {
@@ -86,10 +65,13 @@ const accountSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    // `login.pending` is being fired:
     builder.addCase(login.pending, (state) => {
       state.isLoadingAccountDetails = true;
     });
 
+    // When a server responses with the data,
+    // `login.fulfilled` is fired:
     builder.addCase(login.fulfilled, (state, { payload }) => {
       state.user.id = payload.id;
       state.user.email = payload.email;
@@ -100,6 +82,7 @@ const accountSlice = createSlice({
       state.isAuthenticated = true;
     });
 
+    // When a server responses with an error:
     builder.addCase(login.rejected, (state, { payload }: { payload: any }) => {
       if (payload) {
         state.error = payload.message;
@@ -111,4 +94,33 @@ const accountSlice = createSlice({
   },
 });
 
-export default accountSlice.reducer;
+export const selectAccountState = ({ account }: { account: AccountState }) => {
+  return account;
+};
+
+export const selectUserInformation = createSelector(
+  selectAccountState,
+  (accountState) => accountState.user
+);
+
+export const selectUserID = createSelector(
+  selectAccountState,
+  (accountState) => accountState.user.id
+);
+
+export const selectAccessToken = createSelector(
+  selectAccountState,
+  (accountState) => accountState.accessToken
+);
+
+export const selectUserRole = createSelector(
+  selectAccountState,
+  (accountState) => accountState.user.type
+);
+
+export const selectIsAuthenticated = createSelector(
+  selectAccountState,
+  (accountState) => accountState.isAuthenticated
+);
+
+export const { resetAccountState } = accountSlice.actions;

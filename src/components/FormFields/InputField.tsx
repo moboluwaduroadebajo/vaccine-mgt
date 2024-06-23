@@ -23,7 +23,7 @@ interface TextFieldProps {
 }
 
 const InputField = ({
-  type = "text",
+  type = "text" || "number",
   onChange = () => {},
   onBlur = () => {},
   value,

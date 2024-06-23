@@ -1,24 +1,34 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
 import { Icons } from "../icons";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import Loader from "@/components/utilities/Loader";
+import { useRouter } from "next/router";
 
 const NoofVaccines = () => {
   const [noOfVaccines, setNoOfVaccines] = useState<number | null>(null);
   const baseURL = process.env.NEXT_PUBLIC_BASE_API_URL;
+  const router = useRouter();
 
   useEffect(() => {
     const getNoOfVaccines = async () => {
       try {
-        const token = localStorage.getItem("token");
+        const token = typeof window !== "undefined" ? localStorage.getItem("token") : "";
         const response = await axios.get(`${baseURL}/vaccine/count`, {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: token,
           },
         });
+
         setNoOfVaccines(response.data.data);
-      } catch (error) {
+      } catch (err) {
+        const error = err as AxiosError<Error>;
         console.error("Error fetching vaccine count:", error);
+        if (error.response?.status === 403) {
+          window.localStorage.removeItem("token");
+          router.push("/login");
+        }
       }
     };
     getNoOfVaccines();
