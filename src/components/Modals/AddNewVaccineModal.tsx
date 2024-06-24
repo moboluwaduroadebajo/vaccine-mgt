@@ -46,6 +46,7 @@ const AddNewVaccineModal = ({ isOpen, setIsOpen }: IProps) => {
           },
         });
         console.log(response.data);
+        setIsOpen(false);
       } catch (error: any) {
         console.log(error.response.data);
       }

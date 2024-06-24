@@ -12,7 +12,7 @@ import { Bell, Search } from "react-feather";
 const Header = () => {
   const router = useRouter();
   return (
-    <div className="h-20 bg-white mb-10 ml-4 rounded p-8 px-20 font-poppins font-medium text-xl flex justify-between">
+    <div className="h-20 bg-white mb-10 rounded p-8 px-20 font-poppins font-medium text-xl flex justify-between sticky top-0 left-0 shadow-md z-50">
       <div>
         {sideMenu.map((name) => (
           <p key={name.label}>
