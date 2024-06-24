@@ -27,13 +27,14 @@ export const login = createAsyncThunk<UserEntityType, LoginPayloadType>(
 
       return response.data.data.user;
     } catch (err) {
-      const error = err as AxiosError<Error>;
+      const error = err as AxiosError<UserEntityType>;
       if (!error.response) {
         throw err;
       }
-
-      toast.error(<Alert message={error.response.data.message} type="error" />);
-      return rejectWithValue(error.response.data);
+      toast.error(
+        <Alert message={error.response.data.errors[0]} type="error" />
+      );
+      return rejectWithValue(error.response.data.errors);
     }
   }
 );

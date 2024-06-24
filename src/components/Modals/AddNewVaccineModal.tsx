@@ -7,13 +7,12 @@ import InputField from "../FormFields/InputField";
 import Button from "../utilities/Button";
 import { useFormik } from "formik";
 import axios from "axios";
+import CustomSelect from "../FormFields/CustomSelect";
+import { adminRoute, ageTarget, dosageType, vaccineType } from "@/constants";
 
 interface IProps {
   isOpen: boolean;
-  //   isSubmitting: boolean;
   setIsOpen: (arg: any) => void;
-  onConfirm?: () => void;
-  //   icon?: React.ReactNode;
 }
 
 const AddNewVaccineModal = ({ isOpen, setIsOpen }: IProps) => {
@@ -22,32 +21,40 @@ const AddNewVaccineModal = ({ isOpen, setIsOpen }: IProps) => {
 
   const formik = useFormik({
     initialValues: {
-      ageTarget: "Birth",
-      type: "*BCG",
+      ageTarget: "",
+      type: "",
       dosage: 0,
-      dosageType: "ml",
-      administerRoute: "Intra dermal",
-      administerSite: "string",
+      dosageType: "",
+      administerRoute: "",
+      administerSite: "",
     },
     onSubmit: async (values) => {
+      const {
+        ageTarget,
+        type,
+        dosage,
+        dosageType,
+        administerRoute,
+        administerSite,
+      } = values;
       try {
-        const token = localStorage.getItem("token");
+        const token =
+          typeof window !== "undefined" ? localStorage.getItem("token") : "";
         const response = await axios.post(`${baseURL}/vaccine`, values, {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `${token}`,
           },
         });
-        console.log(response);
-      } catch (error) {
-        console.log(error);
+        console.log(response.data);
+      } catch (error: any) {
+        console.log(error.response.data);
       }
     },
   });
 
   return (
     <Modal isOpen={isOpen} onClose={closeModal}>
-      <div className="flex flex-col justify- items- m-auto ">
+      <div className="flex flex-col">
         <div className="flex flex-col gap-8 font-poppins mb-20">
           <p
             className="flex items-center gap-4 cursor-pointer hover:text-green-700"
@@ -60,37 +67,56 @@ const AddNewVaccineModal = ({ isOpen, setIsOpen }: IProps) => {
         </div>
 
         <form className="flex flex-col gap-4" onSubmit={formik.handleSubmit}>
-          <InputField
+          {/* <InputField
             name="type"
             label="Type of Vacccine"
             placeholder=""
             value={formik.values.type}
             onChange={formik.handleChange}
+          /> */}
+          <CustomSelect
+            options={vaccineType}
+            label="Type of Vaccine"
+            name="type"
+            handleOptionChange={(option) => {
+              formik.setFieldValue("type", option?.value);
+            }}
           />
 
-          <InputField
-            name="ageTarget"
+          <CustomSelect
+            options={ageTarget}
             label="Minimum target age of child"
-            placeholder=""
-            value={formik.values.ageTarget}
-            onChange={formik.handleChange}
+            name="ageTarget"
+            handleOptionChange={(option) => {
+              formik.setFieldValue("ageTarget", option?.value);
+            }}
           />
 
           <InputField
-            type="text"
+            type="number"
             name="dosage"
             label="Dosage"
             placeholder=""
-            value={formik.values.dosageType}
+            value={formik.values.dosage}
             onChange={formik.handleChange}
           />
 
-          <InputField
-            name="administerRoute"
+          <CustomSelect
+            options={dosageType}
+            label="Dosage Type"
+            name="dosageType"
+            handleOptionChange={(option) => {
+              formik.setFieldValue("dosageType", option?.value);
+            }}
+          />
+
+          <CustomSelect
+            options={adminRoute}
             label="Route of Administration"
-            placeholder=""
-            value={formik.values.administerRoute}
-            onChange={formik.handleChange}
+            name="administerRoute"
+            handleOptionChange={(option) => {
+              formik.setFieldValue("administerRoute", option?.value);
+            }}
           />
 
           <InputField

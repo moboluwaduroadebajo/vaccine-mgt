@@ -8,31 +8,29 @@ import Logo from "@/../public/logo.png";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Link from "next/link";
-import axios from "axios";
 import { useRouter } from "next/router";
 import Loader from "@/components/utilities/Loader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import {
+  selectAccountState,
   selectIsAuthenticated,
-  selectUserRole,
 } from "@/reducers/account.reducer";
 import { login } from "@/thunks/account-thunk";
 
 const Login = () => {
-  const baseURL = process.env.NEXT_PUBLIC_BASE_API_URL;
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const userRole = useAppSelector(selectUserRole);
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  const { errors: loginError } = useAppSelector(selectAccountState);
 
   useEffect(() => {
     if (isAuthenticated) {
       router.push("/dashboard");
     }
-  }, [isAuthenticated, router, userRole]);
+  }, [isAuthenticated, router]);
 
   const formik = useFormik({
     initialValues: {
@@ -43,21 +41,23 @@ const Login = () => {
       username: Yup.string().required("Email is required"),
       password: Yup.string().required("Password is required"),
     }),
-    onSubmit: async (values) => {
+    onSubmit: (values) => {
       const { username, password } = values;
-
       try {
-        dispatch(login({ username, password }));
-      } catch (error: any) {
-        if (error.response) {
-          toast.error(error.response.data.errors[0]);
-
-          console.log(error.response.data.errors[0]);
-          formik.isSubmitting = false;
-        }
+        dispatch(login({ username: username, password: password }));
+      } catch (error) {
+        console.log("Error", error);
       }
     },
   });
+
+  useEffect(() => {
+    if (loginError) {
+      formik.setSubmitting(false);
+      formik.resetForm();
+    }
+  }, [loginError]);
+
   return (
     <div className="flex bg-loginBg bg-no-repeat bg-right lg:bg-contain bg-cover h-screen">
       <div className="absolute top-0 bottom-0 lg:left-[50%] left-0 right-0 bg-[#E1F0E1] opacity-90 z-10" />
@@ -76,7 +76,7 @@ const Login = () => {
 
           <p className="font-poppins font-semibold text-2xl my-12">Login</p>
 
-          <form onSubmit={formik.handleSubmit}>
+          <form onSubmit={formik.handleSubmit} autoComplete="off">
             <InputField
               type="email"
               placeholder="Enter your email address"
@@ -102,7 +102,8 @@ const Login = () => {
 
             <button
               className="flex justify-center items-center rounded-[80px] w-full mt-10 h-12 text-white font-poppins bg-[#1F8E1F]"
-              type="submit">
+              type="submit"
+              disabled={formik.isSubmitting}>
               {formik.isSubmitting ? <Loader /> : "Login"}
             </button>
           </form>

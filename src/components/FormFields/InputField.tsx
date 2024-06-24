@@ -7,7 +7,7 @@ interface TextFieldProps {
   type?: "text" | "email" | "number";
   onChange?: (e: React.ChangeEvent<any>) => void;
   onBlur?: (e: React.FocusEvent<any, Element>) => void;
-  value?: string;
+  value?: string | number;
   label: string;
   placeholder: string;
   name: string;
@@ -23,7 +23,7 @@ interface TextFieldProps {
 }
 
 const InputField = ({
-  type = "text" || "number",
+  type = "text",
   onChange = () => {},
   onBlur = () => {},
   value,

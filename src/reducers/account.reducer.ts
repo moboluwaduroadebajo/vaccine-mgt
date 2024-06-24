@@ -19,7 +19,7 @@ interface AccountState {
   };
   accessToken: string;
   message: string;
-  error: string;
+  errors: string[];
   isLoadingAccountDetails: boolean;
   hasLoadedAccountDetails: boolean;
   isAuthenticated: boolean;
@@ -43,7 +43,7 @@ const initialState: AccountState = {
   },
   accessToken: "",
   message: "",
-  error: "",
+  errors: [""],
   isLoadingAccountDetails: false,
   hasLoadedAccountDetails: false,
   isAuthenticated: false,
@@ -85,7 +85,7 @@ export const accountSlice = createSlice({
     // When a server responses with an error:
     builder.addCase(login.rejected, (state, { payload }: { payload: any }) => {
       if (payload) {
-        state.error = payload.message;
+        state.errors[0] = payload.message;
       }
       state.isAuthenticated = false;
       state.isLoadingAccountDetails = false;
