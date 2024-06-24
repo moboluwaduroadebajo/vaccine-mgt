@@ -45,8 +45,8 @@ const AddNewVaccineModal = ({ isOpen, setIsOpen }: IProps) => {
             Authorization: `${token}`,
           },
         });
-        console.log(response.data);
-        setIsOpen(false);
+
+        closeModal();
       } catch (error: any) {
         console.log(error.response.data);
       }
@@ -68,13 +68,6 @@ const AddNewVaccineModal = ({ isOpen, setIsOpen }: IProps) => {
         </div>
 
         <form className="flex flex-col gap-4" onSubmit={formik.handleSubmit}>
-          {/* <InputField
-            name="type"
-            label="Type of Vacccine"
-            placeholder=""
-            value={formik.values.type}
-            onChange={formik.handleChange}
-          /> */}
           <CustomSelect
             options={vaccineType}
             label="Type of Vaccine"
