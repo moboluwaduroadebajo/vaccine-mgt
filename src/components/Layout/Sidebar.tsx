@@ -23,7 +23,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="w-[122px] bg-[#1F8E1F] text-white flex flex-col">
+    <div className="w-[122px] bg-[#1F8E1F] text-white flex flex-col fixed top-0 bottom-0 h-screen z-50">
       <div className="flex-1 flex flex-col justify-center">
         <ul className="flex flex-col gap-3">
           {sideMenu.map((item) => (

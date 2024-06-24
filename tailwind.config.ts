@@ -14,6 +14,7 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         "hero-image": "url('../assets/mom-image.png')",
         loginBg: "url(../assets/login_bg.png)",
+        spiral: "url(../assets/spiral.png)",
       },
       screens: {
         tablet: "840px",

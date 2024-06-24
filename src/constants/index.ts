@@ -26,6 +26,52 @@ export const sideMenu = [
   },
 ];
 
+export const helpMenuList = [
+  {
+    id: 1,
+    iconName: "peace",
+    title: "Improved patient outcomes",
+    description:
+      "Ensure your patients receive timely and appropriate vaccinations,eading to better overall health",
+    bgColor: "bg-[#dbeddb]",
+    borderColor: "border-[#1F8E1F]",
+    textColor: "text-[#1F8E1F]",
+    fillColor: "#1F8E1F",
+  },
+  {
+    id: 2,
+    iconName: "rythm",
+    title: "Enhanced Practice Efficiency",
+    description:
+      "Save valuable time and resources with streamlined workflows and automated tasks.",
+    bgColor: "bg-[#eee3dd]",
+    borderColor: "border-[#DF2935]",
+    textColor: "text-[#DF2935]",
+  },
+  {
+    id: 3,
+    iconName: "peace",
+    title: "reduced errors",
+    description:
+      "Minimize the risk of errors with a centralized and secure record-keeping system.",
+    bgColor: "bg-[#f1eed8]",
+    borderColor: "border-[#FF9900]",
+    textColor: "text-[#FF9900]",
+    fillColor: "#FF9900",
+  },
+  {
+    id: 4,
+    iconName: "peace",
+    title: "Improved Patient Engagement:",
+    description:
+      "Empower patients to take an active role in their health by providing them with easy access to their immunization records.",
+    bgColor: "bg-[#ddeaf1]",
+    borderColor: "border-[#3772FF]",
+    textColor: "text-[#3772FF]",
+    fillColor: "#3772FF",
+  },
+];
+
 // [ *BCG, **OPV0, ***Hep BO birth, Pentavalent(DPT, Hep B and Hib) 1,
 //   Premococcal Conjugate Vaccine 1, OPV1, IPV1, Rotavirus vaccine 1,
 //   Pentavalent(DPT, Hep B and Hib) 2, Premococcal Conjugate Vaccine 2, OPV2,
@@ -35,9 +81,9 @@ export const sideMenu = [
 //    **** HPV, unknown]
 
 export const vaccineType = [
-  { label: "*BCG", value: "*BCG" },
-  { label: "**OPV0", value: "**OPV0" },
-  { label: "***Hep BO birth", value: "***Hep BO birth" },
+  { label: "BCG", value: "BCG" },
+  { label: "OPV0", value: "OPV0" },
+  { label: "Hep BO birth", value: "Hep BO birth" },
   {
     label: "Pentavalent(DPT, Hep B and Hib) 1",
     value: "Pentavalent(DPT, Hep B and Hib) 1",

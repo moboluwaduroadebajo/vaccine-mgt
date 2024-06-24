@@ -114,6 +114,7 @@ const InputField = ({
             onBlur={onBlur}
             disabled={disabled}
             style={computedInputStyle()}
+            autoComplete="off"
           />
           {showIcon && (
             <>

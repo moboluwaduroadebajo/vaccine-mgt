@@ -23,7 +23,6 @@ const AddNewVaccine = () => {
         <div onClick={() => setIsModalOpen(true)}>
           <BsPlusCircleFill
             size={60}
-            stroke="red"
             className="text-[#1F8E1F] hover:text-white"
           />
         </div>
