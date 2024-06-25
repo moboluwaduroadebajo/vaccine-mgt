@@ -8,7 +8,7 @@ type LayoutProps = {
 
 const PageLayout = ({ children }: LayoutProps) => {
   return (
-    <div className="bg-[#F0F7F0] ">
+    <div className="h-full">
       <Sidebar />
       <main className="ml-[122px]">
         <Header />

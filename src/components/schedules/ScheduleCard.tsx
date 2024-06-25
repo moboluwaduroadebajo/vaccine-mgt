@@ -5,8 +5,8 @@ import { FaPlus } from "react-icons/fa";
 const ScheduleCard = () => {
   const date = new Date();
 
-  const day = date.getDate(); // Get the day of the month
-  const month = date.getMonth(); // Get the month (0-11, so we add 1)
+  const day = date.getDate();
+  const month = date.getMonth();
   const year = date.getFullYear();
 
   const months = [
