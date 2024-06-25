@@ -48,7 +48,7 @@ const ChildrenDetailCard = () => {
         console.log(response.data);
       } catch (err) {
         const error = err as AxiosError<Error>;
-        console.error("Error fetching vaccine count:", error);
+        console.error("Error fetching children:", error);
         if (error.response?.status === 403) {
           window.localStorage.removeItem("token");
           router.push("/login");

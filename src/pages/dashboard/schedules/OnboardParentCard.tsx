@@ -14,7 +14,7 @@ const OnboardParentCard = ({ variant, additionalClassname }: ParentProps) => {
   return (
     <div
       className={clsx({
-        "bg-[#1F8E1F] rounded-2xl text-white bg-spiral bg-cover bg-center bg-no-repeat relative cursor-pointer z-[100]":
+        "bg-[#1F8E1F] rounded-2xl text-white bg-spiral bg-cover bg-center bg-no-repeat relative cursor-pointer z-1":
           true,
         "flex justify-center items-center": variant === "primary",
         "flex h-[250px]": variant === "secondary",

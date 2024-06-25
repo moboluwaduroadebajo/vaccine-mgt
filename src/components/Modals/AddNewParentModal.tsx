@@ -7,6 +7,9 @@ import { useFormik } from "formik";
 import { ParentDataType } from "@/type/user.type";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/router";
+import * as Yup from "yup";
+import DatePicker from "react-datepicker";
+import DatePickerInput from "../FormFields/DatePickerInput";
 
 interface IProps {
   isOpen: boolean;
@@ -21,23 +24,35 @@ const AddNewParentModal = ({ isOpen, setIsOpen, parent }: IProps) => {
 
   const formik = useFormik({
     initialValues: {
-      firstName: parent?.firstName,
-      lastName: parent?.lastName,
-      title: parent?.title,
-      phoneNumber: parent?.phoneNumber,
-      email: parent?.email,
+      firstName: "",
+      lastName: "",
+      title: "",
+      phoneNumber: "",
+      email: "",
+      dateOfBirth: new Date(),
     },
+    validationSchema: Yup.object({
+      title: Yup.string().required("Title is required!"),
+      firstName: Yup.string().required("First name is required!"),
+      lastName: Yup.string().required("Last name is required!"),
+      phoneNumber: Yup.string()
+        .required("phone number is required!")
+        .min(11, "Phone number should be at least 11 digits!")
+        .max(2147483647, "phone number is too long!"),
+      email: Yup.string()
+        .required("Email is required!")
+        .email("Invalid email!"),
+    }),
     onSubmit: async (values) => {
       try {
         const token =
           typeof window !== "undefined" ? localStorage.getItem("token") : "";
-        const response = await axios.post(`${baseURL}/immuno/parent`, values, {
+        await axios.post(`${baseURL}/immuno/parent`, values, {
           headers: {
             Authorization: token,
           },
         });
-
-        console.log(response.data);
+        closeModal();
       } catch (err) {
         const error = err as AxiosError<Error>;
         console.error("Error fetching vaccine count:", error);
@@ -51,7 +66,7 @@ const AddNewParentModal = ({ isOpen, setIsOpen, parent }: IProps) => {
 
   return (
     <Modal isOpen={isOpen} onClose={closeModal}>
-      <div className="flex flex-col text-black">
+      <div className="flex flex-col text-black z-10">
         <div className="flex flex-col gap-8 font-poppins mb-20 ">
           <p
             className="flex items-center gap-4 cursor-pointer hover:text-green-700"
@@ -65,58 +80,69 @@ const AddNewParentModal = ({ isOpen, setIsOpen, parent }: IProps) => {
 
         <form className="flex flex-col gap-4" onSubmit={formik.handleSubmit}>
           <InputField
+            name="title"
+            label="Title"
+            placeholder="Mr/Mrs"
+            value={formik.values.title}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.title ? formik.errors.title : ""}
+          />
+
+          <InputField
             name="firstName"
             label="First Name"
             placeholder="Enter your first name"
             value={formik.values.firstName}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
+            error={formik.touched.firstName ? formik.errors.firstName : ""}
           />
 
           <InputField
             name="lastName"
             label="Last Name"
-            placeholder="Enter your first name"
+            placeholder="Enter your last name"
             value={formik.values.lastName}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
+            error={formik.touched.lastName ? formik.errors.lastName : ""}
           />
 
-          <InputField
-            name="title"
-            label="Parental Role"
-            placeholder="Enter your first name"
-            value={formik.values.title}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-
-          <InputField
+          {/* <InputField
             name="number"
             label="Hospital Number"
             placeholder="Enter your first name"
-          />
+          /> */}
 
-          <InputField name="dateOfBirth" label="Date of Birth" placeholder="" />
+          {/* <InputField name="dateOfBirth" label="Date of Birth" placeholder="" /> */}
+
+          <DatePickerInput
+            additionalClass=""
+            value={formik.values.dateOfBirth}
+            onChange={(val) => formik.setFieldValue("dateOfBirth", val)}
+          />
 
           <InputField
             name="email"
             type="email"
             label="Email Address"
-            placeholder=""
+            placeholder="Enter your email address"
             value={formik.values.email}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            additionalClass="text-black"
+            error={formik.touched.email ? formik.errors.email : ""}
           />
 
           <InputField
             name="phoneNumber"
+            type="number"
             label="Phone Number"
-            placeholder=""
+            placeholder="Phone number"
             value={formik.values.phoneNumber}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
+            error={formik.touched.phoneNumber ? formik.errors.phoneNumber : ""}
           />
 
           <Button
