@@ -37,7 +37,7 @@ const NoOfChildrenCard = () => {
       <h3 className="text-xl font-light">No. of Children</h3>
       <div>
         <span className="h-16 w-16 bg-white rounded-full flex justify-center items-center">
-          <Icons name="parents" fill="#1F8E1F" />
+          <Icons name="children" fill="#1F8E1F" />
         </span>
         <div className="text-2xl font-black mt-2 ml-4 text-[#1F8E1F]">
           {noOfChildren !== null ? noOfChildren : <Loader />}
