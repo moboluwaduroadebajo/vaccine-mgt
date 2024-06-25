@@ -7,7 +7,7 @@ import React from "react";
 const Vaccines = () => {
   return (
     <PageLayout>
-      <div className="flex flex-col gap-8 h-[900px]">
+      <div className="flex flex-col gap-8">
         <div className="flex gap-8 w-full">
           <AddNewVaccine />
           <NoofVaccines />

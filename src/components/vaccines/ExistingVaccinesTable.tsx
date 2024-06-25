@@ -46,7 +46,7 @@ const ExistingVaccinesTable = () => {
   }, [searchKey, baseURL]);
 
   return (
-    <div className="bg-white flex1 w-full rounded-2xl overflow-auto font-poppins">
+    <div className="bg-white h-[600px] w-full rounded-2xl overflow-auto font-poppins">
       <div className="p-8 flex justify-between sticky top-0 z-10 bg-white shadow-md">
         <p className="font-semibold text-2xl text-[#1F8E1F]">
           Existing Vaccines
