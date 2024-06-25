@@ -49,7 +49,7 @@ const HeroSection = () => {
             xmlns="http://www.w3.org/2000/svg">
             <ellipse cx={745.5} cy={366} rx={745.5} ry={366} fill="#D2E8D2" />
           </svg>
-          <Image alt="mom-image" src={HeroImage} className="z-50" />
+          <Image alt="mom-image" src={HeroImage} priority className="z-50" />
         </div>
       </div>
     </div>

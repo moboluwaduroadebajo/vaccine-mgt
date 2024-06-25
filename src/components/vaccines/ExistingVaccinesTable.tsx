@@ -96,7 +96,7 @@ const ExistingVaccinesTable = () => {
               vaccines.map((data: ExistingVaccineType) => (
                 <tr
                   key={data.id}
-                  className="h-[70px] mb-6 hover:bg-[#f4f9f4] hover:border hover:border-[#1F8E1F] hover:rounded-lg cursor-pointer">
+                  className="h-[70px] mb-6 hover:bg-[#f4f9f4] hover:border hover:border-[#1F8E1F] hover:rounded-2xl cursor-pointer">
                   <td className="p-6 font-medium mb-2 borderb">
                     {data.ageTarget}
                   </td>

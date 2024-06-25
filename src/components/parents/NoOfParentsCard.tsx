@@ -39,9 +39,9 @@ const NoOfParentsCard = () => {
         <span className="h-16 w-16 bg-white rounded-full flex justify-center items-center">
           <Icons name="parents" fill="#1F8E1F" />
         </span>
-        <p className="text-2xl font-black mt-2 ml-4 text-[#1F8E1F]">
+        <div className="text-2xl font-black mt-2 ml-4 text-[#1F8E1F]">
           {noOfParents !== null ? noOfParents : <Loader />}
-        </p>
+        </div>
       </div>
 
       <a href="#" className="text-[#1F8E1F] mt-2 font-bold inline-block">
