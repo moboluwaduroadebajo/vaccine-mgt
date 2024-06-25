@@ -82,6 +82,7 @@ const ExistingVaccinesTable = () => {
               <td className="max-w-[115px] p-6">Type of Vaccine</td>
               <td className="max-w-[115px] p-6">Dosage</td>
               <td className="max-w-[115px] p-6">Route of Administration</td>
+              <td className="max-w-[115px] p-6">Adm. Site</td>
             </tr>
           </thead>
 
@@ -104,8 +105,11 @@ const ExistingVaccinesTable = () => {
                   <td className="p-6 borderb">
                     {data.dosage} {data.dosageType}
                   </td>
-                  <td className="p-6 borderb text-[#1F8E1F]">
+                  <td className="p-6 borderb text">
                     {data.routeOfAdministration}
+                  </td>
+                  <td className="p-6 borderb text]">
+                    {data.site}
                   </td>
                 </tr>
               ))
