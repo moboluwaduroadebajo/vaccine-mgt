@@ -1,5 +1,7 @@
 import "@/styles/globals.css";
 import "@/styles/scrollbar.css";
+import "@/styles/table-style.css";
+
 import { league_spartan, poppins } from "@/utils/font";
 import type { AppProps } from "next/app";
 import { store } from "@/app/store";
