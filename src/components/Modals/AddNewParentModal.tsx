@@ -109,16 +109,8 @@ const AddNewParentModal = ({ isOpen, setIsOpen, parent }: IProps) => {
             error={formik.touched.lastName ? formik.errors.lastName : ""}
           />
 
-          {/* <InputField
-            name="number"
-            label="Hospital Number"
-            placeholder="Enter your first name"
-          /> */}
-
-          {/* <InputField name="dateOfBirth" label="Date of Birth" placeholder="" /> */}
-
           <DatePickerInput
-            additionalClass=""
+            label="Date of birth"
             value={formik.values.dateOfBirth}
             onChange={(val) => formik.setFieldValue("dateOfBirth", val)}
           />
