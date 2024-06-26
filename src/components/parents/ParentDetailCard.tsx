@@ -75,8 +75,8 @@ const ParentDetailCard = () => {
 
         <div className="flex justify-between px-4 pt-8 pb-4 font-roboto text-[#686868]">
           <p>Name</p>
-          <p>Email adddress</p>
-          <p>Phone Number</p>
+          <p>Contact</p>
+          <p>No of children</p>
         </div>
       </div>
 
@@ -92,9 +92,9 @@ const ParentDetailCard = () => {
             }}>
             <p className="font-semibold max-w-[115px]">{`${parent.firstName} ${parent.lastName}`}</p>
 
-            <p className="font-light">{parent.email}</p>
+            <p className="font-light">{parent.email} / {parent.phoneNumber}</p>
 
-            <p className="font-light">{parent.phoneNumber}</p>
+            <p className="font-light text-[#1F8E1F]">{parent.children.length} {" "} {parent.children.length > 1 ? "children" : "child"}</p>
           </div>
         ))
       )}
