@@ -66,6 +66,10 @@ const ParentDetailModal = ({ isOpen, setIsOpen, selectedParent }: IProps) => {
           <div className="flex flex-col items-center justify-between p-20 font-poppins">
             <p className="font-bold text-2xl">Children</p>
 
+            {selectedParent?.children.map((child) => (
+              <p key={child.id}>{child.firstName} {child.lastName}</p>
+            ))}
+
             <BsPlusCircleFill className="text-[#1F8E1F] text-4xl hover:text-[#6ba96b] cursor-pointer" />
           </div>
         </div>
