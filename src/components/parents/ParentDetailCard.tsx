@@ -5,35 +5,31 @@ import axios, { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import { UserEntityType } from "@/type/account.type";
 import { ParentDataType } from "@/type/user.type";
+import ParentDetailModal from "../Modals/ParentDetailModal";
 
 const ParentDetailCard = () => {
-  const parentsData = [
-    {
-      name: "Taiwo Awoniyi",
-      phoneNumber: "09097776667",
-      noOfChildren: "3",
-    },
-    {
-      name: "Kelechi Iheanacho",
-      phoneNumber: "09097776667",
-      noOfChildren: "3",
-    },
-    {
-      name: "Kelechi Iheanacho",
-      phoneNumber: "09097776667",
-      noOfChildren: "3",
-    },
-    {
-      name: "Kelechi Iheanacho",
-      phoneNumber: "09097776667",
-      noOfChildren: "3",
-    },
-  ];
-
-  const [parentData, setParentData] = useState([]);
+  const [parentData, setParentData] = useState<ParentDataType[]>([]);
+  const [selectedParent, setSelectedParent] = useState<ParentDataType>();
+  const [openParentModal, setOpenParentModal] = useState(false);
 
   const baseURL = process.env.NEXT_PUBLIC_BASE_API_URL;
   const router = useRouter();
+
+  // const getAge = (dateOfBirth: string | Date): number => {
+  //   const today = new Date();
+  //   const birthDate = new Date(dateOfBirth);
+  //   let age = today.getFullYear() - birthDate.getFullYear();
+  //   const monthDifference = today.getMonth() - birthDate.getMonth();
+
+  //   if (
+  //     monthDifference < 0 ||
+  //     (monthDifference === 0 && today.getDate() < birthDate.getDate())
+  //   ) {
+  //     age--;
+  //   }
+
+  //   return age;
+  // };
 
   useEffect(() => {
     const getParentDetails = async () => {
@@ -61,6 +57,11 @@ const ParentDetailCard = () => {
     };
     getParentDetails();
   }, [baseURL]);
+
+  const handleClick = (user: ParentDataType) => {
+    setSelectedParent(user);
+    setOpenParentModal(true);
+  };
   return (
     <div className="grow bg-white rounded-2xl ">
       <div className="flex flex-col shadow-md p-4 sticky top-0 rounded-2xl bg-white">
@@ -100,7 +101,10 @@ const ParentDetailCard = () => {
         parentData.map((parent: ParentDataType) => (
           <div
             key={parent.id}
-            className="flex justify-between items-center py-6 px-6 cursor-pointer font-poppins border-b hover:border-2 hover:rounded-2xl hover:bg-[#f4f9f4] hover:border-[#1F8E1F]">
+            className="flex justify-between items-center py-6 px-6 cursor-pointer font-poppins border-b hover:border-2 hover:rounded-2xl hover:bg-[#f4f9f4] hover:border-[#1F8E1F]"
+            onClick={() => {
+              handleClick(parent);
+            }}>
             <p className="font-semibold max-w-[115px]">{`${parent.firstName} ${parent.lastName}`}</p>
 
             <p className="font-light">{parent.email}</p>
@@ -109,6 +113,12 @@ const ParentDetailCard = () => {
           </div>
         ))
       )}
+
+      <ParentDetailModal
+        selectedParent={selectedParent}
+        isOpen={openParentModal}
+        setIsOpen={() => setOpenParentModal(!openParentModal)}
+      />
     </div>
   );
 };

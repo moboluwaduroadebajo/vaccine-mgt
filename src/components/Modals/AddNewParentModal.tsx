@@ -4,20 +4,17 @@ import { ArrowLeft } from "react-feather";
 import InputField from "../FormFields/InputField";
 import Button from "../utilities/Button";
 import { useFormik } from "formik";
-import { ParentDataType } from "@/type/user.type";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import * as Yup from "yup";
-import DatePicker from "react-datepicker";
 import DatePickerInput from "../FormFields/DatePickerInput";
 
 interface IProps {
   isOpen: boolean;
   setIsOpen: (arg: any) => void;
-  parent?: ParentDataType | undefined;
 }
 
-const AddNewParentModal = ({ isOpen, setIsOpen, parent }: IProps) => {
+const AddNewParentModal = ({ isOpen, setIsOpen }: IProps) => {
   const closeModal = () => setIsOpen(!isOpen);
   const baseURL = process.env.NEXT_PUBLIC_BASE_API_URL;
   const router = useRouter();
