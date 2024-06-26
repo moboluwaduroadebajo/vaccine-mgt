@@ -8,7 +8,7 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { BiCaretDown, BiMenuAltLeft } from "react-icons/bi";
+import { BiMenuAltLeft } from "react-icons/bi";
 import axios, { AxiosError } from "axios";
 import Loader from "@/components/utilities/Loader";
 import { ExistingVaccineType } from "@/type/vaccines.type";
@@ -38,8 +38,6 @@ const ExistingVaccinesTable = () => {
           }
         );
         setVaccines(response.data.data.content);
-        console.log(response.data.data);
-
         setIsLoading(false);
       } catch (err) {
         const error = err as AxiosError<Error>;
@@ -137,9 +135,9 @@ const ExistingVaccinesTable = () => {
           </thead>
 
           {vaccines.length === 0 ? (
-            <p className="text-sm text-center font-bold my-10 mx-auto min-w-full flex justify-center items-center">
+            <div className="text-sm text-center font-bold my-10 mx-auto min-w-full flex justify-center items-center">
               No matching result
-            </p>
+            </div>
           ) : (
             <tbody>
               {table.getRowModel().rows.map((row) => (

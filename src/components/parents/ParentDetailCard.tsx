@@ -15,22 +15,6 @@ const ParentDetailCard = () => {
   const baseURL = process.env.NEXT_PUBLIC_BASE_API_URL;
   const router = useRouter();
 
-  // const getAge = (dateOfBirth: string | Date): number => {
-  //   const today = new Date();
-  //   const birthDate = new Date(dateOfBirth);
-  //   let age = today.getFullYear() - birthDate.getFullYear();
-  //   const monthDifference = today.getMonth() - birthDate.getMonth();
-
-  //   if (
-  //     monthDifference < 0 ||
-  //     (monthDifference === 0 && today.getDate() < birthDate.getDate())
-  //   ) {
-  //     age--;
-  //   }
-
-  //   return age;
-  // };
-
   useEffect(() => {
     const getParentDetails = async () => {
       try {
@@ -43,6 +27,7 @@ const ParentDetailCard = () => {
           },
         });
         setParentData(response.data.data.content);
+        console.log(response);
       } catch (err) {
         const error = err as AxiosError<UserEntityType>;
         console.error(
