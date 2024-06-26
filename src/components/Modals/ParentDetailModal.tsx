@@ -40,9 +40,9 @@ const ParentDetailModal = ({ isOpen, setIsOpen, selectedParent }: IProps) => {
                   {selectedParent?.title === "Mr"
                     ? "Dad"
                     : selectedParent?.title === "Mrs"
-                    ? "Mom"
-                    : "Parent"}{" "}
-                  | 32 years
+                      ? "Mom"
+                      : "Parent"}{" "}
+                  | {selectedParent?.age}
                 </p>
               </div>
             </div>

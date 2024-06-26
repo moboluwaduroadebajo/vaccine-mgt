@@ -6,4 +6,5 @@ export type ParentDataType = {
   phoneNumber: string;
   email: string;
   dateOfBirth: Date | string;
+  age: string
 };
