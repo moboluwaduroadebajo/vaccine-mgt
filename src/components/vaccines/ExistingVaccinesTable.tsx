@@ -53,8 +53,6 @@ const ExistingVaccinesTable = () => {
     getVaccines();
   }, [searchKey, baseURL]);
 
-  const data = useMemo(() => vaccines, []);
-
   const columnHelper = createColumnHelper<ExistingVaccineType>();
 
   const columns = [
@@ -82,7 +80,7 @@ const ExistingVaccinesTable = () => {
   ];
 
   const table = useReactTable({
-    data,
+    data: vaccines,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -134,13 +132,13 @@ const ExistingVaccinesTable = () => {
             ))}
           </thead>
 
-          {vaccines.length === 0 ? (
-            <div className="text-sm text-center font-bold my-10 mx-auto min-w-full flex justify-center items-center">
-              No matching result
-            </div>
-          ) : (
-            <tbody>
-              {table.getRowModel().rows.map((row) => (
+          <tbody>
+            {vaccines.length === 0 ? (
+              <tr className="flex justify-center items-center">
+                <td className="p-8 text-center font-bold">No Record Found</td>
+              </tr>
+            ) : (
+              table.getRowModel().rows.map((row) => (
                 <tr key={row.id} className="cursor-pointer hover:rounded-2xl">
                   {row.getVisibleCells().map((cell) => (
                     <td
@@ -153,9 +151,9 @@ const ExistingVaccinesTable = () => {
                     </td>
                   ))}
                 </tr>
-              ))}
-            </tbody>
-          )}
+              ))
+            )}
+          </tbody>
         </table>
       </div>
 
