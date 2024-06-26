@@ -11,7 +11,10 @@ const Children = () => {
       <div className="flex gap-8 w-full">
         <ChildrenDetailCard />
         <div className="flex flex-col gap-8 w-[25%]">
-          <OnboardParentCard additionalClassname="h-[400px]" />
+          <OnboardParentCard
+            additionalClassname="h-[400px]"
+            variant="primary"
+          />
           <NoOfParentsCard />
           <NoOfChildrenCard />
         </div>

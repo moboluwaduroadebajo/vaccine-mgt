@@ -29,14 +29,6 @@ const AddNewVaccineModal = ({ isOpen, setIsOpen }: IProps) => {
       administerSite: "",
     },
     onSubmit: async (values) => {
-      const {
-        ageTarget,
-        type,
-        dosage,
-        dosageType,
-        administerRoute,
-        administerSite,
-      } = values;
       try {
         const token =
           typeof window !== "undefined" ? localStorage.getItem("token") : "";

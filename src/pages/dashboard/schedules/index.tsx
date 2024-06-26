@@ -10,7 +10,7 @@ const Schedules = () => {
       <div className="flex flex-col gap-8">
         <div className="flex gap-8 w-full">
           <ScheduleCard />
-          <OnboardParentCard additionalClassname="w-[30%]" />
+          <OnboardParentCard additionalClassname="w-[30%]" variant="primary" />
         </div>
         <div className="bg-white rounded-2xl p-5 font-semibold text-2xl font-poppins">
           Daily Immunization Schedules

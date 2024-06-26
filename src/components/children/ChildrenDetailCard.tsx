@@ -48,7 +48,7 @@ const ChildrenDetailCard = () => {
         console.log(response.data);
       } catch (err) {
         const error = err as AxiosError<Error>;
-        console.error("Error fetching vaccine count:", error);
+        console.error("Error fetching children:", error);
         if (error.response?.status === 403) {
           window.localStorage.removeItem("token");
           router.push("/login");
@@ -58,7 +58,7 @@ const ChildrenDetailCard = () => {
     // getChildrenDetails();
   }, []);
   return (
-    <div className="grow bg-white rounded-2xl ">
+    <div className="grow bg-white rounded-2xl">
       <div className="flex flex-col shadow-md p-4 sticky top-0 rounded-2xl bg-white">
         <div className="flex justify-between items-center">
           <div>
@@ -92,10 +92,10 @@ const ChildrenDetailCard = () => {
       {childrenData.map((child, index) => (
         <div
           key={index}
-          className="flex justify-between items-center py-6 px-6 cursor-pointer border-b hover:border-2 hover:rounded-2xl hover:bg-[#f4f9f4] hover:border-[#1F8E1F]">
-          <p className="font-semibold">{child.name}</p>
+          className="flex justify-between items-center py-6 px-6 cursor-pointer font-poppins border-b hover:border-2 hover:rounded-2xl hover:bg-[#f4f9f4] hover:border-[#1F8E1F]">
+          <p className="font-semibold max-w-[115px]">{child.name}</p>
 
-          <p>{child.parentName}</p>
+          <p className="max-w-[115px]">{child.parentName}</p>
 
           <div
             className={`px-3 py-1 rounded-full text-sm ${
