@@ -6,11 +6,11 @@ import { getDateLabel } from "@/utils/date";
 import { useRouter } from "next/router";
 import axios, { AxiosError } from "axios";
 
-interface ScheduDailyScheduleCardleCardProps {
+interface DailyScheduleCardProps {
   targetDate: Date;
 }
 
-const DailyScheduleCard = ({ targetDate }: ScheduDailyScheduleCardleCardProps) => {
+const DailyScheduleCard: React.FC<DailyScheduleCardProps> = ({ targetDate }) => {
   const router = useRouter();
   const baseURL = process.env.NEXT_PUBLIC_BASE_API_URL;
   const current = new Date();
