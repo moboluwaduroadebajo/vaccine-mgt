@@ -11,7 +11,7 @@ const Modal = ({ isOpen, onClose, children }: ModalProps) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-10">
-      <div className="bg-white rounded-2xl overflow-auto shadow-xl transform transition-all sm:max-w-[980px] sm:w-full h-full">
+      <div className="bg-white rounded-2xl overflow-auto shadow-xl transform transition-all max-w-[980px] w-full max-h-full min-h-[600px]">
         <div className="px-20 py-20">{children}</div>
         {/* <div className="p-4 flex justify-end">
           <button

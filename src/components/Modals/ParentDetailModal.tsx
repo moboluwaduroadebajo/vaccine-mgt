@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Modal from "./Modal";
 import { MdCancel } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
@@ -7,6 +7,7 @@ import Image from "next/image";
 import { MdEmail } from "react-icons/md";
 import { BsFillTelephoneFill, BsPlusCircleFill } from "react-icons/bs";
 import { ParentDataType } from "@/type/user.type";
+import AddNewChildModal from "./AddNewChildModal";
 
 interface IProps {
   isOpen: boolean;
@@ -17,10 +18,12 @@ interface IProps {
 const ParentDetailModal = ({ isOpen, setIsOpen, selectedParent }: IProps) => {
   const closeModal = () => setIsOpen(!isOpen);
 
+  const [openAddChildModal, setOpenAddChildModal] = useState(false);
+
   return (
     <Modal isOpen={isOpen} onClose={closeModal}>
-      <div>
-        <div className="flex justify-between text-4xl text-[#1F8E1F]">
+      <div className="flex flex-col justify-center h-full">
+        <div className="flex justify-between text-4xl text-[#1F8E1F] mt-8">
           <MdCancel
             onClick={closeModal}
             className="cursor-pointer hover:text-[#6ba96b]"
@@ -28,9 +31,9 @@ const ParentDetailModal = ({ isOpen, setIsOpen, selectedParent }: IProps) => {
           <MdEdit className="cursor-pointer hover:text-[#6ba96b]" />
         </div>
 
-        <div className="flex justify-center gap-4 mt-8 h-[420px] w-[80%] m-auto">
+        <div className="flex justify-center gap-4 mt-8 h-[] w-[80%] m-auto">
           <div className="bg-[#D9ECD9] rounded-2xl p-8 w-1/2">
-            <div className="flex flex-col items-center justify-center gap-4 mb-8">
+            <div className="flex flex-col items-center justify-center gap-4 mb-10">
               <Image alt="parent-image" src={avatar} />
               <div className=" font-poppins text-center">
                 <p className="text-[#1F8E1F] font-semibold">
@@ -40,8 +43,8 @@ const ParentDetailModal = ({ isOpen, setIsOpen, selectedParent }: IProps) => {
                   {selectedParent?.title === "Mr"
                     ? "Dad"
                     : selectedParent?.title === "Mrs"
-                      ? "Mom"
-                      : "Parent"}{" "}
+                    ? "Mom"
+                    : "Parent"}{" "}
                   | {selectedParent?.age}
                 </p>
               </div>
@@ -63,12 +66,33 @@ const ParentDetailModal = ({ isOpen, setIsOpen, selectedParent }: IProps) => {
             </ul>
           </div>
 
-          <div className="flex flex-col items-center justify-between p-20 font-poppins">
+          <div className="flex flex-col items-center justify-between gap-10 px-20 py-8 font-poppins">
             <p className="font-bold text-2xl">Children</p>
 
-            <BsPlusCircleFill className="text-[#1F8E1F] text-4xl hover:text-[#6ba96b] cursor-pointer" />
+            {selectedParent?.children.length === 0 ? (
+              <p className="font-bold">No child added</p>
+            ) : (
+              selectedParent?.children.map((child) => (
+                <p key={child.id} className="font-medium">
+                  {child.firstName}
+                </p>
+              ))
+            )}
+
+            <BsPlusCircleFill
+              className="text-[#1F8E1F] text-4xl hover:text-[#6ba96b] cursor-pointer"
+              onClick={() => setOpenAddChildModal(!openAddChildModal)}
+            />
           </div>
         </div>
+        <AddNewChildModal
+          parentId={selectedParent?.id}
+          isOpen={openAddChildModal}
+          setIsOpen={() => {
+            setOpenAddChildModal(!openAddChildModal);
+            closeModal();
+          }}
+        />
       </div>
     </Modal>
   );

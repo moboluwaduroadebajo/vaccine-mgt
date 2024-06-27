@@ -27,7 +27,7 @@ const ParentDetailCard = () => {
           },
         });
         setParentData(response.data.data.content);
-        console.log(response);
+        console.log(response.data);
       } catch (err) {
         const error = err as AxiosError<UserEntityType>;
         console.error(
@@ -92,9 +92,14 @@ const ParentDetailCard = () => {
             }}>
             <p className="font-semibold max-w-[115px]">{`${parent.firstName} ${parent.lastName}`}</p>
 
-            <p className="font-light">{parent.email} / {parent.phoneNumber}</p>
+            <p className="font-light">
+              {parent.email} / {parent.phoneNumber}
+            </p>
 
-            <p className="font-light text-[#1F8E1F]">{parent.children.length} {" "} {parent.children.length > 1 ? "children" : "child"}</p>
+            <p className="font-light text-[#1F8E1F]">
+              {parent.children.length}{" "}
+              {parent.children.length > 1 ? "children" : "child"}
+            </p>
           </div>
         ))
       )}
