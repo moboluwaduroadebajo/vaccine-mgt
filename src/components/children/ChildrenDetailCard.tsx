@@ -18,6 +18,10 @@ const ChildrenDetailCard = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [searchKey, setSearchKey] = useState("");
 
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+
   const baseURL = process.env.NEXT_PUBLIC_BASE_API_URL;
   const router = useRouter();
 
@@ -28,7 +32,7 @@ const ChildrenDetailCard = () => {
         const token =
           typeof window !== "undefined" ? localStorage.getItem("token") : "";
         const response = await axios.get(
-          `${baseURL}/immuno/children?size=50$search=${searchKey}`,
+          `${baseURL}/immuno/children?size=${itemsPerPage}&page=${currentPage - 1}&search=${searchKey}`,
           {
             headers: {
               Authorization: token,
@@ -37,6 +41,10 @@ const ChildrenDetailCard = () => {
         );
 
         setAllChildren(response.data.data.content);
+        setTotalPages(response.data.data.page.totalPages);
+        if (currentPage > response.data.data.page.totalPages) {
+          setCurrentPage(response.data.data.page.totalPages);
+        }
         setIsLoading(false);
       } catch (err) {
         const error = err as AxiosError<Error>;
@@ -49,7 +57,7 @@ const ChildrenDetailCard = () => {
       setIsLoading(false);
     };
     getChildrenDetails();
-  }, []);
+  }, [itemsPerPage, currentPage, searchKey]);
 
   const columnHelper = createColumnHelper<ChildrenDataType>();
 
@@ -166,7 +174,11 @@ const ChildrenDetailCard = () => {
           </tbody>
         </table>
       </div>
-      <Paginator />
+      <Paginator itemsPerPage={itemsPerPage}
+        currentPage={currentPage}
+        totalPage={totalPages}
+        onPageChange={setCurrentPage}
+        onItemsPerPageChange={setItemsPerPage} />
     </div>
   );
 };

@@ -10,8 +10,15 @@ const DROPDOWN_OPTIONS = [
   { label: 100, value: 100 },
 ];
 
-const Paginator = () => {
-  const [option, setOption] = useState(10);
+interface PaginatorProps {
+  itemsPerPage: number;
+  currentPage: number;
+  totalPage: number;
+  onPageChange: (page: number) => void;
+  onItemsPerPageChange: (itemsPerPage: number) => void;
+}
+
+const Paginator: React.FC<PaginatorProps> = ({ itemsPerPage, currentPage, totalPage, onPageChange, onItemsPerPageChange }) => {
   return (
     <div className="flex justify-between mt-8">
       <div className="flex items-center gap-3">
@@ -22,11 +29,10 @@ const Paginator = () => {
             {({ active }) => (
               <div
                 className={clsx(
-                  `${
-                    active && "bg-green-200"
+                  `${active && "bg-green-200"
                   } border flex items-center justify-center gap-3 bg-white w-12 h-10 rounded-md px-10 cursor-pointer`
                 )}>
-                {option}
+                {itemsPerPage}
                 <span className="hover:text-[#1F8E1F]">
                   <RxCaretDown fontSize={24} />
                 </span>
@@ -44,7 +50,7 @@ const Paginator = () => {
                       " list-none py-2 px-3.5",
                       focus && "bg-green-100 cursor-pointer"
                     )}
-                    onClick={() => setOption(option.label)}>
+                    onClick={() => onItemsPerPageChange(option.value)}>
                     {option.label}
                   </li>
                 )}
@@ -55,12 +61,16 @@ const Paginator = () => {
       </div>
 
       <div className="flex justify-center items-center gap-8">
-        <button className="border-none outline-none flex items-center font-medium hover:text-[#1F8E1F]">
+        <button className="border-none outline-none flex items-center font-medium hover:text-[#1F8E1F]"
+          onClick={() => onPageChange(Math.max(currentPage - 1, 1))}
+          disabled={currentPage === 1}>
           <RxCaretLeft fontSize={24} />
           Prev
         </button>
-        <p>1 of 10</p>
-        <button className="border-none outline-none flex items-center font-medium hover:text-[#1F8E1F]">
+        <p>{currentPage} of {totalPage}</p>
+        <button className="border-none outline-none flex items-center font-medium hover:text-[#1F8E1F]"
+          onClick={() => onPageChange(Math.min(currentPage + 1, totalPage))}
+          disabled={currentPage === totalPage}>
           Next
           <RxCaretRight fontSize={24} />
         </button>
