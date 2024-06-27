@@ -5,14 +5,14 @@ export const sideMenu = [
     iconName: "home",
   },
   {
-    label: "Children",
-    path: "/dashboard/children",
-    iconName: "children",
-  },
-  {
     label: "Parents",
     path: "/dashboard/parents",
     iconName: "parents",
+  },
+  {
+    label: "Children",
+    path: "/dashboard/children",
+    iconName: "children",
   },
   {
     label: "Vaccines",
