@@ -3,10 +3,8 @@ import ScheduleCard from "@/components/schedules/ScheduleCard";
 import React, { useState, useEffect } from "react";
 import DailyScheduleCard from "./DailyScheduleCard";
 import OnboardParentCard from "./OnboardParentCard";
-import { months } from "../../../constants";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/router";
-import { ImmunizationRecordType } from "@/type/immunization.types";
 
 const Schedules = () => {
   const start = new Date();

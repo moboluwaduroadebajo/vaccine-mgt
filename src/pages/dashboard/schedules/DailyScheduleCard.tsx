@@ -2,7 +2,6 @@ import { Icons } from "@/components/icons";
 import React, { useState, useEffect } from "react";
 import { BiMenuAltLeft } from "react-icons/bi";
 import { ImmunizationRecordType } from "@/type/immunization.types";
-import Loader from "@/components/utilities/Loader";
 import { getDateLabel } from "@/utils/date";
 import { useRouter } from "next/router";
 import axios, { AxiosError } from "axios";
@@ -71,7 +70,7 @@ const DailyScheduleCard = ({ targetDate }: ScheduDailyScheduleCardleCardProps) =
         </div>
       </div>
       <div className=" ">
-        {imminentImmunizations === null || imminentImmunizations.length === 0 ? <Loader /> : imminentImmunizations.map((item) => (
+        {imminentImmunizations.map((item) => (
           <div
             key={item.id}
             className="flex justify-between py-8 px-4 hover:bg-[#f4f9f4] cursor-pointer">

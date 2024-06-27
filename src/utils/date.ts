@@ -12,6 +12,6 @@ export const getDateLabel = (currentDate: Date, targetDate: Date): string => {
     } else if (diffDays === 2) {
         return "Next Tomorrow";
     } else {
-        return target.toLocaleDateString(); // Default to the date string if not today, tomorrow, or next tomorrow
+        return target.toLocaleDateString();
     }
 };
