@@ -6,8 +6,8 @@ export type ParentDataType = {
   phoneNumber: string;
   email: string;
   dateOfBirth: Date | string;
-  age: string
-  children: ChildrenDataType[]
+  age: string;
+  children: ChildrenDataType[];
 };
 
 export type ChildrenDataType = {
@@ -17,4 +17,5 @@ export type ChildrenDataType = {
   dateOfBirth: Date | string;
   age: string;
   gender: string;
+  parent: ParentDataType;
 };
