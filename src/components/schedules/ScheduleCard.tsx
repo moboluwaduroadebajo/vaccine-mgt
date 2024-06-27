@@ -1,17 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Icons } from "../icons";
 import { FaPlus } from "react-icons/fa";
-import { months } from "../../constants";
 
-interface ScheduleCardProps {
-  todayCount: number;
-}
-
-const ScheduleCard: React.FC<ScheduleCardProps> = ({ todayCount }) => {
+const ScheduleCard = () => {
   const date = new Date();
+
   const day = date.getDate();
   const month = date.getMonth();
   const year = date.getFullYear();
+
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
   return (
     <div className="bg-[#D9ECD9] overflow-auto grow rounded-2xl px-8 py-10 font-poppins">
       <div className="space-y-4 pb-10 border-b border-[#1F8E1F] w-[80%]">
@@ -23,7 +34,7 @@ const ScheduleCard: React.FC<ScheduleCardProps> = ({ todayCount }) => {
         <ul>
           <li className="p-2 font-light text-base flex items-center gap-2">
             <Icons name="schedule" fill="#1F8E1F" />
-            {todayCount ? `${todayCount} scheduled ${todayCount > 1 ? "children" : "child"} today` : "No scheduled children today"}
+            25 scheduled children today
           </li>
           <li className="p-2 font-light text-base flex items-center gap-2">
             <span className="text-[#1F8E1F] text-[26px]">

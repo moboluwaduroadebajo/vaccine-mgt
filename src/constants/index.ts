@@ -119,18 +119,3 @@ export const adminRoute = [
   { label: "Subcutaneous", value: "Subcutaneous" },
   { label: "unknown", value: "unknown" },
 ];
-
-export const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
