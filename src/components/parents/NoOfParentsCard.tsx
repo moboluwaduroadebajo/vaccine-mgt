@@ -40,7 +40,11 @@ const NoOfParentsCard = () => {
           <Icons name="parents" fill="#1F8E1F" />
         </span>
         <div className="text-2xl font-black mt-2 ml-4 text-[#1F8E1F]">
-          {noOfParents !== null ? noOfParents : <Loader />}
+          {noOfParents !== null ? (
+            noOfParents
+          ) : (
+            <Loader className="!text-[#1F8E1F]" />
+          )}
         </div>
       </div>
 

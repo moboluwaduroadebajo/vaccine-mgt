@@ -1,3 +1,5 @@
+import { ExistingVaccineType } from "./vaccines.type";
+
 export type ParentDataType = {
   id: string;
   title: string;

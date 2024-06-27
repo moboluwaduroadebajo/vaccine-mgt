@@ -46,6 +46,7 @@ const ChildrenDetailCard = () => {
           setCurrentPage(response.data.data.page.totalPages);
         }
         setIsLoading(false);
+        console.log(response.data.data.content);
       } catch (err) {
         const error = err as AxiosError<Error>;
         console.error("Error fetching children:", error);
