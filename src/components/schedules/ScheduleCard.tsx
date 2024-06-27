@@ -23,7 +23,11 @@ const ScheduleCard: React.FC<ScheduleCardProps> = ({ todayCount }) => {
         <ul>
           <li className="p-2 font-light text-base flex items-center gap-2">
             <Icons name="schedule" fill="#1F8E1F" />
-            {todayCount ? `${todayCount} scheduled ${todayCount > 1 ? "children" : "child"} today` : "No scheduled children today"}
+            {todayCount
+              ? `${todayCount} scheduled ${
+                  todayCount > 1 ? "children" : "child"
+                } today`
+              : "No scheduled children today"}
           </li>
           <li className="p-2 font-light text-base flex items-center gap-2">
             <span className="text-[#1F8E1F] text-[26px]">
@@ -35,6 +39,7 @@ const ScheduleCard: React.FC<ScheduleCardProps> = ({ todayCount }) => {
             <Icons name="schedule" fill="#1F8E1F" />7 OPV children today
           </li>
         </ul>
+
         <div className="bg-[#1F8E1F] items-stretch w-[.01em]"></div>
         <div className="flex justify-center items-center gap-2 max-w-[225px] text-[#C91919]">
           <Icons name="missed_call" />5 missed immunization (awaiting)

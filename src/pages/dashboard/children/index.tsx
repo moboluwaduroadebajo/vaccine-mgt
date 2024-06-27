@@ -16,7 +16,7 @@ const Children = () => {
             variant="primary"
           />
           <NoOfParentsCard />
-          <NoOfChildrenCard />
+          <NoOfChildrenCard variant="primary" />
         </div>
       </div>
     </PageLayout>
