@@ -22,6 +22,10 @@ const ParentDetailCard = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [searchKey, setSearchKey] = useState("");
 
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+
   const baseURL = process.env.NEXT_PUBLIC_BASE_API_URL;
   const router = useRouter();
 
@@ -32,7 +36,7 @@ const ParentDetailCard = () => {
         const token =
           typeof window !== "undefined" ? localStorage.getItem("token") : "";
         const response = await axios.get(
-          `${baseURL}/immuno/parents/search?size=50&search=${searchKey}`,
+          `${baseURL}/immuno/parents/search?size=${itemsPerPage}&page=${currentPage - 1}&search=${searchKey}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -41,6 +45,10 @@ const ParentDetailCard = () => {
           }
         );
         setParentData(response.data.data.content);
+        setTotalPages(response.data.data.page.totalPages);
+        if (currentPage > response.data.data.page.totalPages) {
+          setCurrentPage(response.data.data.page.totalPages);
+        }
         setIsLoading(false);
       } catch (err) {
         const error = err as AxiosError<UserEntityType>;
@@ -56,7 +64,7 @@ const ParentDetailCard = () => {
       setIsLoading(false);
     };
     getParentDetails();
-  }, [searchKey, baseURL]);
+  }, [itemsPerPage, currentPage, searchKey]);
 
   const handleClick = (parent: ParentDataType) => {
     setSelectedParent(parent);
@@ -87,13 +95,11 @@ const ParentDetailCard = () => {
       header: "No of Children",
       cell: (props) => {
         return (
-          <p className="font-light text-[#1F8E1F]">{`${
-            props.row.original.children.length === 0
-              ? "No"
-              : props.row.original.children.length
-          } ${
-            props.row.original.children.length > 1 ? "children" : "child"
-          }`}</p>
+          <p className="font-light text-[#1F8E1F]">{`${props.row.original.children.length === 0
+            ? "No"
+            : props.row.original.children.length
+            } ${props.row.original.children.length > 1 ? "children" : "child"
+            }`}</p>
         );
       },
     }),
@@ -195,7 +201,11 @@ const ParentDetailCard = () => {
         />
       </div>
 
-      <Paginator />
+      <Paginator itemsPerPage={itemsPerPage}
+        currentPage={currentPage}
+        totalPage={totalPages}
+        onPageChange={setCurrentPage}
+        onItemsPerPageChange={setItemsPerPage} />
     </>
   );
 };

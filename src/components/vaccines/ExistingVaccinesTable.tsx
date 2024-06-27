@@ -20,6 +20,10 @@ const ExistingVaccinesTable = () => {
   const [searchKey, setSearchKey] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+
   const baseURL = process.env.NEXT_PUBLIC_BASE_API_URL;
   const router = useRouter();
 
@@ -30,7 +34,7 @@ const ExistingVaccinesTable = () => {
         const token =
           typeof window !== "undefined" ? localStorage.getItem("token") : "";
         const response = await axios.get(
-          `${baseURL}/vaccine?size=50&search=${searchKey}`,
+          `${baseURL}/vaccine?size=${itemsPerPage}&page=${currentPage - 1}&search=${searchKey}`,
           {
             headers: {
               Authorization: `${token}`,
@@ -38,6 +42,10 @@ const ExistingVaccinesTable = () => {
           }
         );
         setVaccines(response.data.data.content);
+        setTotalPages(response.data.data.page.totalPages);
+        if (currentPage > response.data.data.page.totalPages) {
+          setCurrentPage(response.data.data.page.totalPages);
+        }
         setIsLoading(false);
       } catch (err) {
         const error = err as AxiosError<Error>;
@@ -51,7 +59,7 @@ const ExistingVaccinesTable = () => {
       setIsLoading(false);
     };
     getVaccines();
-  }, [searchKey, baseURL]);
+  }, [itemsPerPage, currentPage, searchKey]);
 
   const columnHelper = createColumnHelper<ExistingVaccineType>();
 
@@ -159,7 +167,11 @@ const ExistingVaccinesTable = () => {
         </table>
       </div>
 
-      <Paginator />
+      <Paginator itemsPerPage={itemsPerPage}
+        currentPage={currentPage}
+        totalPage={totalPages}
+        onPageChange={setCurrentPage}
+        onItemsPerPageChange={setItemsPerPage} />
     </>
   );
 };
