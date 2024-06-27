@@ -59,9 +59,9 @@ const Schedules = () => {
           Daily Immunization Schedules
         </div>
         <div className="flex gap-8 overflow-x-auto w-full h-full scroll-smooth">
-          <DailyScheduleCard targetDate={start} />
-          <DailyScheduleCard targetDate={tomorrow} />
-          <DailyScheduleCard targetDate={nextTomorrow} />
+          <DailyScheduleCard targetDate={start.toISOString().split("T")[0]} />
+          <DailyScheduleCard targetDate={tomorrow.toISOString().split("T")[0]} />
+          <DailyScheduleCard targetDate={nextTomorrow.toISOString().split("T")[0]} />
         </div>
       </div>
     </PageLayout>

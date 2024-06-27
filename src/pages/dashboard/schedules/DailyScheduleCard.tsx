@@ -7,15 +7,15 @@ import { useRouter } from "next/router";
 import axios, { AxiosError } from "axios";
 
 interface DailyScheduleCardProps {
-  targetDate: Date;
+  targetDate: string;
 }
 
 const DailyScheduleCard: React.FC<DailyScheduleCardProps> = ({ targetDate }) => {
   const router = useRouter();
   const baseURL = process.env.NEXT_PUBLIC_BASE_API_URL;
   const current = new Date();
-  const day = getDateLabel(current, targetDate);
-  const dayString = targetDate.toISOString().split("T")[0];
+  const target = new Date(targetDate);
+  const day = getDateLabel(current, target);
   const [imminentImmunizations, setImminentImmunizations] = useState<ImmunizationRecordType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -26,7 +26,7 @@ const DailyScheduleCard: React.FC<DailyScheduleCardProps> = ({ targetDate }) => 
         const token =
           typeof window !== "undefined" ? localStorage.getItem("token") : "";
         const response = await axios.get(
-          `${baseURL}/immuno/pending/betweenDays?startDate=${dayString}&endDate=${dayString}`,
+          `${baseURL}/immuno/pending/betweenDays?startDate=${targetDate}&endDate=${targetDate}`,
           {
             headers: {
               Authorization: `${token}`,
