@@ -66,10 +66,7 @@ const AddNewChildModal = ({ isOpen, setIsOpen, parentId }: IProps) => {
           <p className="text-2xl font-semibold">Onboard a Child</p>
         </div>
 
-        <form
-          action=""
-          className="flex flex-col gap-4"
-          onSubmit={formik.handleSubmit}>
+        <form className="flex flex-col gap-4" onSubmit={formik.handleSubmit}>
           <InputField
             name="firstName"
             value={formik.values.firstName}
@@ -98,6 +95,7 @@ const AddNewChildModal = ({ isOpen, setIsOpen, parentId }: IProps) => {
             label="Date of Birth"
             value={formik.values.dateOfBirth}
             onChange={(val) => formik.setFieldValue("dateOfBirth", val)}
+            additionalClass="mb-4"
           />
 
           <Button

@@ -5,7 +5,6 @@ import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
-  getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 import { BiMenuAltLeft } from "react-icons/bi";
@@ -13,14 +12,14 @@ import axios, { AxiosError } from "axios";
 import Loader from "@/components/utilities/Loader";
 import { ExistingVaccineType } from "@/type/vaccines.type";
 import { useRouter } from "next/router";
-import Paginator from "../Table/Paginator";
+import Paginator from "./Paginator";
 
 const ExistingVaccinesTable = () => {
   const [vaccines, setVaccines] = useState([]);
   const [searchKey, setSearchKey] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
-  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [itemsPerPage, setItemsPerPage] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
 
@@ -34,7 +33,9 @@ const ExistingVaccinesTable = () => {
         const token =
           typeof window !== "undefined" ? localStorage.getItem("token") : "";
         const response = await axios.get(
-          `${baseURL}/vaccine?size=${itemsPerPage}&page=${currentPage - 1}&search=${searchKey}`,
+          `${baseURL}/vaccine?size=${itemsPerPage}&page=${
+            currentPage - 1
+          }&search=${searchKey}`,
           {
             headers: {
               Authorization: `${token}`,
@@ -46,6 +47,7 @@ const ExistingVaccinesTable = () => {
         if (currentPage > response.data.data.page.totalPages) {
           setCurrentPage(response.data.data.page.totalPages);
         }
+
         setIsLoading(false);
       } catch (err) {
         const error = err as AxiosError<Error>;
@@ -91,12 +93,11 @@ const ExistingVaccinesTable = () => {
     data: vaccines,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
   });
 
   return (
     <>
-      <div className="bg-white h-[600px] w-full rounded-2xl overflow-auto font-poppins">
+      <div className="bg-white h-[600px] w-full rounded-2xl overflow-y-auto font-poppins">
         <div className="p-8 flex justify-between sticky top-0 z-10 bg-white shadow-md">
           <p className="font-semibold text-2xl text-[#1F8E1F]">
             Existing Vaccines
@@ -144,8 +145,9 @@ const ExistingVaccinesTable = () => {
 
           <tbody>
             {vaccines.length === 0 ? (
-              <tr className="flex justify-center items-center">
-                <td className="p-8 text-center font-bold">No Record Found</td>
+              <tr className="w-full">
+                <td />
+                <td className="p-8 font-bold">No Vaccines Available</td>
               </tr>
             ) : (
               table.getRowModel().rows.map((row) => (
@@ -167,11 +169,13 @@ const ExistingVaccinesTable = () => {
         </table>
       </div>
 
-      <Paginator itemsPerPage={itemsPerPage}
+      <Paginator
+        itemsPerPage={itemsPerPage}
         currentPage={currentPage}
         totalPage={totalPages}
         onPageChange={setCurrentPage}
-        onItemsPerPageChange={setItemsPerPage} />
+        onItemsPerPageChange={setItemsPerPage}
+      />
     </>
   );
 };

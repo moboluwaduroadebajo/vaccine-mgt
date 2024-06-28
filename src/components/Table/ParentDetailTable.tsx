@@ -13,9 +13,9 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import Loader from "../utilities/Loader";
-import Paginator from "../Table/Paginator";
+import Paginator from "./Paginator";
 
-const ParentDetailCard = () => {
+const ParentDetailTable = () => {
   const [parentData, setParentData] = useState<ParentDataType[]>([]);
   const [selectedParent, setSelectedParent] = useState<ParentDataType>();
   const [openParentModal, setOpenParentModal] = useState(false);
@@ -36,7 +36,9 @@ const ParentDetailCard = () => {
         const token =
           typeof window !== "undefined" ? localStorage.getItem("token") : "";
         const response = await axios.get(
-          `${baseURL}/immuno/parents/search?size=${itemsPerPage}&page=${currentPage - 1}&search=${searchKey}`,
+          `${baseURL}/immuno/parents/search?size=${itemsPerPage}&page=${
+            currentPage - 1
+          }&search=${searchKey}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -84,22 +86,24 @@ const ParentDetailCard = () => {
     }),
 
     columnHelper.accessor("email", {
-      header: "Contact",
+      header: () => <p className="text-center">Contact</p>,
       cell: (props) => {
         return (
-          <p className="font-light">{`${props.row.original.email} / ${props.row.original.phoneNumber}`}</p>
+          <p className="font-light text-center">{`${props.row.original.email} / ${props.row.original.phoneNumber}`}</p>
         );
       },
     }),
     columnHelper.accessor("children", {
-      header: "No of Children",
+      header: () => <p className="text-end">No of Children</p>,
       cell: (props) => {
         return (
-          <p className="font-light text-[#1F8E1F]">{`${props.row.original.children.length === 0
-            ? "No"
-            : props.row.original.children.length
-            } ${props.row.original.children.length > 1 ? "children" : "child"
-            }`}</p>
+          <p className="font-light text-[#1F8E1F] text-end">{`${
+            props.row.original.children.length === 0
+              ? "No"
+              : props.row.original.children.length
+          } ${
+            props.row.original.children.length > 1 ? "children" : "child"
+          }`}</p>
         );
       },
     }),
@@ -168,9 +172,8 @@ const ParentDetailCard = () => {
           <tbody>
             {parentData.length === 0 ? (
               <tr className="w-full">
-                <td className="p-8 text-center font-bold flex justify-center items-center">
-                  No Record Found
-                </td>
+                <td />
+                <td className="p-8 font-bold">No Record Found</td>
               </tr>
             ) : (
               table.getRowModel().rows.map((row) => (
@@ -201,13 +204,15 @@ const ParentDetailCard = () => {
         />
       </div>
 
-      <Paginator itemsPerPage={itemsPerPage}
+      <Paginator
+        itemsPerPage={itemsPerPage}
         currentPage={currentPage}
         totalPage={totalPages}
         onPageChange={setCurrentPage}
-        onItemsPerPageChange={setItemsPerPage} />
+        onItemsPerPageChange={setItemsPerPage}
+      />
     </>
   );
 };
 
-export default ParentDetailCard;
+export default ParentDetailTable;

@@ -11,9 +11,9 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import Loader from "../utilities/Loader";
-import Paginator from "../Table/Paginator";
+import Paginator from "./Paginator";
 
-const ChildrenDetailCard = () => {
+const ChildrenDetailTable = () => {
   const [allChildren, setAllChildren] = useState<ChildrenDataType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchKey, setSearchKey] = useState("");
@@ -32,7 +32,9 @@ const ChildrenDetailCard = () => {
         const token =
           typeof window !== "undefined" ? localStorage.getItem("token") : "";
         const response = await axios.get(
-          `${baseURL}/immuno/children?size=${itemsPerPage}&page=${currentPage - 1}&search=${searchKey}`,
+          `${baseURL}/immuno/children?size=${itemsPerPage}&page=${
+            currentPage - 1
+          }&search=${searchKey}`,
           {
             headers: {
               Authorization: token,
@@ -46,7 +48,6 @@ const ChildrenDetailCard = () => {
           setCurrentPage(response.data.data.page.totalPages);
         }
         setIsLoading(false);
-        console.log(response.data.data.content);
       } catch (err) {
         const error = err as AxiosError<Error>;
         console.error("Error fetching children:", error);
@@ -72,17 +73,19 @@ const ChildrenDetailCard = () => {
       },
     }),
     columnHelper.accessor("age", {
-      header: "Age",
+      header: () => <p className="text-center">Age</p>,
       cell: (props) => {
-        return <p className="font-light">{`${props.row.original.age}`}</p>;
+        return (
+          <p className="font-light text-center">{`${props.row.original.age}`}</p>
+        );
       },
     }),
 
     columnHelper.accessor("gender", {
-      header: "Gender",
+      header: () => <p className="text-end">Gender</p>,
       cell: (props) => {
         return (
-          <p className="font-semibold text-[#1F8E1F]">{`${props.row.original.gender}`}</p>
+          <p className="font-semibold text-end text-[#1F8E1F]">{`${props.row.original.gender}`}</p>
         );
       },
     }),
@@ -150,9 +153,8 @@ const ChildrenDetailCard = () => {
           <tbody>
             {allChildren.length === 0 ? (
               <tr className="w-full">
-                <td className="p-8 text-center font-bold flex justify-center items-center">
-                  No Record Found
-                </td>
+                <td />
+                <td className="p-8 font-bold">No Record Found</td>
               </tr>
             ) : (
               table.getRowModel().rows.map((row) => (
@@ -175,13 +177,15 @@ const ChildrenDetailCard = () => {
           </tbody>
         </table>
       </div>
-      <Paginator itemsPerPage={itemsPerPage}
+      <Paginator
+        itemsPerPage={itemsPerPage}
         currentPage={currentPage}
         totalPage={totalPages}
         onPageChange={setCurrentPage}
-        onItemsPerPageChange={setItemsPerPage} />
+        onItemsPerPageChange={setItemsPerPage}
+      />
     </div>
   );
 };
 
-export default ChildrenDetailCard;
+export default ChildrenDetailTable;

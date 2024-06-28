@@ -3,7 +3,7 @@ import React from "react";
 import OnboardParentCard from "../schedules/OnboardParentCard";
 import NoOfParentsCard from "@/components/parents/NoOfParentsCard";
 import NoOfChildrenCard from "@/components/children/NoOfChildrenCard";
-import ParentDetailCard from "@/components/parents/ParentDetailCard";
+import ParentDetailTable from "@/components/Table/ParentDetailTable";
 
 const Parent = () => {
   return (
@@ -14,7 +14,7 @@ const Parent = () => {
             variant="secondary"
             additionalClassname="flex p-6 items-start"
           />
-          <ParentDetailCard />
+          <ParentDetailTable />
         </div>
         <div className="w-[20%]">
           <NoOfParentsCard />

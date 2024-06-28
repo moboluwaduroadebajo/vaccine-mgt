@@ -58,9 +58,11 @@ const PendingVaccinesToday = () => {
     }),
 
     columnHelper.accessor("immunization.vaccine", {
-      header: "Vaccines",
+      header: () => <p className="text-center">Vaccines</p>,
       cell: (props) => {
-        return <p>{`${props.row.original.immunization.vaccine.type}`}</p>;
+        return (
+          <p className="text-center">{`${props.row.original.immunization.vaccine.type}`}</p>
+        );
       },
     }),
 
