@@ -59,13 +59,13 @@ const Login = () => {
   }, [loginError]);
 
   return (
-    <div className="flex bg-loginBg bg-no-repeat bg-right lg:bg-contain bg-cover h-screen">
+    <div className="flex bg-loginBg bg-no-repeat bg-center lg:bg-right lg:bg-contain bg-cover h-screen">
       <div className="absolute top-0 bottom-0 lg:left-[50%] left-0 right-0 bg-[#E1F0E1] opacity-90 z-10" />
-      <div className="flex-1 hidden lg:block">
+      <div className="lg:flex-1 hidden lg:block">
         <Image alt="login" src={LoginImage} className="h-screen w-full" />
       </div>
 
-      <div className="flex-1 flex flex-col justify-center items-center w-full z-10">
+      <div className="lg:flex-1 flex flex-col justify-center items-center h-full w-full z-10">
         <div className="lg:w-2/5 md:w-1/2 w-[80%]">
           <Link href="/">
             <p className="flex items-center gap-4 cursor-pointer hover:text-green-700">

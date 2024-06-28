@@ -2,9 +2,10 @@ import React from "react";
 import { TiSocialFacebook } from "react-icons/ti";
 import { AiFillInstagram } from "react-icons/ai";
 import { FaXTwitter } from "react-icons/fa6";
+
 const Footer = () => {
   return (
-    <div className="bg-[#f0f7f0] pt-40 pb-8">
+    <div className="bg-[#f0f7f0] pb-8">
       <div className="border-t border-[#003466] p-8 flex justify-end items-center">
         <ul className="flex gap-4 pr-20">
           <li className=" h-11 w-11 bg-[#c6e2c6] flex items-center justify-center rounded-full p-2">
