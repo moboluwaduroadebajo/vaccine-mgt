@@ -12,11 +12,15 @@ import {
 } from "@tanstack/react-table";
 import Loader from "../utilities/Loader";
 import Paginator from "./Paginator";
+import { useSearchParams } from "next/navigation";
+import ChildProfileModal from "../Modals/ChildProfileModal";
 
 const ChildrenDetailTable = () => {
   const [allChildren, setAllChildren] = useState<ChildrenDataType[]>([]);
+  const [selectedChild, setSelectedChild] = useState<ChildrenDataType>();
   const [isLoading, setIsLoading] = useState(true);
   const [searchKey, setSearchKey] = useState("");
+  const [openModal, setOpenModal] = useState(false);
 
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
@@ -24,6 +28,20 @@ const ChildrenDetailTable = () => {
 
   const baseURL = process.env.NEXT_PUBLIC_BASE_API_URL;
   const router = useRouter();
+  const { profile } = router.query;
+
+  const handleClick = (child: ChildrenDataType) => {
+    setSelectedChild(child);
+    setOpenModal(!openModal);
+  };
+
+  const handleChildClick = (child: ChildrenDataType) => {
+    // const activeChild = profile || child.id;
+    router.push({
+      pathname: "/dashboard/children/child-profile",
+      query: { id: child.id },
+    });
+  };
 
   useEffect(() => {
     const getChildrenDetails = async () => {
@@ -41,6 +59,7 @@ const ChildrenDetailTable = () => {
             },
           }
         );
+        console.log(response.data.data.content);
 
         setAllChildren(response.data.data.content);
         setTotalPages(response.data.data.page.totalPages);
@@ -160,7 +179,8 @@ const ChildrenDetailTable = () => {
               table.getRowModel().rows.map((row) => (
                 <tr
                   key={row.id}
-                  className="cursor-pointer hover:rounded-2xl font-poppins">
+                  className="cursor-pointer hover:rounded-2xl font-poppins"
+                  onClick={() => handleChildClick(row.original)}>
                   {row.getVisibleCells().map((cell) => (
                     <td
                       key={cell.id}
@@ -183,6 +203,12 @@ const ChildrenDetailTable = () => {
         totalPage={totalPages}
         onPageChange={setCurrentPage}
         onItemsPerPageChange={setItemsPerPage}
+      />
+
+      <ChildProfileModal
+        isOpen={openModal}
+        setIsOpen={() => setOpenModal(!openModal)}
+        selectedChild={selectedChild}
       />
     </div>
   );

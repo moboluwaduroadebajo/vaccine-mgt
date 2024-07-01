@@ -1,4 +1,4 @@
-import { ExistingVaccineType } from "./vaccines.type";
+import { ImmunizationType } from "./immunization.types";
 
 export type ParentDataType = {
   id: string;
@@ -20,4 +20,5 @@ export type ChildrenDataType = {
   age: string;
   gender: string;
   parent: ParentDataType;
+  immunizations: ImmunizationType[];
 };

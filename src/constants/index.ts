@@ -11,7 +11,7 @@ export const sideMenu = [
   },
   {
     label: "Children",
-    path: "/dashboard/children",
+    path: "/dashboard/children" || "/dashboard/children/child-profile",
     iconName: "children",
   },
   {
