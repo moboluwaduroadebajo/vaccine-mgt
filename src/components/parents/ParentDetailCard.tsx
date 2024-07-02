@@ -3,14 +3,12 @@ import avatar from "@/assets/avatar.png";
 import Image from "next/image";
 import { BsFillTelephoneFill, BsPlusCircleFill } from "react-icons/bs";
 import { MdEmail } from "react-icons/md";
-import OtherChildrenCard from "../children/OtherChildrenCard";
-import { ChildrenDataType, ParentDataType } from "@/type/user.type";
+import { ChildrenDataType } from "@/type/user.type";
 import axios from "axios";
-import { set } from "date-fns";
 import AddNewChildModal from "../Modals/AddNewChildModal";
 
 interface IProps {
-  childData?: ChildrenDataType;
+  childData: ChildrenDataType;
 }
 
 const ParentDetailCard = ({ childData }: IProps) => {
@@ -23,7 +21,7 @@ const ParentDetailCard = ({ childData }: IProps) => {
 
   useEffect(() => {
     const getOtherChildren = async () => {
-      const parentId = childData?.parent.id;
+      const parentId = childData.parent.id;
       try {
         const token =
           typeof window !== "undefined" ? localStorage.getItem("token") : "";
@@ -36,7 +34,6 @@ const ParentDetailCard = ({ childData }: IProps) => {
             },
           }
         );
-        console.log(response.data.data);
         setAllChildren(response.data.data.children);
         if (allChildren) {
           const otherChildren = allChildren.filter(
@@ -50,7 +47,7 @@ const ParentDetailCard = ({ childData }: IProps) => {
       }
     };
     getOtherChildren();
-  }, []);
+  }, [childData]);
 
   return (
     <div className="flex flex-col gap-8">
@@ -65,8 +62,8 @@ const ParentDetailCard = ({ childData }: IProps) => {
               {childData?.parent.title === "Mr"
                 ? "Dad"
                 : childData?.parent.title === "Mrs"
-                ? "Mom"
-                : "Parent"}{" "}
+                  ? "Mom"
+                  : "Parent"}{" "}
               | {childData?.parent.age}
             </p>
           </div>
