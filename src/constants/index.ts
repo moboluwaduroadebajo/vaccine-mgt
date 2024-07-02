@@ -1,3 +1,5 @@
+import { useRouter } from "next/router";
+
 export const sideMenu = [
   {
     label: "Home",
@@ -11,7 +13,7 @@ export const sideMenu = [
   },
   {
     label: "Children",
-    path: "/dashboard/children",
+    path: "/dashboard/children" || "/dashboard/children/child-profile",
     iconName: "children",
   },
   {
@@ -25,6 +27,21 @@ export const sideMenu = [
     iconName: "schedule",
   },
 ];
+
+export const PageName = () => {
+  const router = useRouter();
+
+  switch (router.pathname) {
+    case "/dashboard":
+      return "Home";
+    case "/dashboard/parents":
+      return "";
+    case "/dashboard":
+      return;
+    case "/dashboard":
+      return;
+  }
+};
 
 export const helpMenuList = [
   {
@@ -109,8 +126,6 @@ export const dosageType = [
   { label: "IU", value: "IU" },
   { label: "unknown", value: "unknown" },
 ];
-
-// [ Intra dermal, Oral, Intramuscular, Subcutaneous, unknown ]
 
 export const adminRoute = [
   { label: "Intra dermal", value: "Intra dermal" },
