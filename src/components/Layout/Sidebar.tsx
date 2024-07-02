@@ -1,5 +1,3 @@
-"use client";
-
 import { sideMenu } from "@/constants";
 import React from "react";
 import MenuItem from "./MenuItem";
@@ -7,7 +5,6 @@ import { useRouter } from "next/router";
 import { Icons } from "../icons";
 import { useAppDispatch } from "@/app/hooks";
 import { resetAccountState } from "@/reducers/account.reducer";
-import axios from "axios";
 
 const Sidebar = () => {
   const router = useRouter();
@@ -64,7 +61,6 @@ const Sidebar = () => {
               label={item.label}
               iconName={item.iconName}
               path={item.path}
-              // isTabActive={router.pathname === item.path}
               isTabActive={isItemActive(item)}
             />
           ))}

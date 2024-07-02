@@ -1,5 +1,3 @@
-import { useRouter } from "next/router";
-
 export const sideMenu = [
   {
     label: "Home",
@@ -13,7 +11,7 @@ export const sideMenu = [
   },
   {
     label: "Children",
-    path: "/dashboard/children" || "/dashboard/children/child-profile",
+    path: "/dashboard/children",
     iconName: "children",
   },
   {
@@ -27,21 +25,6 @@ export const sideMenu = [
     iconName: "schedule",
   },
 ];
-
-export const PageName = () => {
-  const router = useRouter();
-
-  switch (router.pathname) {
-    case "/dashboard":
-      return "Home";
-    case "/dashboard/parents":
-      return "";
-    case "/dashboard":
-      return;
-    case "/dashboard":
-      return;
-  }
-};
 
 export const helpMenuList = [
   {
@@ -89,22 +72,47 @@ export const helpMenuList = [
   },
 ];
 
-// [ *BCG, **OPV0, ***Hep BO birth, Pentavalent(DPT, Hep B and Hib) 1,
-//   Premococcal Conjugate Vaccine 1, OPV1, IPV1, Rotavirus vaccine 1,
-//   Pentavalent(DPT, Hep B and Hib) 2, Premococcal Conjugate Vaccine 2, OPV2,
-//   Rotavirus vaccine 2, (DPT, Hep B and Hib) 3, Premococcal Conjugate Vaccine 3,
-//   OPV3, Rotavirus vaccine 3, IPV2, Vitamin A 1st done, Measles 1st dose(MCV1),
-//   Yellow Fever, Meningitis Vaccine, Vitamin A 2nd done, Measles 2nd dose(MCV2),
-//    **** HPV, unknown]
-
 export const vaccineType = [
   { label: "BCG", value: "BCG" },
+  { label: "HPV", value: "HPV" },
   { label: "OPV0", value: "OPV0" },
+  { label: "OPV1", value: "OPV1" },
+  { label: "OPV2", value: "OPV2" },
+  { label: "OPV3", value: "OPV3" },
+  { label: "IPV1", value: "IPV1" },
+  { label: "IPV2", value: "IPV2" },
   { label: "Hep BO birth", value: "Hep BO birth" },
   {
     label: "Pentavalent(DPT, Hep B and Hib) 1",
     value: "Pentavalent(DPT, Hep B and Hib) 1",
   },
+  {
+    label: "Pentavalent(DPT, Hep B and Hib) 2",
+    value: "Pentavalent(DPT, Hep B and Hib) 2",
+  },
+  {
+    label: "Premococcal Conjugate Vaccine 1",
+    value: "Premococcal Conjugate Vaccine 1",
+  },
+  {
+    label: "Premococcal Conjugate Vaccine 2",
+    value: "Premococcal Conjugate Vaccine 2",
+  },
+  {
+    label: "Premococcal Conjugate Vaccine 3",
+    value: "Premococcal Conjugate Vaccine 3",
+  },
+  { label: "Rotavirus vaccine 1", value: "Rotavirus vaccine 1" },
+  { label: "Rotavirus vaccine 2", value: "Rotavirus vaccine 2" },
+  { label: "Rotavirus vaccine 3", value: "Rotavirus vaccine 3" },
+  { label: "(DPT, Hep B and Hib) 3", value: "(DPT, Hep B and Hib) 3" },
+  { label: "Vitamin A 1st done", value: "Vitamin A 1st done" },
+  { label: "Vitamin A 2nd done", value: "Vitamin A 2nd done" },
+  { label: "Measles 1st dose(MCV1)", value: "Measles 1st dose(MCV1)" },
+  { label: "Measles 2nd dose(MCV2)", value: "Measles 2nd dose(MCV2)" },
+  { label: "Yellow Fever", value: "Yellow Fever" },
+  { label: "Meningitis Vaccine", value: "Meningitis Vaccine" },
+  { label: "unknown", value: "unknown" },
 ];
 
 export const ageTarget = [
