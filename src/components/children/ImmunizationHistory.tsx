@@ -9,11 +9,10 @@ import { ImmunizationType } from "@/type/immunization.types";
 import { ExistingVaccineType } from "@/type/vaccines.type";
 
 interface ImmunoProps {
-  childData?: ChildrenDataType;
   immunizationList?: ImmunizationType[];
 }
 
-const ImmunizationHistory = ({ childData, immunizationList }: ImmunoProps) => {
+const ImmunizationHistory = ({ immunizationList }: ImmunoProps) => {
   const menuTab = [
     {
       label: "Completed",
@@ -53,20 +52,14 @@ const ImmunizationHistory = ({ childData, immunizationList }: ImmunoProps) => {
         <p className="font-semibold text-2xl">Immunization History</p>
       </div>
 
-      <div className="bg-white shadow-md rounded-2xl p-8">
+      <div className="bg-white shadow-md rounded-2xl p-8 h-[600px] overflow-auto">
         <MenuTab tabs={menuTab} />
 
         {selectedTab === "completed" && (
-          <ImmunoCompletedTable
-            childData={childData}
-            completedVaccine={completedVaccine}
-          />
+          <ImmunoCompletedTable completedVaccine={completedVaccine} />
         )}
         {selectedTab === "pending" && (
-          <ImmunoPendingTable
-            childData={childData}
-            pendingVaccines={pendingVaccine}
-          />
+          <ImmunoPendingTable pendingVaccines={pendingVaccine} />
         )}
       </div>
     </div>

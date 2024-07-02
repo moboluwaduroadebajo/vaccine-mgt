@@ -6,8 +6,9 @@ import NoOfChildrenCard from "@/components/children/NoOfChildrenCard";
 import ParentDetailTable from "@/components/Table/ParentDetailTable";
 
 const Parent = () => {
+  const breadcrumbs = [{ name: "Parents" }];
   return (
-    <PageLayout>
+    <PageLayout breadcrumbs={breadcrumbs}>
       <div className="flex gap-8">
         <div className="grow flex flex-col gap-6">
           <OnboardParentCard

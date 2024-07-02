@@ -7,6 +7,7 @@ import axios, { AxiosError } from "axios";
 import { useRouter } from "next/router";
 
 const Schedules = () => {
+  const breadcrumbs = [{ name: "Schedules" }];
   const start = new Date();
   const tomorrow = new Date();
   tomorrow.setDate(start.getDate() + 1);
@@ -49,7 +50,7 @@ const Schedules = () => {
     getImminentImmunizations();
   }, [baseURL]);
   return (
-    <PageLayout>
+    <PageLayout breadcrumbs={breadcrumbs}>
       <div className="flex flex-col gap-8">
         <div className="flex gap-8 w-full">
           <ScheduleCard todayCount={countToday} />
@@ -60,8 +61,12 @@ const Schedules = () => {
         </div>
         <div className="flex gap-8 overflow-x-auto w-full h-full scroll-smooth">
           <DailyScheduleCard targetDate={start.toISOString().split("T")[0]} />
-          <DailyScheduleCard targetDate={tomorrow.toISOString().split("T")[0]} />
-          <DailyScheduleCard targetDate={nextTomorrow.toISOString().split("T")[0]} />
+          <DailyScheduleCard
+            targetDate={tomorrow.toISOString().split("T")[0]}
+          />
+          <DailyScheduleCard
+            targetDate={nextTomorrow.toISOString().split("T")[0]}
+          />
         </div>
       </div>
     </PageLayout>

@@ -9,15 +9,37 @@ import Link from "next/link";
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
 import { Bell, Search } from "react-feather";
 
-const Header = () => {
+type Breadcrumb = {
+  name: string;
+  href?: string;
+};
+
+type HeaderProps = {
+  breadcrumbs: Breadcrumb[];
+};
+
+const Header = ({ breadcrumbs }: HeaderProps) => {
   const router = useRouter();
   return (
     <div className="h-20 bg-white mb-10 rounded p-8 px-20 font-poppins font-medium text-xl flex justify-between sticky top-0 left-0 shadow-md z-[10]">
-      <div>
-        {sideMenu.map((name) => (
+      <div className="flex gap-3">
+        {/* {sideMenu.map((name) => (
           <p key={name.label}>
             {router.pathname === name.path ? name.label : ""}
           </p>
+        ))} */}
+
+        {breadcrumbs.map((breadcrumb, index) => (
+          <div key={index} className="flex items-center gap-3">
+            {breadcrumb.href ? (
+              <Link href={breadcrumb.href}>
+                <p className="hover:text-[#a7a7a7]">{breadcrumb.name}</p>
+              </Link>
+            ) : (
+              <span>{breadcrumb.name}</span>
+            )}
+            {index < breadcrumbs.length - 1 && <span>→</span>}
+          </div>
         ))}
       </div>
       <div>

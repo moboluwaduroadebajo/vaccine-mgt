@@ -2,6 +2,7 @@ import React from "react";
 import avatar from "@/assets/avatar.png";
 import Image from "next/image";
 import { MdEmail } from "react-icons/md";
+import { IoIosBriefcase } from "react-icons/io";
 import { ChildrenDataType } from "@/type/user.type";
 
 interface IProps {
@@ -31,15 +32,15 @@ const ChildProfileCard = ({ selectedChild }: IProps) => {
 
           <div className="flex gap-6">
             <span className="flex items-center justify-center rounded-full w-10 h-10 bg-[#d2e8d2] text-2xl text-[#1F8E1F]">
-              <MdEmail className="" />
-            </span>{" "}
+              <MdEmail />
+            </span>
             <span className="flex items-center justify-center rounded-full w-10 h-10 bg-[#d2e8d2] text-2xl text-[#1F8E1F]">
-              <MdEmail className="" />
+              <IoIosBriefcase />
             </span>
           </div>
         </div>
 
-        <div className="w-[%] border-t border-[#1F8E1F]">
+        <div className="border-t border-[#1F8E1F]">
           <div className="flex justify-between gap- max-w- mt-8">
             <div>
               <p className="text-[#9a9a9a]">Last visit</p>

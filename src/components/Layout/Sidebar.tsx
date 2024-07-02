@@ -17,9 +17,41 @@ const Sidebar = () => {
   //   typeof window !== "undefined" ? localStorage.getItem("token") : "";
 
   const handleLogout = async () => {
-    window.localStorage.removeItem("token");
+    localStorage.removeItem("token");
     await dispatch(resetAccountState());
     router.push("/login");
+  };
+
+  const isItemActive = (item: {
+    label: string;
+    path: string;
+    iconName: string;
+  }) => {
+    if (item.label === "Home" && router.pathname === "/dashboard") {
+      return true;
+    }
+    if (item.label === "Parents" && router.pathname === "/dashboard/parents") {
+      return true;
+    }
+    if (
+      item.label === "Children" &&
+      router.pathname.includes("child-profile")
+    ) {
+      return true;
+    }
+    if (
+      item.label === "Vaccines" &&
+      router.pathname === "/dashboard/vaccines"
+    ) {
+      return true;
+    }
+    if (
+      item.label === "Schedules" &&
+      router.pathname === "/dashboard/schedules"
+    ) {
+      return true;
+    }
+    return router.pathname === item.path;
   };
 
   return (
@@ -32,7 +64,8 @@ const Sidebar = () => {
               label={item.label}
               iconName={item.iconName}
               path={item.path}
-              isTabActive={router.pathname === item.path}
+              // isTabActive={router.pathname === item.path}
+              isTabActive={isItemActive(item)}
             />
           ))}
         </ul>

@@ -7,9 +7,11 @@ import NoOfChildrenCard from "@/components/children/NoOfChildrenCard";
 import DashboardParentsList from "@/components/dashboard/DashboardParentsList";
 import PendingVaccinesToday from "@/components/Table/PendingVaccinesToday";
 
+const breadcrumbs = [{ name: "Home" }];
+
 const Dashboard = () => {
   return (
-    <PageLayout>
+    <PageLayout breadcrumbs={breadcrumbs}>
       <div className="flex flex-col gap-8">
         <div className="flex gap-8 w-full">
           <HomeSchedules />

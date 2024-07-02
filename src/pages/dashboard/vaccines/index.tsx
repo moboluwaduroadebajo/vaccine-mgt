@@ -5,8 +5,9 @@ import NoofVaccines from "@/components/vaccines/NoofVaccines";
 import React from "react";
 
 const Vaccines = () => {
+  const breadcrumbs = [{ name: "Vaccines" }];
   return (
-    <PageLayout>
+    <PageLayout breadcrumbs={breadcrumbs}>
       <div className="flex flex-col gap-8 h-">
         <div className="flex gap-8 w-full">
           <AddNewVaccine />

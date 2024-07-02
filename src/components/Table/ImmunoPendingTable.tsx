@@ -2,16 +2,22 @@ import { ImmunizationType } from "@/type/immunization.types";
 import { ChildrenDataType } from "@/type/user.type";
 import { ExistingVaccineType } from "@/type/vaccines.type";
 import { createColumnHelper } from "@tanstack/react-table";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PiCaretDownLight } from "react-icons/pi";
 import Button from "../utilities/Button";
+import axios from "axios";
+import { headers } from "next/headers";
+import { toast } from "react-toastify";
 
 interface ImmunoProps {
-  childData?: ChildrenDataType;
   pendingVaccines: ImmunizationType[];
 }
 
-const ImmunoPendingTable = ({ childData, pendingVaccines }: ImmunoProps) => {
+const ImmunoPendingTable = ({ pendingVaccines }: ImmunoProps) => {
+  const [vaccineStatus, setVaccineStatus] = useState(false);
+  const [immunoID, setImmunoID] = useState<ImmunizationType[]>();
+  const baseURL = process.env.NEXT_PUBLIC_BASE_API_URL;
+
   const columnHelper = createColumnHelper<ExistingVaccineType>();
 
   const columns = [
@@ -39,6 +45,9 @@ const ImmunoPendingTable = ({ childData, pendingVaccines }: ImmunoProps) => {
   ];
 
   const [selectedVaccine, setSelectedVaccine] = useState<number | null>();
+  const [checkedStatus, setCheckedStatus] = useState<{
+    [key: number]: boolean;
+  }>({});
 
   const toggle = (i: number) => {
     if (selectedVaccine === i) {
@@ -47,8 +56,43 @@ const ImmunoPendingTable = ({ childData, pendingVaccines }: ImmunoProps) => {
       setSelectedVaccine(i);
     }
   };
+  const handleCheckboxChange = (id: number) => {
+    setCheckedStatus({ ...checkedStatus, [id]: !checkedStatus[id] });
+  };
 
-  //   const [isOpen, setIsOpen] = useState(false);
+  // const updateStatus = async (immunizationID: string) => {
+  //   if (!checkedStatus[immunizationID]) {
+  //     alert("Please check the 'Administered' checkbox before updating.");
+  //     return;
+  //   }
+
+  const updateStatus = async (immunizationID: string) => {
+    // if (!checkedStatus[immunizationID]) {
+    //    toast.error("Please check the 'Administered' checkbox before updating.");
+    //    return;
+    //  }
+    try {
+      const token =
+        typeof window !== "undefined" ? localStorage.getItem("token") : "";
+      const response = await axios.put(
+        `${baseURL}/immuno/immuno-record/${immunizationID}`,
+        { administered: true, vaccineId: "" },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        console.log("Vaccine status updated successfully");
+      } else {
+        console.error("Failed to update vaccine status");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="pt-7">
@@ -64,7 +108,12 @@ const ImmunoPendingTable = ({ childData, pendingVaccines }: ImmunoProps) => {
               className="flex justify-between py-4 cursor-pointer"
               onClick={() => toggle(index)}>
               <p className="flex gap-4 items-center">
-                <span>
+                <span
+                  className={
+                    selectedVaccine === index
+                      ? " transform rotate-180 transition-transform duration-[0.5s] ease-in "
+                      : " transform rotate-0 transition-transform duration-[0.5s] ease-in "
+                  }>
                   <PiCaretDownLight className="text-2xl" />
                 </span>
                 {vaccine.vaccine.type}
@@ -90,7 +139,7 @@ const ImmunoPendingTable = ({ childData, pendingVaccines }: ImmunoProps) => {
                   <div className="flex items-center gap-4">
                     <label htmlFor="">Administered</label>
 
-                    <input type="checkbox" className="w-6 h-6" />
+                    <input type="checkbox" className="w-7 h-7" />
                   </div>
 
                   <div className="flex flex-col gap-1">
@@ -105,6 +154,7 @@ const ImmunoPendingTable = ({ childData, pendingVaccines }: ImmunoProps) => {
                   label="Update"
                   variant="primary"
                   additionalClassname="w-[200px]"
+                  onClick={() => updateStatus(vaccine.id)}
                 />
               </div>
             </div>

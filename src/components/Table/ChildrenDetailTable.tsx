@@ -17,10 +17,10 @@ import ChildProfileModal from "../Modals/ChildProfileModal";
 
 const ChildrenDetailTable = () => {
   const [allChildren, setAllChildren] = useState<ChildrenDataType[]>([]);
-  const [selectedChild, setSelectedChild] = useState<ChildrenDataType>();
+  // const [selectedChild, setSelectedChild] = useState<ChildrenDataType>();
   const [isLoading, setIsLoading] = useState(true);
   const [searchKey, setSearchKey] = useState("");
-  const [openModal, setOpenModal] = useState(false);
+  // const [openModal, setOpenModal] = useState(false);
 
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
@@ -28,15 +28,13 @@ const ChildrenDetailTable = () => {
 
   const baseURL = process.env.NEXT_PUBLIC_BASE_API_URL;
   const router = useRouter();
-  const { profile } = router.query;
 
-  const handleClick = (child: ChildrenDataType) => {
-    setSelectedChild(child);
-    setOpenModal(!openModal);
-  };
+  // const handleClick = (child: ChildrenDataType) => {
+  //   setSelectedChild(child);
+  //   setOpenModal(!openModal);
+  // };
 
   const handleChildClick = (child: ChildrenDataType) => {
-    // const activeChild = profile || child.id;
     router.push({
       pathname: "/dashboard/children/child-profile",
       query: { id: child.id },
@@ -59,7 +57,7 @@ const ChildrenDetailTable = () => {
             },
           }
         );
-        console.log(response.data.data.content);
+        // console.log(response.data.data.content);
 
         setAllChildren(response.data.data.content);
         setTotalPages(response.data.data.page.totalPages);
@@ -205,11 +203,11 @@ const ChildrenDetailTable = () => {
         onItemsPerPageChange={setItemsPerPage}
       />
 
-      <ChildProfileModal
+      {/* <ChildProfileModal
         isOpen={openModal}
         setIsOpen={() => setOpenModal(!openModal)}
         selectedChild={selectedChild}
-      />
+      /> */}
     </div>
   );
 };

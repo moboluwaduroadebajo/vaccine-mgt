@@ -8,12 +8,13 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
+const breadcrumbs = [
+  { name: "Children", href: "/dashboard/children" },
+  { name: "Child" },
+];
 const ChildProfile = () => {
   const [selectedChild, setSelectedChild] = useState<ChildrenDataType>();
-
   const [immunizations, setImmunizations] = useState<ImmunizationType[]>([]);
-  const [pendingVaccine, setPendingVaccine] = useState([]);
-  const [completedVaccine, setCompletedVaccine] = useState([]);
 
   const router = useRouter();
   const { id } = router.query;
@@ -29,7 +30,7 @@ const ChildProfile = () => {
             Authorization: token,
           },
         });
-        // console.log(response.data);
+        console.log(response.data.data);
         setSelectedChild(response.data.data);
         setImmunizations(response.data.data.immunizations);
       } catch (error) {
@@ -39,24 +40,24 @@ const ChildProfile = () => {
     getChildData();
   }, []);
   return (
-    <PageLayout>
-      <div className="flex flex-col gap-8">
-        {/* <div className="grow flex flex-col gap-8">
-        <ChildProfileCard />
-        <ImmunizationHistory />
-      </div>
-      <div className="w-[30%]">
-        <ParentDetailCard />
-      </div> */}
+    <PageLayout breadcrumbs={breadcrumbs}>
+      <div className="flex gap-8">
+        <div className="grow flex flex-col gap-8 w-[]">
+          <ChildProfileCard selectedChild={selectedChild} />
+          <ImmunizationHistory immunizationList={immunizations} />
+        </div>
+        <div className="w-[30%]">
+          <ParentDetailCard childData={selectedChild} />
+        </div>
 
-        <div className="flex gap-8 w-full">
+        {/* <div className="flex gap-8 w-full">
           <ChildProfileCard selectedChild={selectedChild} />
           <ParentDetailCard childData={selectedChild} />
         </div>
         <ImmunizationHistory
           childData={selectedChild}
           immunizationList={immunizations}
-        />
+        /> */}
       </div>
     </PageLayout>
   );
