@@ -6,6 +6,7 @@ import { MdEmail } from "react-icons/md";
 import { ChildrenDataType } from "@/type/user.type";
 import axios from "axios";
 import AddNewChildModal from "../Modals/AddNewChildModal";
+import { log } from "console";
 
 interface IProps {
   childData: ChildrenDataType;
@@ -35,11 +36,11 @@ const ParentDetailCard = ({ childData }: IProps) => {
           }
         );
         setAllChildren(response.data.data.children);
+        var respo = response.data.data.children;
         if (allChildren) {
-          const otherChildren = allChildren.filter(
-            (children) => children.id != childID
+          const otherChildren = respo.filter(
+            (children: ChildrenDataType) => children.id != childID
           );
-          console.log(otherChildren);
           setOtherChildren(otherChildren);
         }
       } catch (error) {
@@ -94,7 +95,7 @@ const ParentDetailCard = ({ childData }: IProps) => {
         ) : (
           otherChildren.map((child) => (
             <p key={child.id} className="font-medium">
-              {child.firstName}
+              {child.firstName} {child.lastName}
             </p>
           ))
         )}

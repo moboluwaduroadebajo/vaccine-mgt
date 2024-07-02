@@ -32,7 +32,7 @@ const ChildProfileModal = ({ isOpen, setIsOpen, selectedChild }: IProps) => {
         <div className="flex flex-col gap-8 w-full">
           <div className="flex gap-8">
             <ChildProfileCard />
-            <ParentDetailCard />
+            {/* <ParentDetailCard childData={selectedChild as ChildrenDataType} /> */}
           </div>
           <ImmunizationHistory />
         </div>

@@ -30,7 +30,6 @@ const ChildProfile = () => {
             Authorization: token,
           },
         });
-        console.log(response.data.data);
         setSelectedChild(response.data.data);
         setImmunizations(response.data.data.immunizations);
       } catch (error) {
@@ -40,17 +39,18 @@ const ChildProfile = () => {
     getChildData();
   }, []);
   return (
-    <PageLayout breadcrumbs={breadcrumbs}>
-      <div className="flex gap-8">
-        <div className="grow flex flex-col gap-8 w-[]">
-          <ChildProfileCard selectedChild={selectedChild} />
-          <ImmunizationHistory immunizationList={immunizations} />
-        </div>
-        <div className="w-[30%]">
-          <ParentDetailCard childData={selectedChild} />
-        </div>
+    selectedChild && (
+      <PageLayout breadcrumbs={breadcrumbs}>
+        <div className="flex gap-8">
+          <div className="grow flex flex-col gap-8 w-[]">
+            <ChildProfileCard selectedChild={selectedChild} />
+            <ImmunizationHistory immunizationList={immunizations} />
+          </div>
+          <div className="w-[30%]">
+            <ParentDetailCard childData={selectedChild as ChildrenDataType} />
+          </div>
 
-        {/* <div className="flex gap-8 w-full">
+          {/* <div className="flex gap-8 w-full">
           <ChildProfileCard selectedChild={selectedChild} />
           <ParentDetailCard childData={selectedChild} />
         </div>
@@ -58,8 +58,8 @@ const ChildProfile = () => {
           childData={selectedChild}
           immunizationList={immunizations}
         /> */}
-      </div>
-    </PageLayout>
+        </div>
+      </PageLayout>)
   );
 };
 
