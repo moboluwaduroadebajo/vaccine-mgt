@@ -6,8 +6,9 @@ import avatar from "@/assets/avatar.png";
 import Image from "next/image";
 import { MdEmail } from "react-icons/md";
 import { BsFillTelephoneFill, BsPlusCircleFill } from "react-icons/bs";
-import { ParentDataType } from "@/type/user.type";
+import { ChildrenDataType, ParentDataType } from "@/type/user.type";
 import AddNewChildModal from "./AddNewChildModal";
+import { useRouter } from "next/router";
 
 interface IProps {
   isOpen: boolean;
@@ -17,8 +18,16 @@ interface IProps {
 
 const ParentDetailModal = ({ isOpen, setIsOpen, selectedParent }: IProps) => {
   const closeModal = () => setIsOpen(!isOpen);
+  const router = useRouter();
 
   const [openAddChildModal, setOpenAddChildModal] = useState(false);
+
+  const handleChildClick = (child: ChildrenDataType) => {
+    router.push({
+      pathname: "/dashboard/children/child-profile",
+      query: { id: child.id },
+    });
+  };
 
   return (
     <Modal isOpen={isOpen} onClose={closeModal}>
@@ -67,14 +76,17 @@ const ParentDetailModal = ({ isOpen, setIsOpen, selectedParent }: IProps) => {
               </ul>
             </div>
 
-            <div className="flex flex-col items-center justify-between gap-10 px-20 py-8 font-poppins">
+            <div className="flex flex-col items-center justify-between gap-6 px-20 py-8 font-poppins">
               <p className="font-bold text-2xl">Children</p>
 
               {selectedParent?.children.length === 0 ? (
                 <p className="font-bold">No child added</p>
               ) : (
                 selectedParent?.children.map((child) => (
-                  <p key={child.id} className="font-medium">
+                  <p
+                    key={child.id}
+                    className="font-medium hover:bg-[#D9ECD9] hover:text-[#1F8E1F] cursor-pointer py-4 px-8"
+                    onClick={() => handleChildClick(child)}>
                     {child.firstName}
                   </p>
                 ))

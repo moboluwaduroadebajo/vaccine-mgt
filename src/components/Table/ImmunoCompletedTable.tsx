@@ -5,6 +5,8 @@ import { createColumnHelper } from "@tanstack/react-table";
 import React, { useState } from "react";
 import { PiCaretDownLight } from "react-icons/pi";
 import Button from "../utilities/Button";
+import DatePickerInput from "../FormFields/DatePickerInput";
+import { BsCheck } from "react-icons/bs";
 
 interface ImmunoProps {
   completedVaccine: ImmunizationType[];
@@ -47,8 +49,8 @@ const ImmunoCompletedTable = ({ completedVaccine }: ImmunoProps) => {
     }),
   ];
   return (
-    <div className="pt-7">
-      <div className="flex justify-between p-4">
+    <div className="pt-7 p-8">
+      <div className="flex justify-between p-4 font-bold font-poppins text-[#1F8E1F]">
         <p>Vaccine</p>
         <p>Status</p>
       </div>
@@ -60,7 +62,12 @@ const ImmunoCompletedTable = ({ completedVaccine }: ImmunoProps) => {
               className="flex justify-between py-4 cursor-pointer"
               onClick={() => toggle(index)}>
               <p className="flex gap-4 items-center">
-                <span>
+                <span
+                  className={
+                    selectedVaccine === index
+                      ? " transform rotate-180 transition-transform duration-[0.5s] ease-in "
+                      : " transform rotate-0 transition-transform duration-[0.5s] ease-in "
+                  }>
                   <PiCaretDownLight className="text-2xl" />
                 </span>
                 {vaccine.vaccine.type}
@@ -73,7 +80,7 @@ const ImmunoCompletedTable = ({ completedVaccine }: ImmunoProps) => {
             <div
               className={
                 selectedVaccine === index
-                  ? "w-full overflow-hidden max-h-[400px] font-poppins transition-max-h duration-[0.8s] ease mt-1 bg-gray-50 p-8 rounded-lg border border-green-400"
+                  ? "w-full max-h-[400px] font-poppins transition-max-h duration-[0.8s] ease mt-1 bg-gray-50 p-8 rounded-lg border border-green-400"
                   : "w-full overflow-hidden max-h-0 font-poppins transition-all duration-[0.8s] ease"
               }>
               <h5 className=" font-semibold ">{vaccine.vaccine.type}</h5>
@@ -82,18 +89,28 @@ const ImmunoCompletedTable = ({ completedVaccine }: ImmunoProps) => {
               </p>
 
               <div className="flex justify-between">
-                <div className="flex items-center justify-between w-1/2 gap-">
-                  <div className="flex items-center gap-4">
-                    <label htmlFor="">Administered</label>
+                <div className="flex items-center justify-between w-1/2">
+                  <div className="flex flex-col items-center gap-4">
+                    <label htmlFor="">Not Administered</label>
 
-                    <input type="checkbox" className="w-7 h-7" />
+                    <input
+                      type="checkbox"
+                      className="w-7 h-7 appearance-  border border-[#1F8E1F] rounded-sm"
+                    />
                   </div>
 
-                  <div className="flex flex-col gap-1">
+                  <div className="flex flex-col items-center gap-1">
                     <p>Date of Immunization</p>
-                    <p className="p-4 bg-[#eeeeee] flex items-center justify-center">
-                      {vaccine.minimumAdministerDate}
-                    </p>
+                    {/* <input
+                      type="text"
+                      className="p-4 w-[160px] bg-[#eeeeee]  items- justify-center outline-none"
+                      placeholder={vaccine.minimumAdministerDate}
+                    /> */}
+                    <DatePickerInput
+                      label=""
+                      placeholder={vaccine.minimumAdministerDate}
+                      additionalClass="w-[160px]"
+                    />
                   </div>
                 </div>
 

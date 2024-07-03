@@ -63,8 +63,8 @@ const ParentDetailCard = ({ childData }: IProps) => {
               {childData?.parent.title === "Mr"
                 ? "Dad"
                 : childData?.parent.title === "Mrs"
-                  ? "Mom"
-                  : "Parent"}{" "}
+                ? "Mom"
+                : "Parent"}{" "}
               | {childData?.parent.age}
             </p>
           </div>

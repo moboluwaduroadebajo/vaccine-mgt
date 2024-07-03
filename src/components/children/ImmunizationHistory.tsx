@@ -52,8 +52,10 @@ const ImmunizationHistory = ({ immunizationList }: ImmunoProps) => {
         <p className="font-semibold text-2xl">Immunization History</p>
       </div>
 
-      <div className="bg-white shadow-md rounded-2xl p-8 h-[600px] overflow-auto">
-        <MenuTab tabs={menuTab} />
+      <div className="bg-white shadow-md rounded-2xl h-[600px] overflow-auto">
+        <div className="sticky top-0 bg-white z-10 p-8">
+          <MenuTab tabs={menuTab} />
+        </div>
 
         {selectedTab === "completed" && (
           <ImmunoCompletedTable completedVaccine={completedVaccine} />

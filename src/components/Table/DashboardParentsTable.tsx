@@ -1,38 +1,38 @@
 import React, { useEffect, useState } from "react";
-import { BiMenuAltLeft } from "react-icons/bi";
 import { Icons } from "../icons";
-import axios, { AxiosError } from "axios";
-import { useRouter } from "next/router";
-import { UserEntityType } from "@/type/account.type";
+import { BiMenuAltLeft } from "react-icons/bi";
 import { ParentDataType } from "@/type/user.type";
-import ParentDetailModal from "../Modals/ParentDetailModal";
 import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import Loader from "../utilities/Loader";
+import axios, { AxiosError } from "axios";
+import { UserEntityType } from "@/type/account.type";
+import { useRouter } from "next/router";
+import ParentDetailModal from "../Modals/ParentDetailModal";
 import Paginator from "./Paginator";
 
-const ParentDetailTable = () => {
+const DashboardParentsTable = () => {
+  const baseURL = process.env.NEXT_PUBLIC_BASE_API_URL;
+  const router = useRouter();
+
   const [parentData, setParentData] = useState<ParentDataType[]>([]);
   const [selectedParent, setSelectedParent] = useState<ParentDataType>();
   const [openParentModal, setOpenParentModal] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const columnHelper = createColumnHelper<ParentDataType>();
+
   const [searchKey, setSearchKey] = useState("");
 
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-
-  const baseURL = process.env.NEXT_PUBLIC_BASE_API_URL;
-  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getParentDetails = async () => {
       try {
-        setIsLoading(true);
         const token =
           typeof window !== "undefined" ? localStorage.getItem("token") : "";
         const response = await axios.get(
@@ -63,17 +63,14 @@ const ParentDetailTable = () => {
           router.push("/login");
         }
       }
-      setIsLoading(false);
     };
     getParentDetails();
-  }, [itemsPerPage, currentPage, searchKey]);
+  }, [searchKey, baseURL, itemsPerPage, currentPage]);
 
   const handleClick = (parent: ParentDataType) => {
     setSelectedParent(parent);
     setOpenParentModal(true);
   };
-
-  const columnHelper = createColumnHelper<ParentDataType>();
 
   const columns = [
     columnHelper.accessor("firstName", {
@@ -85,16 +82,10 @@ const ParentDetailTable = () => {
       },
     }),
 
-    columnHelper.accessor("email", {
-      header: () => <p className="text-center">Contact</p>,
-      cell: (props) => {
-        return (
-          <p className="font-light text-center">{`${props.row.original.email} / ${props.row.original.phoneNumber}`}</p>
-        );
-      },
-    }),
     columnHelper.accessor("children", {
-      header: () => <p className="text-end">No of Children</p>,
+      header: () => {
+        return <p className="text-end">No of Children</p>;
+      },
       cell: (props) => {
         return (
           <p className="font-light text-[#1F8E1F] text-end">{`${
@@ -114,40 +105,26 @@ const ParentDetailTable = () => {
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
-
   return (
-    <>
-      <div className="grow bg-white rounded-2xl">
-        <div className="flex flex-col shadow-md p-8 sticky top-0 rounded-2xl bg-white">
-          <div className="flex justify-between items-center">
-            <div>
-              <p className="font-poppins font-semibold text-2xl">Parents</p>
-            </div>
+    <div className="flex flex-col w-[38%]">
+      <div className="bg-white rounded-2xl shadow-md">
+        <div className="flex justify-between items-center p-8 sticky top-0">
+          <div>
+            <p className="font-poppins font-semibold text-2xl">Parents</p>
+          </div>
 
-            <div className="flex items-center justify-center gap-8">
-              <BiMenuAltLeft fontSize={24} />
-              <div className="relative">
-                <div className="absolute top-1/2 right-6 -translate-y-1/2 ">
-                  {isLoading ? (
-                    <Loader className="!text-[#1F8E1F]" />
-                  ) : (
-                    <Icons
-                      name="search"
-                      fill="#1F8E1F"
-                      width={16}
-                      height={16}
-                    />
-                  )}
-                </div>
+          <div className="flex items-center justify-center gap-8 cursor-pointer">
+            <BiMenuAltLeft fontSize={26} />
+            <div className="relative">
+              <Icons name="search" fill="#1F8E1F" />
 
-                <input
-                  type="text"
-                  placeholder="Search"
-                  value={searchKey}
-                  onChange={(e) => setSearchKey(e.target.value)}
-                  className="focus:outline-none active:outline-none h-10 w-96 px-6 rounded-full border border-[#1F8E1F]"
-                />
-              </div>
+              {/* <input
+                type="text"
+                placeholder="Search"
+                value={searchKey}
+                onChange={(e) => setSearchKey(e.target.value)}
+                className="focus:outline-none active:outline-none h-10 w-96 px-6 rounded-full border border-[#1F8E1F]"
+              /> */}
             </div>
           </div>
         </div>
@@ -172,15 +149,18 @@ const ParentDetailTable = () => {
           <tbody>
             {parentData.length === 0 ? (
               <tr className="w-full">
-                <td />
-                <td className="p-8 font-bold">No Record Found</td>
+                <td className="p-8 text-center font-bold flex justify-center items-center">
+                  No Record Found
+                </td>
               </tr>
             ) : (
               table.getRowModel().rows.map((row) => (
                 <tr
                   key={row.id}
                   className="cursor-pointer hover:rounded-2xl font-poppins"
-                  onClick={() => handleClick(row.original)}>
+                  onClick={() => {
+                    handleClick(row.original);
+                  }}>
                   {row.getVisibleCells().map((cell) => (
                     <td
                       key={cell.id}
@@ -196,14 +176,12 @@ const ParentDetailTable = () => {
             )}
           </tbody>
         </table>
-
         <ParentDetailModal
           selectedParent={selectedParent}
           isOpen={openParentModal}
           setIsOpen={() => setOpenParentModal(!openParentModal)}
         />
       </div>
-
       <Paginator
         itemsPerPage={itemsPerPage}
         currentPage={currentPage}
@@ -211,8 +189,8 @@ const ParentDetailTable = () => {
         onPageChange={setCurrentPage}
         onItemsPerPageChange={setItemsPerPage}
       />
-    </>
+    </div>
   );
 };
 
-export default ParentDetailTable;
+export default DashboardParentsTable;

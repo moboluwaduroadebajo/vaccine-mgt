@@ -49,17 +49,9 @@ const ChildProfile = () => {
           <div className="w-[30%]">
             <ParentDetailCard childData={selectedChild as ChildrenDataType} />
           </div>
-
-          {/* <div className="flex gap-8 w-full">
-          <ChildProfileCard selectedChild={selectedChild} />
-          <ParentDetailCard childData={selectedChild} />
         </div>
-        <ImmunizationHistory
-          childData={selectedChild}
-          immunizationList={immunizations}
-        /> */}
-        </div>
-      </PageLayout>)
+      </PageLayout>
+    )
   );
 };
 

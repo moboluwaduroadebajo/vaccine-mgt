@@ -13,14 +13,8 @@ const MenuTab = ({ tabs }: TabsProps) => {
 
   const activeTab = tab || tabs[0].url;
   return (
-    <div className=" font-poppins font-light border-b-2 border-[#cce5cc] text-[#575757]">
+    <div className="font-poppins font-light border-b-2 border-[#cce5cc] text-[#575757] ">
       <ul className="flex items-center justify-center h-[60px]">
-        {/* <li className="hover:bg-[#f6fbf6] hover:border-b hover:text-[#1F8E1F] h-full text-center w-1/2 flex justify-center cursor-pointer items-center">
-          Completed
-        </li>
-        <li className="hover:bg-[#f6fbf6] hover:border-b hover:text-[#1F8E1F] h-full text-center w-1/2 flex justify-center cursor-pointer items-center">
-          Pending
-        </li> */}
         {tabs.map((tab) => (
           <Link
             key={tab.url}

@@ -57,7 +57,6 @@ const ChildrenDetailTable = () => {
             },
           }
         );
-        // console.log(response.data.data.content);
 
         setAllChildren(response.data.data.content);
         setTotalPages(response.data.data.page.totalPages);

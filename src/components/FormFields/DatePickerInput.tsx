@@ -8,6 +8,7 @@ interface IProps {
   additionalClass?: any;
   onChange?: (date: Date | undefined) => void;
   value?: Date;
+  placeholder?: string;
 }
 
 export default function DatePickerInput({
@@ -15,6 +16,7 @@ export default function DatePickerInput({
   onChange,
   value,
   label,
+  placeholder = "DD-MM-YYYY",
 }: IProps) {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(value);
 
@@ -41,7 +43,7 @@ export default function DatePickerInput({
           onChange={(date) => handleChange(date!)}
           dateFormat="dd-MM-yyyy"
           maxDate={new Date()}
-          placeholderText="DD-MM-YYYY"
+          placeholderText={placeholder}
           className="w-full outline-0"
         />
       </div>

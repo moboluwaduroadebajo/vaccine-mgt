@@ -4,8 +4,8 @@ import AddNewVaccine from "@/components/vaccines/AddNewVaccine";
 import React from "react";
 import OnboardParentCard from "./schedules/OnboardParentCard";
 import NoOfChildrenCard from "@/components/children/NoOfChildrenCard";
-import DashboardParentsList from "@/components/dashboard/DashboardParentsList";
 import PendingVaccinesToday from "@/components/Table/PendingVaccinesToday";
+import DashboardParentsTable from "@/components/Table/DashboardParentsTable";
 
 const breadcrumbs = [{ name: "Home" }];
 
@@ -30,7 +30,7 @@ const Dashboard = () => {
 
         <div className="flex gap-8 w-full">
           <PendingVaccinesToday />
-          <DashboardParentsList />
+          <DashboardParentsTable />
         </div>
       </div>
     </PageLayout>
