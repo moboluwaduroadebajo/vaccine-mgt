@@ -13,14 +13,40 @@ interface ImmunoProps {
 }
 
 const ImmunoCompletedTable = ({ completedVaccine }: ImmunoProps) => {
-  const [selectedVaccine, setSelectedVaccine] = useState<number | null>();
+  const [selectedVaccine, setSelectedVaccine] = useState<number>(0);
+  const [administered, setAdministered] = useState<boolean[]>(completedVaccine.map(v => v.administered));
+  const [administeredDate, setAdministeredDate] = useState<(string | null)[]>(completedVaccine.map(v => v.dateOfAdministration));
+
 
   const toggle = (i: number) => {
-    if (selectedVaccine === i) {
-      setSelectedVaccine(null);
-    } else {
+    if (selectedVaccine !== i) {
       setSelectedVaccine(i);
     }
+  };
+
+  const handleCheckboxChange = (index: number) => {
+    setAdministered(prevState => {
+      const newState = [...prevState];
+      newState[index] = !newState[index];
+      return newState;
+    });
+  };
+
+  const handleDateChange = (index: number, date: string) => {
+    setAdministeredDate(prevState => {
+      const newState = [...prevState];
+      newState[index] = date;
+      return newState;
+    });
+  };
+
+  const handleSubmit = (index: number) => {
+    const updatedVaccine = {
+      ...completedVaccine[index],
+      administered: administered[index],
+      dateOfAdministration: administeredDate[index],
+    };
+    console.log(`Submitting updated data for vaccine ${index}:`, updatedVaccine);
   };
 
   const columnHelper = createColumnHelper<ExistingVaccineType>();
@@ -96,6 +122,8 @@ const ImmunoCompletedTable = ({ completedVaccine }: ImmunoProps) => {
                     <input
                       type="checkbox"
                       className="w-7 h-7 appearance-  border border-[#1F8E1F] rounded-sm"
+                      checked={administered[index]}
+                      onChange={() => handleCheckboxChange(index)}
                     />
                   </div>
 
@@ -118,6 +146,7 @@ const ImmunoCompletedTable = ({ completedVaccine }: ImmunoProps) => {
                   label="Update"
                   variant="primary"
                   additionalClassname="w-[200px]"
+                  onClick={() => handleSubmit(index)}
                 />
               </div>
             </div>
