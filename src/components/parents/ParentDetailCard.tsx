@@ -6,7 +6,6 @@ import { MdEmail } from "react-icons/md";
 import { ChildrenDataType } from "@/type/user.type";
 import axios from "axios";
 import AddNewChildModal from "../Modals/AddNewChildModal";
-import { log } from "console";
 
 interface IProps {
   childData: ChildrenDataType;

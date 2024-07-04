@@ -1,19 +1,37 @@
 import { ImmunizationType } from "@/type/immunization.types";
-import { ChildrenDataType } from "@/type/user.type";
 import { ExistingVaccineType } from "@/type/vaccines.type";
 import { createColumnHelper } from "@tanstack/react-table";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PiCaretDownLight } from "react-icons/pi";
 import Button from "../utilities/Button";
 import DatePickerInput from "../FormFields/DatePickerInput";
 import { BsCheck } from "react-icons/bs";
+import axios from "axios";
 
 interface ImmunoProps {
   completedVaccine: ImmunizationType[];
 }
 
 const ImmunoCompletedTable = ({ completedVaccine }: ImmunoProps) => {
+  const formatDate = (date: Date): string => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
+  const baseURL = process.env.NEXT_PUBLIC_BASE_API_URL;
+
   const [selectedVaccine, setSelectedVaccine] = useState<number | null>();
+  const [administered, setAdministered] = useState<boolean[]>(
+    completedVaccine.map((v) => v.administered)
+  );
+
+  const [administeredDate, setAdministeredDate] = useState<(Date | null)[]>(
+    completedVaccine.map((v) =>
+      v.dateOfAdministration ? new Date(v.dateOfAdministration) : null
+    )
+  );
 
   const toggle = (i: number) => {
     if (selectedVaccine === i) {
@@ -23,31 +41,46 @@ const ImmunoCompletedTable = ({ completedVaccine }: ImmunoProps) => {
     }
   };
 
-  const columnHelper = createColumnHelper<ExistingVaccineType>();
+  const handleCheckboxChange = (index: number) => {
+    setAdministered((prevState) => {
+      const newState = [...prevState];
+      newState[index] = !newState[index];
+      return newState;
+    });
+  };
 
-  const columns = [
-    columnHelper.accessor("type", {
-      header: "Vaccine",
-      cell: (props) => {
-        return (
-          <p className="flex gap-4 items-center">
-            <span>
-              <PiCaretDownLight className="text-2xl" />
-            </span>
-            {props.row.original.type}
-          </p>
-        );
-      },
-    }),
-    columnHelper.accessor("id", {
-      header: "Status",
-      cell: () => (
-        <p className="px-4 py-2 rounded-full text-sm bg-[#e1f7e4] text-[#35C549]">
-          Completed
-        </p>
-      ),
-    }),
-  ];
+  const handleDateChange = (index: number, date: Date | undefined) => {
+    setAdministeredDate((prevState) => {
+      const newState = [...prevState];
+      newState[index] = date || null;
+      return newState;
+    });
+  };
+
+  const handleSubmit = async (index: number, immunizationID: string) => {
+    const updatedVaccine = {
+      ...completedVaccine[index],
+      administered: !administered[index],
+      dateOfAdministration: administeredDate[index]
+        ? formatDate(administeredDate[index]!)
+        : null,
+      vaccineId: completedVaccine[index].vaccine.id,
+    };
+    try {
+      const token =
+        typeof window !== "undefined" ? localStorage.getItem("token") : "";
+      const response = await axios.put(
+        `${baseURL}/immuno/immuno-record/${immunizationID}`,
+        updatedVaccine,
+        { headers: { Authorization: token } }
+      );
+
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="pt-7 p-8">
       <div className="flex justify-between p-4 font-bold font-poppins text-[#1F8E1F]">
@@ -96,19 +129,23 @@ const ImmunoCompletedTable = ({ completedVaccine }: ImmunoProps) => {
                     <input
                       type="checkbox"
                       className="w-7 h-7 appearance-  border border-[#1F8E1F] rounded-sm"
+                      checked={administered[index]}
+                      onChange={() => handleCheckboxChange(index)}
                     />
                   </div>
 
                   <div className="flex flex-col items-center gap-1">
-                    <p>Date of Immunization</p>
+                    {/* <p>Date of Immunization</p> */}
                     {/* <input
                       type="text"
                       className="p-4 w-[160px] bg-[#eeeeee]  items- justify-center outline-none"
                       placeholder={vaccine.minimumAdministerDate}
                     /> */}
                     <DatePickerInput
-                      label=""
+                      label="Date of Immunization"
                       placeholder={vaccine.minimumAdministerDate}
+                      value={administeredDate[index] || undefined}
+                      onChange={(date) => handleDateChange(index, date)}
                       additionalClass="w-[160px]"
                     />
                   </div>
@@ -118,6 +155,7 @@ const ImmunoCompletedTable = ({ completedVaccine }: ImmunoProps) => {
                   label="Update"
                   variant="primary"
                   additionalClassname="w-[200px]"
+                  onClick={() => handleSubmit(index, vaccine.id)}
                 />
               </div>
             </div>
