@@ -37,7 +37,7 @@ const ChildProfile = () => {
       }
     };
     getChildData();
-  }, []);
+  }, [id, baseURL]);
   return (
     selectedChild && (
       <PageLayout breadcrumbs={breadcrumbs}>

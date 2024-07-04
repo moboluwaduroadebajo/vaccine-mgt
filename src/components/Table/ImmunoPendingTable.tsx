@@ -13,17 +13,24 @@ interface ImmunoProps {
 
 const ImmunoPendingTable = ({ pendingVaccines }: ImmunoProps) => {
   const baseURL = process.env.NEXT_PUBLIC_BASE_API_URL;
-
-  const [vaccineStatus, setVaccineStatus] = useState(false);
-  const [immunoID, setImmunoID] = useState<ImmunizationType[]>();
-  const [checkedStatus, setCheckedStatus] = useState<{
-    [key: number]: boolean;
-  }>({});
-  const [administeredDate, setAdministeredDate] = useState<{
-    [key: number]: string;
-  }>({});
+  const formatDate = (date: Date): string => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
 
   const [selectedVaccine, setSelectedVaccine] = useState<number | null>();
+  const [administered, setAdministered] = useState<boolean[]>(
+    pendingVaccines.map((v) => v.administered)
+  );
+
+  const [administeredDate, setAdministeredDate] = useState<(Date | null)[]>(
+    pendingVaccines.map((v) =>
+      v.dateOfAdministration ? new Date(v.dateOfAdministration) : null
+    )
+  );
+
   const toggle = (i: number) => {
     if (selectedVaccine === i) {
       setSelectedVaccine(null);
@@ -32,38 +39,44 @@ const ImmunoPendingTable = ({ pendingVaccines }: ImmunoProps) => {
     }
   };
 
-  const handleCheckboxChange = (index: number, checked: boolean) => {
-    setCheckedStatus((prev) => ({ ...prev, [index]: checked }));
+  const handleCheckboxChange = (index: number) => {
+    setAdministered((prevState) => {
+      const newState = [...prevState];
+      newState[index] = !newState[index];
+      return newState;
+    });
   };
 
-  const handleDateChange = (index: number, date: string) => {
-    setAdministeredDate((prev) => ({ ...prev, [index]: date }));
+  const handleDateChange = (index: number, date: Date | undefined) => {
+    setAdministeredDate((prevState) => {
+      const newState = [...prevState];
+      newState[index] = date || null;
+      return newState;
+    });
   };
 
   const updateStatus = async (immunizationID: string, index: number) => {
+    const updatedVaccine = {
+      ...pendingVaccines[index],
+      administered: administered[index],
+      dateOfAdministration: administeredDate[index]
+        ? formatDate(administeredDate[index]!)
+        : null,
+      vaccineId: pendingVaccines[index].vaccine.id,
+    };
     try {
       const token =
         typeof window !== "undefined" ? localStorage.getItem("token") : "";
       const response = await axios.put(
         `${baseURL}/immuno/immuno-record/${immunizationID}`,
-        {
-          administered: true,
-          dateOfAdministration: "2024-07-03",
-          vaccineId: "43d9c45f-c90b-41d0-9040-5c62b8dc6e42",
-          minimumAdministerDate: "2024-08-08",
-        },
+        updatedVaccine,
         {
           headers: {
             Authorization: token,
           },
         }
       );
-
-      if (response.status === 200) {
-        console.log("Vaccine status updated successfully");
-      } else {
-        console.error("Failed to update vaccine status");
-      }
+      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -117,20 +130,16 @@ const ImmunoPendingTable = ({ pendingVaccines }: ImmunoProps) => {
                     <input
                       type="checkbox"
                       className="w-7 h-7"
-                      checked={checkedStatus[index] || false}
-                      onChange={(e) =>
-                        handleCheckboxChange(index, e.target.checked)
-                      }
+                      onChange={() => handleCheckboxChange(index)}
                     />
                   </div>
 
                   <div className="flex flex-col gap-1">
-                    <p>Date of Immunization</p>
                     <DatePickerInput
-                      label=""
+                      label="Date of Immunization"
                       placeholder={vaccine.minimumAdministerDate}
-                      // value={administeredDate[index] || ""}
-                      // onChange={(date: Date) => handleDateChange(index, date)}
+                      value={administeredDate[index] || undefined}
+                      onChange={(date) => handleDateChange(index, date)}
                       additionalClass="w-[160px]"
                     />
                   </div>
@@ -140,7 +149,7 @@ const ImmunoPendingTable = ({ pendingVaccines }: ImmunoProps) => {
                   label="Update"
                   variant="primary"
                   additionalClassname="w-[200px]"
-                  // onClick={() => updateStatus(vaccine.id, index)}
+                  onClick={() => updateStatus(vaccine.id, index)}
                 />
               </div>
             </div>
