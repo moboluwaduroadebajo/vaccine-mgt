@@ -85,7 +85,7 @@ const ParentDetailCard = ({ childData }: IProps) => {
         </ul>
       </div>
 
-      {/* <OtherChildrenCard /> */}
+      {/* OtherChildren */}
       <div className="flex flex-col items-center justify-between gap-10 px-20 py-8 font-poppins bg-white rounded-2xl">
         <p className="font-bold text-2xl">Other Children</p>
 

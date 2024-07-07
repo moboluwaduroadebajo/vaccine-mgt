@@ -3,13 +3,13 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; /* Color of the track */
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
   background-color: #888; /* Color of the scroll thumb */
   border-radius: 10px; /* Roundness of the scroll thumb */
-  border: 3px solid #f1f1f1; /* Padding around the scroll thumb */
+  border: 3px solid #f1f1f1;
 }
 
 ::-webkit-scrollbar-thumb:hover {

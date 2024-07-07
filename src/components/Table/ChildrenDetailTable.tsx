@@ -12,15 +12,11 @@ import {
 } from "@tanstack/react-table";
 import Loader from "../utilities/Loader";
 import Paginator from "./Paginator";
-import { useSearchParams } from "next/navigation";
-import ChildProfileModal from "../Modals/ChildProfileModal";
 
 const ChildrenDetailTable = () => {
   const [allChildren, setAllChildren] = useState<ChildrenDataType[]>([]);
-  // const [selectedChild, setSelectedChild] = useState<ChildrenDataType>();
   const [isLoading, setIsLoading] = useState(true);
   const [searchKey, setSearchKey] = useState("");
-  // const [openModal, setOpenModal] = useState(false);
 
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
@@ -28,11 +24,6 @@ const ChildrenDetailTable = () => {
 
   const baseURL = process.env.NEXT_PUBLIC_BASE_API_URL;
   const router = useRouter();
-
-  // const handleClick = (child: ChildrenDataType) => {
-  //   setSelectedChild(child);
-  //   setOpenModal(!openModal);
-  // };
 
   const handleChildClick = (child: ChildrenDataType) => {
     router.push({
@@ -75,6 +66,7 @@ const ChildrenDetailTable = () => {
       setIsLoading(false);
     };
     getChildrenDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [itemsPerPage, currentPage, searchKey]);
 
   const columnHelper = createColumnHelper<ChildrenDataType>();
@@ -201,12 +193,6 @@ const ChildrenDetailTable = () => {
         onPageChange={setCurrentPage}
         onItemsPerPageChange={setItemsPerPage}
       />
-
-      {/* <ChildProfileModal
-        isOpen={openModal}
-        setIsOpen={() => setOpenModal(!openModal)}
-        selectedChild={selectedChild}
-      /> */}
     </div>
   );
 };
