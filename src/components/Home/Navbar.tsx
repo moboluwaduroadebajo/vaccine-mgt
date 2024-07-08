@@ -1,11 +1,13 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import Logo from "@/../public/logo.png";
 import { IoIosMenu } from "react-icons/io";
 import Link from "next/link";
 import Button from "../utilities/Button";
+import MobileNavbar from "./MobileNavbar";
 
 const Navbar = () => {
+  const [openmobileNav, setOpenMobileNav] = useState(false);
   return (
     <div className="flex justify-between items-center lg:px-40 px-8 py-10">
       <Image alt="logo" src={Logo} className="md:h-full h-[30%]" />
@@ -28,9 +30,16 @@ const Navbar = () => {
 
       {/* mobile Navbar */}
 
-      <div className="md:hidden">
-        <IoIosMenu size={40} className="text-[#1F8E1F]" />
+      <div
+        className="md:hidden"
+        onClick={() => setOpenMobileNav(!openmobileNav)}>
+        <IoIosMenu size={40} className="text-[#1F8E1F] cursor-pointer" />
       </div>
+
+      <MobileNavbar
+        closeModal={() => setOpenMobileNav(false)}
+        openSidebar={openmobileNav}
+      />
     </div>
   );
 };

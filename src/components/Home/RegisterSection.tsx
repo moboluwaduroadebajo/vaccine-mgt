@@ -8,7 +8,7 @@ const RegisterSection = () => {
     <div className="relative">
       <Image alt="nurse-image" src={nurse} className="object-cover w-screen" />
 
-      <div className="absolute lg:top-[30%] md:left-[60%] top-[30%] left-[50%]">
+      <div className="absolute lg:top-[30%] top-[10%] md:left-[60%] left-[50%]">
         <p className="text-white font-poppins lg:text-2xl text-xs lg:leading-[48px] max-w-[500px] font-medium md:mb-8 mb-3">
           Join a growing network of healthcare professionals who are
           transforming immunization management! <br />
