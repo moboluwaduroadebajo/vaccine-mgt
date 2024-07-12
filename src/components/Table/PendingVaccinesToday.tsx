@@ -57,7 +57,7 @@ const PendingVaccinesToday = () => {
     }),
 
     columnHelper.accessor("immunization.vaccine", {
-      header: () => <p className="text-center">Vaccines</p>,
+      header: () => <p className="sm:text-center">Vaccines</p>,
       cell: (props) => {
         return (
           <p className="text-center">{`${props.row.original.immunization.vaccine.type}`}</p>
@@ -90,14 +90,14 @@ const PendingVaccinesToday = () => {
       </div>
 
       <div className="bg-white font-poppins rounded-2xl shadow-md">
-        <table className="w-full table-content">
+        <table className="table-content w-full large:table-auto table-fixed">
           <thead className="font-semibold text-xl">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr className="text-[#1F8E1F]" key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
                   <th
                     key={header.id}
-                    className="py-8 px-16 text-start bg-[#f4f9f4]">
+                    className="py-8 large:px-16 md:px-8 px-4 bg-[#f4f9f4] text-start">
                     {flexRender(
                       header.column.columnDef.header,
                       header.getContext()
@@ -110,8 +110,10 @@ const PendingVaccinesToday = () => {
           <tbody>
             {pendingVaccines.length === 0 ? (
               <tr className="w-full">
-                <td />
-                <td className="p-8 font-bold">No Pending Vaccines Today</td>
+                <td className="sm:block hidden" />
+                <td className="sm:p-8 p-5 font-bold text-nowrap">
+                  No Pending Vaccines Today
+                </td>
               </tr>
             ) : (
               table.getRowModel().rows.map((row) => (
@@ -121,7 +123,7 @@ const PendingVaccinesToday = () => {
                   {row.getVisibleCells().map((cell) => (
                     <td
                       key={cell.id}
-                      className="px-16 py-8 h-[70px] border-b max-w-[300px]">
+                      className="large:px-16 md:px-8 px-4 py-8 h-[70px] border-b max-w-[300px]">
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()

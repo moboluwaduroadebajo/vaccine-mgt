@@ -106,7 +106,7 @@ const DashboardParentsTable = () => {
     getCoreRowModel: getCoreRowModel(),
   });
   return (
-    <div className="flex flex-col w-[38%]">
+    <div className="flex flex-col lg:w-[38%]">
       <div className="bg-white rounded-2xl shadow-md">
         <div className="flex justify-between items-center p-8 sticky top-0">
           <div>
@@ -129,14 +129,14 @@ const DashboardParentsTable = () => {
           </div>
         </div>
 
-        <table className="w-full table-content">
+        <table className="w-full table-content large:table-auto table-fixed">
           <thead className="font-semibold text-xl">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr className="text-[#1F8E1F]" key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
                   <th
                     key={header.id}
-                    className="py-8 px-16 text-start bg-[#f4f9f4]">
+                    className="py-8 large:px-16 md:px-8 px-4 text-start bg-[#f4f9f4]">
                     {flexRender(
                       header.column.columnDef.header,
                       header.getContext()
@@ -164,7 +164,7 @@ const DashboardParentsTable = () => {
                   {row.getVisibleCells().map((cell) => (
                     <td
                       key={cell.id}
-                      className="px-16 py-8 h-[70px] border-b max-w-[300px]">
+                      className="large:px-16 md:px-8 px-4 py-8 h-[70px] border-b max-w-[300px]">
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()

@@ -97,42 +97,51 @@ const ExistingVaccinesTable = () => {
 
   return (
     <>
-      <div className="bg-white h-[600px] w-full rounded-2xl overflow-y-auto font-poppins">
-        <div className="p-8 flex justify-between sticky top-0 z-10 bg-white shadow-md">
-          <p className="font-semibold text-2xl text-[#1F8E1F]">
-            Existing Vaccines
-          </p>
+      <div className="bg-white w-full rounded-2xl overflow-auto font-poppins">
+        <div className="md:p-8 p-4 flex flex-col sticky top-0 bg-white shadow-md w-full">
+          <div className="flex justify-between gap-8 items-center">
+            <div>
+              <p className="font-semibold md:text-2xl text-lg text-[#1F8E1F] text-nowrap">
+                Existing Vaccines
+              </p>
+            </div>
 
-          <div className="flex items-center justify-center gap-8">
-            <BiMenuAltLeft fontSize={24} />
-            <div className="relative">
-              <div className="absolute top-1/2 right-6 -translate-y-1/2 ">
-                {isLoading ? (
-                  <Loader className="!text-[#1F8E1F]" />
-                ) : (
-                  <Icons name="search" fill="#1F8E1F" width={16} height={16} />
-                )}
+            <div className="flex items-center md:justify-center justify-end sm:gap-8 gap-4">
+              <BiMenuAltLeft fontSize={24} />
+              <div className="relative">
+                <div className="absolute top-1/2 right-6 -translate-y-1/2 ">
+                  {isLoading ? (
+                    <Loader className="!text-[#1F8E1F]" />
+                  ) : (
+                    <Icons
+                      name="search"
+                      fill="#1F8E1F"
+                      width={16}
+                      height={16}
+                    />
+                  )}
+                </div>
+
+                <input
+                  type="text"
+                  placeholder="Search"
+                  value={searchKey}
+                  onChange={(e) => setSearchKey(e.target.value)}
+                  className="focus:outline-none active:outline-none h-10 w-96 w- px-6 rounded-full border border-[#1F8E1F]"
+                />
               </div>
-
-              <input
-                type="text"
-                placeholder="Search"
-                value={searchKey}
-                onChange={(e) => setSearchKey(e.target.value)}
-                className="focus:outline-none active:outline-none h-10 w-96 px-6 rounded-full border border-[#1F8E1F]"
-              />
             </div>
           </div>
         </div>
 
-        <table className="w-full table-content">
-          <thead className="font-semibold text-xl">
+        <table className="w-full table-content ">
+          <thead className="font-semibold large:text-xl text-sm">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr className="text-[#1F8E1F]" key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
                   <th
                     key={header.id}
-                    className="py-8 px-16 text-start bg-[#f4f9f4]">
+                    className="py-8 large:px-16 px-4 text-start bg-[#f4f9f4]">
                     {flexRender(
                       header.column.columnDef.header,
                       header.getContext()
@@ -155,7 +164,7 @@ const ExistingVaccinesTable = () => {
                   {row.getVisibleCells().map((cell) => (
                     <td
                       key={cell.id}
-                      className="px-16 py-8 h-[70px] border-b max-w-[300px] ">
+                      className="large:px-16 px-4 py-8 h-[70px] border-b max-w-[300px] ">
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()

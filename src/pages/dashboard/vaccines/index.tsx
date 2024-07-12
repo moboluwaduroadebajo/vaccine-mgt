@@ -8,8 +8,8 @@ const Vaccines = () => {
   const breadcrumbs = [{ name: "Vaccines" }];
   return (
     <PageLayout breadcrumbs={breadcrumbs}>
-      <div className="flex flex-col gap-8 h-">
-        <div className="flex gap-8 w-full">
+      <div className="flex flex-col gap-8">
+        <div className="flex lg:flex-row flex-col gap-8 w-full">
           <AddNewVaccine />
           <NoofVaccines />
         </div>

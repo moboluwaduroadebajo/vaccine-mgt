@@ -17,7 +17,7 @@ const StepstoStart = ({
 }: StepsProps) => {
   return (
     <div
-      className={`flex items-center md:p-10 p-4 relative md:px-40 mb-4 ${
+      className={`flex items-center md:p-10 p-6 relative md:px-40 mb-4 ${
         isMultiple
           ? "flex-row-reverse md:justify-around md:gap-16"
           : "md:justify-center"
