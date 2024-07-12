@@ -28,7 +28,7 @@ const Paginator: React.FC<PaginatorProps> = ({
 }) => {
   return (
     <div className="flex justify-between mt-8">
-      <div className="flex items-center gap-3">
+      <div className="flex sm:flex-row flex-col items-center gap-3">
         <p>Result per page</p>
 
         <Menu>
@@ -70,7 +70,7 @@ const Paginator: React.FC<PaginatorProps> = ({
         </Menu>
       </div>
 
-      <div className="flex justify-center items-center gap-8">
+      <div className="flex justify-center items-center sm:gap-8 gap-4">
         <button
           className="border-none outline-none flex items-center font-medium hover:text-[#1F8E1F]"
           onClick={() => onPageChange(Math.max(currentPage - 1, 1))}

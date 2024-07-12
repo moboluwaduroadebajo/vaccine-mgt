@@ -1,20 +1,16 @@
 import { sideMenu } from "@/constants";
 import React from "react";
-import MenuItem from "./MenuItem";
+import { AiOutlineCloseCircle } from "react-icons/ai";
+import MobileMenuItem from "./MobileMenuItem";
 import { useRouter } from "next/router";
-import { Icons } from "../icons";
-import { useAppDispatch } from "@/app/hooks";
-import { resetAccountState } from "@/reducers/account.reducer";
 
-const Sidebar = () => {
+interface SidebarProps {
+  closeModal: () => void;
+  openSidebar: boolean;
+}
+
+const MobileSidebar = ({ closeModal, openSidebar }: SidebarProps) => {
   const router = useRouter();
-  const dispatch = useAppDispatch();
-
-  const handleLogout = async () => {
-    localStorage.removeItem("token");
-    await dispatch(resetAccountState());
-    router.push("/login");
-  };
 
   const isItemActive = (item: {
     label: string;
@@ -47,14 +43,21 @@ const Sidebar = () => {
     }
     return router.pathname === item.path;
   };
-
   return (
-    <div className="w-[122px] bg-[#1F8E1F] text-white hidden md:flex flex-col fixed top-0 bottom-0 h-screen z-50">
-      <div className="flex-1 flex flex-col justify-center">
-        <ul className="flex flex-col gap-3">
+    <div
+      className={
+        openSidebar
+          ? "fixed h-full w-screen bg-black/50 backdrop-blur-sm top-0 right-0 transition-all transform ease-out duration-[0.8s] translate-x-0"
+          : "fixed h-full w-screen bg-black/0 backdrop-blur-sm top-0 right-0 transition-all transform ease-in duration-[0.8s] -translate-x-full"
+      }>
+      <div className="text-[48px] text-white flex justify-end p-4">
+        <AiOutlineCloseCircle onClick={closeModal} />
+      </div>
+      <div className="absolute bg-white h-full w-[70%] left-0 bottom-0 mx-auto py-24 z-10 font-sora top-0">
+        <ul>
           {sideMenu.map((item) => (
-            <MenuItem
-              key={item.path}
+            <MobileMenuItem
+              key={item.label}
               label={item.label}
               iconName={item.iconName}
               path={item.path}
@@ -63,16 +66,8 @@ const Sidebar = () => {
           ))}
         </ul>
       </div>
-
-      <div className="flex justify-center items-center border-t">
-        <p
-          className="py-6 flex flex-col items-center gap-2 justify-center cursor-pointer"
-          onClick={handleLogout}>
-          Log out <Icons name="logout" />
-        </p>
-      </div>
     </div>
   );
 };
 
-export default Sidebar;
+export default MobileSidebar;

@@ -39,14 +39,14 @@ const HomeSchedules = () => {
     getImminentImmunizations();
   }, [baseURL]);
   return (
-    <div className="w-[60%] px-8 py-10 rounded-2xl shadow-md bg-white font-poppins">
-      <p className="font-bold text-2xl pb-10 border-b border-[#1F8E1F]">
+    <div className="lg:w-[60%] md:px-8 px-4 py-10 rounded-2xl shadow-md bg-white font-poppins">
+      <p className="font-bold sm:text-2xl text-lg pb-10 border-b border-[#1F8E1F]">
         Welcome Back
       </p>
 
-      <div className="flex justify-between gap-8 pt-8 px-8">
+      <div className="flex justify-between md:gap-8 gap-3 pt-8 md:px-8">
         <div>
-          <div className="p-2 font-light text-base flex items-center gap-2">
+          <div className="p-2 font-light sm:text-base text-xs flex items-center gap-2">
             <Icons name="schedule" fill="#1F8E1F" />
             {countToday
               ? `${countToday} scheduled ${
@@ -56,7 +56,7 @@ const HomeSchedules = () => {
           </div>
         </div>
         <div className="bg-[#1F8E1F] items-stretch w-[.01em]" />
-        <div className="flex justify-center items-center gap-2 max-w-[225px] text-[#C91919]">
+        <div className="flex justify-center items-center gap-2 sm:text-base text-xs max-w-[225px] text-[#C91919]">
           <Icons name="missed_call" />5 missed immunization
         </div>
       </div>

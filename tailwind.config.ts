@@ -17,7 +17,7 @@ const config: Config = {
       },
       screens: {
         tablet: "840px",
-        large: "1200px",
+        large: "1340px",
       },
       colors: {
         green: {
