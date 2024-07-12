@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { BiMenuAltLeft } from "react-icons/bi";
 import { Icons } from "../icons";
 import axios, { AxiosError } from "axios";
@@ -29,7 +29,7 @@ const ParentDetailTable = () => {
   const baseURL = process.env.NEXT_PUBLIC_BASE_API_URL;
   const router = useRouter();
 
-  useEffect(() => {
+  useMemo(() => {
     const getParentDetails = async () => {
       try {
         setIsLoading(true);

@@ -4,39 +4,44 @@ import { useRouter } from "next/router";
 import axios, { AxiosError } from "axios";
 import Loader from "../utilities/Loader";
 import clsx from "clsx";
+import { useQuery } from "@tanstack/react-query";
 
 interface ChildrenCardProps {
-  variant?: "primary" | "whiteBackground";
+  variant: "primary" | "whiteBackground";
 }
 
 const NoOfChildrenCard = ({ variant }: ChildrenCardProps) => {
-  const [noOfChildren, setNoOfChildren] = useState<number | null>(null);
   const baseURL = process.env.NEXT_PUBLIC_BASE_API_URL;
+  const token =
+    typeof window !== "undefined" ? localStorage.getItem("token") : "";
   const router = useRouter();
 
-  useEffect(() => {
-    const getNoOfChildren = async () => {
-      try {
-        const token =
-          typeof window !== "undefined" ? localStorage.getItem("token") : "";
-        const response = await axios.get(`${baseURL}/immuno/children/count`, {
-          headers: {
-            Authorization: token,
-          },
-        });
+  const fetchNoOfChildren = async () => {
+    const response = await axios.get(`${baseURL}/immuno/children/count`, {
+      headers: {
+        Authorization: token,
+      },
+    });
+    return response.data.data;
+  };
 
-        setNoOfChildren(response.data.data);
-      } catch (err) {
-        const error = err as AxiosError<Error>;
-        console.error("Error fetching vaccine count:", error);
-        if (error.response?.status === 403) {
-          window.localStorage.removeItem("token");
-          router.push("/login");
-        }
-      }
-    };
-    getNoOfChildren();
+  const {
+    data: noOfChildren,
+    error,
+    isLoading,
+  } = useQuery<number, AxiosError<Error>>({
+    queryKey: ["fetchNoOfChildren"],
+    queryFn: fetchNoOfChildren,
   });
+
+  if (error) {
+    console.error("Error fetching number of children: ", error);
+    if (error.response?.status === 401) {
+      window.localStorage.removeItem("token");
+      router.push("/login");
+    }
+  }
+
   return (
     <div
       className={clsx({
@@ -85,11 +90,7 @@ const NoOfChildrenCard = ({ variant }: ChildrenCardProps) => {
           <Icons name="children" fill="#1F8E1F" />
         </span>
         <div className="text-2xl font-black mt-2 ml-4 text-[#1F8E1F]">
-          {noOfChildren !== null ? (
-            noOfChildren
-          ) : (
-            <Loader className="!text-[#1F8E1F]" />
-          )}
+          {isLoading ? <Loader className="!text-[#1F8E1F]" /> : noOfChildren}
         </div>
       </div>
 
