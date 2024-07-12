@@ -13,15 +13,15 @@ const ScheduleCard: React.FC<ScheduleCardProps> = ({ todayCount }) => {
   const month = date.getMonth();
   const year = date.getFullYear();
   return (
-    <div className="bg-[#D9ECD9] overflow-auto grow rounded-2xl px-8 py-10 font-poppins">
-      <div className="space-y-4 pb-10 border-b border-[#1F8E1F] w-[80%]">
+    <div className="bg-[#D9ECD9] overflow-auto grow rounded-2xl md:px-8 px-4 py-10 font-poppins">
+      <div className="space-y-4 pb-10 border-b border-[#1F8E1F] lg:w-[80%]">
         <p className="font-bold text-2xl text-[#1F8E1F]">Schedules Today</p>
         <p>{`${months[month]} ${day}, ${year}`}</p>
       </div>
 
-      <div className="flex justify-between gap-8 pt-8 w-[80%]">
+      <div className="flex justify-between md:gap-8 gap-2 pt-8 lg:w-[80%]">
         <ul>
-          <li className="p-2 font-light text-base flex items-center gap-2">
+          <li className="p-2 font-light md:text-base text-sm flex items-center gap-2">
             <Icons name="schedule" fill="#1F8E1F" />
             {todayCount
               ? `${todayCount} scheduled ${
@@ -29,13 +29,13 @@ const ScheduleCard: React.FC<ScheduleCardProps> = ({ todayCount }) => {
                 } today`
               : "No scheduled children today"}
           </li>
-          <li className="p-2 font-light text-base flex items-center gap-2">
+          <li className="p-2 font-light md:text-base text-sm flex items-center gap-2">
             <span className="text-[#1F8E1F] text-[26px]">
               <FaPlus />
             </span>{" "}
             5 PCV scheduled
           </li>
-          <li className="p-2 font-light text-base flex items-center gap-2">
+          <li className="p-2 font-light md:text-base text-sm flex items-center gap-2">
             <Icons name="schedule" fill="#1F8E1F" />7 OPV children today
           </li>
         </ul>

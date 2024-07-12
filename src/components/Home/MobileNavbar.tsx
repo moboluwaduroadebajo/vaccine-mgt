@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import Button from "../utilities/Button";
 
@@ -14,6 +14,14 @@ const MobileNavbar = ({ closeModal, openSidebar }: NavbarProps) => {
     { name: "Features", path: "/features" },
     { name: "Procedures", path: "/procedures" },
   ];
+
+  useEffect(() => {
+    if (openSidebar) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [openSidebar]);
   return (
     <div
       className={

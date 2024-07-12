@@ -15,19 +15,17 @@ const Parent = () => {
             variant="secondary"
             additionalClassname="lg:grow h-[292px]"
           />
-          {/* <ParentDetailTable /> */}
+
           <div className="lg:w-[25%]">
             <NoOfParentsCard />
           </div>
         </div>
-        <div className="flex lg:flex-row flex-col gap-8 w-full">
+        <div className="flex lg:flex-row flex-col-reverse gap-8 w-full">
           <ParentDetailTable />
 
           <div className="lg:w-[25%]">
             <NoOfChildrenCard variant="primary" />
           </div>
-
-          {/* <NoOfParentsCard /> */}
         </div>
       </div>
     </PageLayout>

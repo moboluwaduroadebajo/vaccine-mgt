@@ -52,11 +52,14 @@ const Schedules = () => {
   return (
     <PageLayout breadcrumbs={breadcrumbs}>
       <div className="flex flex-col gap-8">
-        <div className="flex gap-8 w-full">
+        <div className="flex lg:flex-row flex-col gap-8 w-full">
           <ScheduleCard todayCount={countToday} />
-          <OnboardParentCard additionalClassname="w-[30%]" variant="primary" />
+          <OnboardParentCard
+            additionalClassname="lg:w-[30%]"
+            variant="primary"
+          />
         </div>
-        <div className="bg-white rounded-2xl p-5 font-semibold text-2xl font-poppins">
+        <div className="bg-white rounded-2xl p-5 font-semibold md:text-2xl text-lg font-poppins">
           Daily Immunization Schedules
         </div>
         <div className="flex gap-8 overflow-x-auto w-full h-full scroll-smooth">
