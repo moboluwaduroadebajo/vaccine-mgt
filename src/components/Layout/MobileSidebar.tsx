@@ -1,5 +1,5 @@
 import { sideMenu } from "@/constants";
-import React from "react";
+import React, { useEffect } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import MobileMenuItem from "./MobileMenuItem";
 import { useRouter } from "next/router";
@@ -11,6 +11,14 @@ interface SidebarProps {
 
 const MobileSidebar = ({ closeModal, openSidebar }: SidebarProps) => {
   const router = useRouter();
+
+  useEffect(() => {
+    if (openSidebar) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [openSidebar]);
 
   const isItemActive = (item: {
     label: string;
@@ -53,7 +61,7 @@ const MobileSidebar = ({ closeModal, openSidebar }: SidebarProps) => {
       <div className="text-[48px] text-white flex justify-end p-4">
         <AiOutlineCloseCircle onClick={closeModal} />
       </div>
-      <div className="absolute bg-white h-full w-[70%] left-0 bottom-0 mx-auto py-24 z-10 font-sora top-0">
+      <div className="absolute bg-white h-full w-[70%] left-0 bottom-0 mx-auto py-24 font-sora top-0">
         <ul>
           {sideMenu.map((item) => (
             <MobileMenuItem

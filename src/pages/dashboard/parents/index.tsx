@@ -9,17 +9,25 @@ const Parent = () => {
   const breadcrumbs = [{ name: "Parents" }];
   return (
     <PageLayout breadcrumbs={breadcrumbs}>
-      <div className="flex gap-8">
-        <div className="grow flex flex-col gap-6">
+      <div className="flex flex-col gap-8">
+        <div className="flex lg:flex-row flex-col gap-8 w-full">
           <OnboardParentCard
             variant="secondary"
-            additionalClassname="flex p-6 items-start"
+            additionalClassname="lg:grow h-[292px]"
           />
-          <ParentDetailTable />
+          {/* <ParentDetailTable /> */}
+          <div className="lg:w-[25%]">
+            <NoOfParentsCard />
+          </div>
         </div>
-        <div className="w-[20%]">
-          <NoOfParentsCard />
-          <NoOfChildrenCard variant="primary" />
+        <div className="flex lg:flex-row flex-col gap-8 w-full">
+          <ParentDetailTable />
+
+          <div className="lg:w-[25%]">
+            <NoOfChildrenCard variant="primary" />
+          </div>
+
+          {/* <NoOfParentsCard /> */}
         </div>
       </div>
     </PageLayout>
