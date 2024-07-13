@@ -10,13 +10,17 @@ interface DailyScheduleCardProps {
   targetDate: string;
 }
 
-const DailyScheduleCard: React.FC<DailyScheduleCardProps> = ({ targetDate }) => {
+const DailyScheduleCard: React.FC<DailyScheduleCardProps> = ({
+  targetDate,
+}) => {
   const router = useRouter();
   const baseURL = process.env.NEXT_PUBLIC_BASE_API_URL;
   const current = new Date();
   const target = new Date(targetDate);
   const day = getDateLabel(current, target);
-  const [imminentImmunizations, setImminentImmunizations] = useState<ImmunizationRecordType[]>([]);
+  const [imminentImmunizations, setImminentImmunizations] = useState<
+    ImmunizationRecordType[]
+  >([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -51,7 +55,7 @@ const DailyScheduleCard: React.FC<DailyScheduleCardProps> = ({ targetDate }) => 
   }, [baseURL]);
 
   return (
-    <div className="bg-white border border-[#1F8E1F] rounded-2xl min-w-[454px] h-[600px] overflow-auto">
+    <div className="bg-white border border-[#1F8E1F] rounded-2xl md:min-w-[454px] min-w-[330px] md:h-[600px] h-[450px] overflow-auto">
       <div className="flex flex-col shadow-md p-4 sticky top-0 bg-white">
         <div className="flex justify-between items-center">
           <div>
@@ -74,7 +78,9 @@ const DailyScheduleCard: React.FC<DailyScheduleCardProps> = ({ targetDate }) => 
           <div
             key={item.id}
             className="flex justify-between py-8 px-4 hover:bg-[#f4f9f4] cursor-pointer">
-            <p>{item.child.firstName} {item.child.lastName}</p>
+            <p>
+              {item.child.firstName} {item.child.lastName}
+            </p>
             <p>{item.immunization.vaccine.type}</p>
           </div>
         ))}

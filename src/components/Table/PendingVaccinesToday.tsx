@@ -85,8 +85,8 @@ const PendingVaccinesToday = () => {
 
   return (
     <div className="flex flex-col grow">
-      <div className="bg-white p-8 font-poppins rounded-2xl shadow-md mb-8">
-        <p className="font-semibold text-2xl"> Today</p>
+      <div className="bg-white sm:p-8 p-5 font-poppins rounded-2xl shadow-md mb-8">
+        <p className="font-semibold md:text-2xl text-lg"> Today</p>
       </div>
 
       <div className="bg-white font-poppins rounded-2xl shadow-md">

@@ -9,11 +9,11 @@ const Children = () => {
   const breadcrumbs = [{ name: "Children" }];
   return (
     <PageLayout breadcrumbs={breadcrumbs}>
-      <div className="flex lg:flex-row flex-col-reverse gap-8 w-full">
+      <div className="flex lg:flex-row flex-col-reverse sm:gap-8 gap-5 w-full">
         <ChildrenDetailTable />
-        <div className="flex flex-col gap-8 lg:w-[25%]">
+        <div className="flex flex-col sm:gap-8 gap-5 lg:w-[25%]">
           <OnboardParentCard
-            additionalClassname="h-[400px]"
+            additionalClassname="md:h-[400px]"
             variant="primary"
           />
           <NoOfParentsCard />

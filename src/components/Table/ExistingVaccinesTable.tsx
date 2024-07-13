@@ -127,7 +127,7 @@ const ExistingVaccinesTable = () => {
                   placeholder="Search"
                   value={searchKey}
                   onChange={(e) => setSearchKey(e.target.value)}
-                  className="focus:outline-none active:outline-none h-10 w-96 w- px-6 rounded-full border border-[#1F8E1F]"
+                  className="focus:outline-none active:outline-none h-10 md:w-96 w-full w- px-6 rounded-full border border-[#1F8E1F]"
                 />
               </div>
             </div>

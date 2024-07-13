@@ -107,7 +107,7 @@ const ChildrenDetailTable = () => {
   return (
     <div className="flex flex-col lg:w-[75%]">
       <div className="h-full bg-white rounded-2xl">
-        <div className="flex flex-col shadow-md p-8 sticky top-0 rounded-2xl bg-white">
+        <div className="flex flex-col shadow-md sm:p-8 p-4 sticky top-0 rounded-2xl bg-white">
           <div className="flex justify-between gap-8 items-center">
             <div>
               <p className="font-poppins font-semibold md:text-2xl text-lg">

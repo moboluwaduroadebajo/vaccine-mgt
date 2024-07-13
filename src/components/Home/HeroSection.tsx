@@ -12,7 +12,7 @@ const HeroSection = () => {
       <Navbar />
 
       <div className="mt-20 lg:flex justify-between lg:pl-40 pl-8">
-        <div className="md:w-1/2 pb-10">
+        <div className="lg:w-1/2 pb-10">
           <div className="flex gap-1 bg-[#D9ECD9] p-2 md:w-[420px] w-[340px] rounded-full">
             <Image alt="pin" src={pin} />
             <p className="text-[#1F8E1F] md:text-base text-xs">

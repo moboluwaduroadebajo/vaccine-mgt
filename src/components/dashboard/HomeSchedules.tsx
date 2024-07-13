@@ -39,7 +39,7 @@ const HomeSchedules = () => {
     getImminentImmunizations();
   }, [baseURL]);
   return (
-    <div className="lg:w-[60%] md:px-8 px-4 py-10 rounded-2xl shadow-md bg-white font-poppins">
+    <div className="lg:w-[60%] md:px-8 p-3 md:py-10 rounded-2xl shadow-md bg-white font-poppins">
       <p className="font-bold sm:text-2xl text-lg pb-10 border-b border-[#1F8E1F]">
         Welcome Back
       </p>

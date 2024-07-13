@@ -18,7 +18,7 @@ const PageLayout = ({ children, breadcrumbs }: LayoutProps) => {
       <Sidebar />
       <main className="md:ml-[122px]">
         <Header breadcrumbs={breadcrumbs} />
-        <div className="pl-9 large:pr-16 pr-9 h-full pb-10">{children}</div>
+        <div className="pl-5 large:pr-16 pr-5 h-full pb-10">{children}</div>
       </main>
     </div>
   );

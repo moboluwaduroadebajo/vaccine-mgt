@@ -7,7 +7,7 @@ const AddNewVaccine = () => {
 
   return (
     <>
-      <div className="flex-1 rounded-2xl shadow-md bg-[#D9ECD9] sm:p-10 p-6 flex justify-between items-center cursor-pointer">
+      <div className="flex-1 rounded-2xl shadow-md bg-[#D9ECD9] sm:p-10 p-3 flex justify-between items-center cursor-pointer">
         <div className="font-poppins text-[#1F8E1F]">
           <p className="font-semibold sm:text-2xl text-xl sm:mb-6 mb-3 leading-9">
             Add <br />

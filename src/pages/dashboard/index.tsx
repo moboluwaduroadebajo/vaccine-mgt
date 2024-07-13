@@ -12,13 +12,13 @@ const breadcrumbs = [{ name: "Home" }];
 const Dashboard = () => {
   return (
     <PageLayout breadcrumbs={breadcrumbs}>
-      <div className="flex flex-col gap-8">
-        <div className="flex lg:flex-row flex-col gap-8 w-full">
+      <div className="flex flex-col sm:gap-8 gap-5">
+        <div className="flex lg:flex-row flex-col sm:gap-8 gap-5 w-full">
           <HomeSchedules />
           <AddNewVaccine />
         </div>
 
-        <div className="flex lg:flex-row flex-col gap-8 w-full">
+        <div className="flex lg:flex-row flex-col sm:gap-8 gap-5 w-full">
           <OnboardParentCard
             variant="secondary"
             additionalClassname="lg:w-[60%]"
@@ -28,7 +28,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="flex lg:flex-row flex-col gap-8 w-full">
+        <div className="flex lg:flex-row flex-col sm:gap-8 gap-5 w-full">
           <PendingVaccinesToday />
           <DashboardParentsTable />
         </div>

@@ -20,7 +20,7 @@ const MobileMenuItem = ({
     <Link href={path}>
       <li
         className={clsx({
-          "p-5 py-10 flex gap-5 font-poppins hover:bg-[#F0F7F0] hover:font-bold hover:text-[#1F8E1F] group cursor-pointer":
+          "p-5 py-10 flex gap-5 font-poppins text-lg hover:bg-[#F0F7F0] hover:font-bold hover:text-[#1F8E1F] group cursor-pointer":
             true,
           "bg-[#F0F7F0] text-[#1F8E1F] font-bold": isTabActive,
         })}>

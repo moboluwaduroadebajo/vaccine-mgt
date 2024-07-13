@@ -39,9 +39,9 @@ const NoOfParentsCard = () => {
   }
 
   return (
-    <div className="bg-[#D9ECD9] p-8 rounded-2xl shadow-md mb-6 flex flex-col justify-center gap-8 font-poppins">
+    <div className="bg-[#D9ECD9] sm:p-8 p-4 rounded-2xl shadow-md mb-6 flex flex-col md:items-start items-center justify-center md:gap-8 gap-6 font-poppins">
       <h3 className="text-xl font-light">No. of Parents</h3>
-      <div>
+      <div className="md:block flex items-center gap-5">
         <span className="h-16 w-16 bg-white rounded-full flex justify-center items-center">
           <Icons name="parents" fill="#1F8E1F" />
         </span>
@@ -50,9 +50,7 @@ const NoOfParentsCard = () => {
         </div>
       </div>
 
-      <a href="#" className="text-[#1F8E1F] mt-2 font-bold inline-block">
-        View all
-      </a>
+      <a className="text-[#1F8E1F] mt-2 font-bold inline-block">View all</a>
     </div>
   );
 };

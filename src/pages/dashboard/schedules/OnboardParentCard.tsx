@@ -14,23 +14,24 @@ const OnboardParentCard = ({ variant, additionalClassname }: ParentProps) => {
   return (
     <div
       className={clsx({
-        "bg-[#1F8E1F] rounded-2xl text-white bg-spiral bg-cover bg-center bg-no-repeat relative cursor-pointer z-[0]":
+        "bg-[#1F8E1F] rounded-2xl text-white bg-spiral bg-cover bg-center bg-no-repeat relative cursor-pointer":
           true,
-        "flex justify-center items-center": variant === "primary",
-        "flex h-[250px]": variant === "secondary",
+        "flex justify-center items-center p-4": variant === "primary",
+        "flex md:h-[250px]": variant === "secondary",
         [additionalClassname]: additionalClassname,
       })}>
       <div className="absolute top-0 bottom-0 left-0 right-0 bg-[#1F8E1F] opacity-90 rounded-2xl" />
 
       <div
         className={clsx({
-          "z-10 flex p-4 font-poppins": true,
+          "z-10 flex sm:p-4 p-2 font-poppins": true,
           "text-center w-1/2 justify-center items-center flex-col gap-4":
             variant === "primary",
-          "w-full items-center justify-between p-8": variant === "secondary",
+          "w-full items-center justify-between sm:p-8 p-4":
+            variant === "secondary",
         })}>
         <div>
-          <p className="font-semibold text-2xl capitalize leading-10">
+          <p className="font-semibold sm:text-2xl text-xl capitalize leading-10">
             Onboard <br />
             new parent
           </p>

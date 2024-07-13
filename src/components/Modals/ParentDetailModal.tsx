@@ -41,8 +41,8 @@ const ParentDetailModal = ({ isOpen, setIsOpen, selectedParent }: IProps) => {
             <MdEdit className="cursor-pointer hover:text-[#6ba96b]" />
           </div>
 
-          <div className="flex justify-center gap-4 mt-8 h-[] w-[80%] m-auto">
-            <div className="bg-[#D9ECD9] rounded-2xl p-8 w-1/2">
+          <div className="flex md:flex-row flex-col justify-center gap-4 mt-8 w-[80%] m-auto">
+            <div className="bg-[#D9ECD9] rounded-2xl md:p-8 p-5 md:w-1/2">
               <div className="flex flex-col items-center justify-center gap-4 mb-10">
                 <Image alt="parent-image" src={avatar} />
                 <div className=" font-poppins text-center">
@@ -61,14 +61,14 @@ const ParentDetailModal = ({ isOpen, setIsOpen, selectedParent }: IProps) => {
               </div>
 
               <ul>
-                <li className="flex items-center gap-2 pb-5 font-poppins">
-                  <span className="flex items-center justify-center rounded-full w-10 h-10 bg-white text-2xl text-[#1F8E1F]">
-                    <MdEmail className="" />
+                <li className="flex items-center gap-2 pb-5 font-poppins md:text-base text-sm">
+                  <span className="flex items-center justify-center rounded-full md:w-10 md:h-10 w-6 h-6 bg-white md:text-2xl text-sm text-[#1F8E1F]">
+                    <MdEmail />
                   </span>
                   {selectedParent?.email}
                 </li>
-                <li className="flex items-center gap-2 pb-5 font-poppins">
-                  <span className="flex items-center justify-center rounded-full w-10 h-10 bg-white text-2xl text-[#1F8E1F]">
+                <li className="flex items-center gap-2 pb-5 font-poppins md:text-base text-sm">
+                  <span className="flex items-center justify-center rounded-full md:w-10 md:h-10 w-6 h-6 bg-white md:text-2xl text-sm text-[#1F8E1F]">
                     <BsFillTelephoneFill />
                   </span>
                   {selectedParent?.phoneNumber}

@@ -45,10 +45,10 @@ const NoOfChildrenCard = ({ variant }: ChildrenCardProps) => {
   return (
     <div
       className={clsx({
-        "bg-[#D9ECD9] p-8 rounded-2xl shadow-md mb-6 flex flex-col gap-8 font-poppins":
+        "bg-[#D9ECD9] sm:p-8 p-4 rounded-2xl shadow-md mb-6 flex flex-col gap-8 font-poppins":
           true,
-        "": variant === "primary",
-        "bg-white h-full": variant === "whiteBackground",
+        " md:items-start items-center": variant === "primary",
+        "bg-white h-full ": variant === "whiteBackground",
       })}>
       <div
         className={clsx({
@@ -78,6 +78,7 @@ const NoOfChildrenCard = ({ variant }: ChildrenCardProps) => {
       <div
         className={clsx({
           "": true,
+          "md:block flex gap-5": variant === "primary",
           "flex items-center justify-center gap-8":
             variant === "whiteBackground",
         })}>
@@ -95,7 +96,6 @@ const NoOfChildrenCard = ({ variant }: ChildrenCardProps) => {
       </div>
 
       <a
-        href="#"
         className={clsx({
           "text-[#1F8E1F] mt-2 font-bold inline-block": true,
           hidden: variant === "whiteBackground",

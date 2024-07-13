@@ -63,7 +63,7 @@ const AddNewParentModal = ({ isOpen, setIsOpen }: IProps) => {
 
   return (
     <Modal isOpen={isOpen} onClose={closeModal}>
-      <div className="flex flex-col text-black z-10">
+      <div className="flex flex-col text-black">
         <div className="flex flex-col gap-8 font-poppins mb-20 ">
           <p
             className="flex items-center gap-4 cursor-pointer hover:text-green-700"

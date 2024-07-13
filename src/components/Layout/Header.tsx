@@ -24,7 +24,7 @@ const Header = ({ breadcrumbs }: HeaderProps) => {
   const [openmobileSideNav, setOpenMobileSideNav] = useState(false);
 
   return (
-    <div className="h-20 bg-white mb-10 rounded p-8 md:px-20 px-5 font-poppins font-medium text-xl flex justify-between sticky top-0 left-0 shadow-md z-[10]">
+    <div className="h-20 bg-white mb-10 rounded p-8 md:px-20 px-5 font-poppins font-medium text-xl flex justify-between sticky top-0 left-0 shadow-md z-[50]">
       <div className="md:hidden">
         <IoIosMenu onClick={() => setOpenMobileSideNav(!openmobileSideNav)} />
       </div>
