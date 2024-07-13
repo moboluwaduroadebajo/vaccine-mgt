@@ -64,7 +64,7 @@ const AddNewParentModal = ({ isOpen, setIsOpen }: IProps) => {
   return (
     <Modal isOpen={isOpen} onClose={closeModal}>
       <div className="flex flex-col text-black">
-        <div className="flex flex-col gap-8 font-poppins mb-20 ">
+        <div className="flex flex-col sm:gap-8 gap-5 font-poppins md:mb-20 mb-10">
           <p
             className="flex items-center gap-4 cursor-pointer hover:text-green-700"
             onClick={() => setIsOpen(false)}>
@@ -72,7 +72,7 @@ const AddNewParentModal = ({ isOpen, setIsOpen }: IProps) => {
             Back
           </p>
 
-          <p className="text-2xl font-semibold">Onboard Parent</p>
+          <p className="sm:text-2xl text-lg font-semibold">Onboard Parent</p>
         </div>
 
         <form className="flex flex-col gap-4" onSubmit={formik.handleSubmit}>

@@ -12,7 +12,7 @@ interface IProps {
 const ChildProfileCard = ({ selectedChild }: IProps) => {
   return (
     <div className="font-poppins w-full h-full shadow-md">
-      <div className="bg-white rounded-2xl p-14">
+      <div className="bg-white rounded-2xl sm:p-14 p-6">
         <div className="flex justify-between mb-8">
           <div className="flex gap-6">
             <Image
@@ -20,17 +20,17 @@ const ChildProfileCard = ({ selectedChild }: IProps) => {
               src={avatar}
               className="w-[60px] h-[60px]"
             />
-            <div className=" font-poppins space-y-4">
-              <p className="text-[#1F8E1F] text-2xl font-bold">
+            <div className="font-poppins sm:space-y-4">
+              <p className="text-[#1F8E1F] md:text-2xl text-xl font-bold">
                 {`${selectedChild?.firstName} ${selectedChild?.lastName}`}
               </p>
-              <p className="text-[#9a9a9a]">
+              <p className="text-[#9a9a9a] md:text-base text-sm">
                 {`${selectedChild?.gender} | DOB: ${selectedChild?.dateOfBirth}`}
               </p>
             </div>
           </div>
 
-          <div className="flex gap-6">
+          <div className="flex sm:gap-6 gap-3">
             <span className="flex items-center justify-center rounded-full w-10 h-10 bg-[#d2e8d2] text-2xl text-[#1F8E1F]">
               <MdEmail />
             </span>

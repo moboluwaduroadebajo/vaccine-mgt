@@ -41,12 +41,12 @@ const ChildProfile = () => {
   return (
     selectedChild && (
       <PageLayout breadcrumbs={breadcrumbs}>
-        <div className="flex gap-8">
+        <div className="flex lg:flex-row flex-col gap-8">
           <div className="grow flex flex-col gap-8 w-[]">
             <ChildProfileCard selectedChild={selectedChild} />
             <ImmunizationHistory immunizationList={immunizations} />
           </div>
-          <div className="w-[30%]">
+          <div className="lg:w-[30%]">
             <ParentDetailCard childData={selectedChild as ChildrenDataType} />
           </div>
         </div>

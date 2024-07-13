@@ -106,7 +106,7 @@ const ImmunoPendingTable = ({ pendingVaccines }: ImmunoProps) => {
                 </span>
                 {vaccine.vaccine.type}
               </p>
-              <p className="px-4 py-2 rounded-full text-sm bg-[#eed8d4] text-[#C91919]">
+              <p className="h-6 sm:px-6 sm:p-4 p-3 flex items-center justify-center rounded-full sm:text-sm text-xs bg-[#eed8d4] text-[#C91919]">
                 Pending
               </p>
             </div>
@@ -114,17 +114,17 @@ const ImmunoPendingTable = ({ pendingVaccines }: ImmunoProps) => {
             <div
               className={
                 selectedVaccine === index
-                  ? "w-full max-h-[400px] font-poppins transition-max-h duration-[0.8s] ease mt-1 bg-gray-50 p-8 rounded-lg border border-green-400"
+                  ? "w-full max-h-[400px] font-poppins transition-max-h duration-[0.8s] ease mt-1 bg-gray-50 sm:p-8 p-4 rounded-lg border border-green-400"
                   : "w-full overflow-hidden max-h-0 font-poppins transition-all duration-[0.8s] ease"
               }>
-              <h5 className=" font-semibold ">{vaccine.vaccine.type}</h5>
+              <h5 className="font-semibold">{vaccine.vaccine.type}</h5>
               <p className="mb-4">
                 This dose is taken at birth or as soon as possible after birth
               </p>
 
-              <div className="flex justify-between">
-                <div className="flex items-center justify-between w-1/2">
-                  <div className="flex flex-col items-center gap-4">
+              <div className="flex md:flex-row flex-col md:gap-0 gap-6 justify-between">
+                <div className="flex lg:flex-row flex-col lg:items-center justify-between lg:gap-0 gap-5 md:w-1/2">
+                  <div className="flex lg:flex-col items-center gap-4">
                     <label htmlFor="">Administered</label>
 
                     <input
@@ -134,7 +134,7 @@ const ImmunoPendingTable = ({ pendingVaccines }: ImmunoProps) => {
                     />
                   </div>
 
-                  <div className="flex flex-col gap-1">
+                  <div className="flex flex-col lg:items-center gap-1">
                     <DatePickerInput
                       label="Date of Immunization"
                       placeholder={vaccine.minimumAdministerDate}
@@ -148,7 +148,7 @@ const ImmunoPendingTable = ({ pendingVaccines }: ImmunoProps) => {
                 <Button
                   label="Update"
                   variant="primary"
-                  additionalClassname="w-[200px]"
+                  additionalClassname="md:w-[200px] w-[60%]"
                   onClick={() => updateStatus(vaccine.id, index)}
                 />
               </div>

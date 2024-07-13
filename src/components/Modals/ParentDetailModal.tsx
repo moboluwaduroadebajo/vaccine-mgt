@@ -61,8 +61,8 @@ const ParentDetailModal = ({ isOpen, setIsOpen, selectedParent }: IProps) => {
               </div>
 
               <ul>
-                <li className="flex items-center gap-2 pb-5 font-poppins md:text-base text-sm">
-                  <span className="flex items-center justify-center rounded-full md:w-10 md:h-10 w-6 h-6 bg-white md:text-2xl text-sm text-[#1F8E1F]">
+                <li className="flex items-center gap-2 pb-5 font-poppins sm:text-base text-xs">
+                  <span className="flex items-center justify-center rounded-full md:w-10 md:h-10 w-6 h-6 bg-white sm:text-2xl text-xs text-[#1F8E1F]">
                     <MdEmail />
                   </span>
                   {selectedParent?.email}

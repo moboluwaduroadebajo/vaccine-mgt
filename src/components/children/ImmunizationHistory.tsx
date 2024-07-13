@@ -48,7 +48,9 @@ const ImmunizationHistory = ({ immunizationList }: ImmunoProps) => {
   return (
     <div className="flex flex-col gap-8 font-poppins">
       <div className="p-6 bg-white rounded-2xl shadow-md">
-        <p className="font-semibold text-2xl">Immunization History</p>
+        <p className="font-semibold md:text-2xl text-lg">
+          Immunization History
+        </p>
       </div>
 
       <div className="bg-white shadow-md rounded-2xl h-[600px] overflow-auto">
