@@ -124,12 +124,12 @@ const ImmunoCompletedTable = ({ completedVaccine }: ImmunoProps) => {
               <div className="flex md:flex-row flex-col md:gap-0 gap-6 justify-between">
                 <div className="flex lg:flex-row flex-col lg:items-center justify-between lg:gap-0 gap-5 md:w-1/2">
                   <div className="flex lg:flex-col items-center gap-4">
-                    <label htmlFor="">Not Administered</label>
+                    <label htmlFor="">Administered</label>
 
                     <input
                       type="checkbox"
                       className="w-7 h-7 border border-[#1F8E1F] rounded-sm"
-                      // checked={administered[index]}
+                      checked={administered[index]}
                       onChange={() => handleCheckboxChange(index)}
                     />
                   </div>

@@ -6,6 +6,7 @@ import { MdEmail } from "react-icons/md";
 import { ChildrenDataType } from "@/type/user.type";
 import axios from "axios";
 import AddNewChildModal from "../Modals/AddNewChildModal";
+import { useRouter } from "next/router";
 
 interface IProps {
   childData: ChildrenDataType;
@@ -14,11 +15,18 @@ interface IProps {
 const ParentDetailCard = ({ childData }: IProps) => {
   const childID = childData?.id;
   const baseURL = process.env.NEXT_PUBLIC_BASE_API_URL;
+  const router = useRouter();
 
   const [allChildren, setAllChildren] = useState<ChildrenDataType[]>([]);
   const [otherChildren, setOtherChildren] = useState<ChildrenDataType[]>([]);
   const [addchildModal, setAddChildModal] = useState(false);
 
+  const handleChildClick = (child: ChildrenDataType) => {
+    router.push({
+      pathname: "/dashboard/children/child-profile",
+      query: { id: child.id },
+    });
+  };
   useEffect(() => {
     const getOtherChildren = async () => {
       const parentId = childData.parent.id;
@@ -93,7 +101,10 @@ const ParentDetailCard = ({ childData }: IProps) => {
           <p className="font-bold">No Other Child available</p>
         ) : (
           otherChildren.map((child) => (
-            <p key={child.id} className="font-medium">
+            <p
+              key={child.id}
+              className="font-medium hover:bg-[#D9ECD9] hover:text-[#1F8E1F] cursor-pointer py-4 px-8"
+              onClick={() => handleChildClick(child)}>
               {child.firstName} {child.lastName}
             </p>
           ))
