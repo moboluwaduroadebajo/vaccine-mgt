@@ -29,7 +29,7 @@ const HomeSchedules = () => {
         const error = err as AxiosError<Error>;
 
         console.error("Error fetching imminent immunization for today:", error);
-        if (error.response?.status === 403) {
+        if (error.response?.status === 401) {
           window.localStorage.removeItem("token");
           router.push("/login");
         }

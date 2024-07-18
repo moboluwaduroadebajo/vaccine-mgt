@@ -45,7 +45,7 @@ const AddNewChildModal = ({ isOpen, setIsOpen, parentId }: IProps) => {
       } catch (err) {
         const error = err as AxiosError<UserEntityType>;
         console.error("Error adding new child:", error.response?.data.errors);
-        if (error.response?.status === 403) {
+        if (error.response?.status === 401) {
           window.localStorage.removeItem("token");
           router.push("/login");
         }
